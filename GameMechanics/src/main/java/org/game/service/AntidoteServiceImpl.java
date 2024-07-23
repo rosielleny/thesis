@@ -6,14 +6,16 @@ import org.game.entity.Antidote;
 import org.game.entity.AntidoteAction;
 import org.game.entity.PlantAntidote;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class AntidoteServiceImpl implements AntidoteService {
 
     @Autowired
-    AntidoteDao antidoteDao;
+    private AntidoteDao antidoteDao;
 
 
     public List<Antidote> getAllAntidotes() {
