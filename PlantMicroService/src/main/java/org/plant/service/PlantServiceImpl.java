@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PlantServiceImpl {
+public class PlantServiceImpl implements PlantService{
 
     @Autowired
     private PlantDao plantDao;
@@ -32,7 +32,7 @@ public class PlantServiceImpl {
 
     // Compendium
 
-    public CompendiumPage getCompendiumById(int id) {
-        return compendiumDao.findById(id).orElse(null);
+    public CompendiumPage getCompendiumPageByPlantId(int plantId) {
+        return compendiumDao.findById(plantId).orElse(null);
     }
 }
