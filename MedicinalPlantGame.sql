@@ -59,6 +59,21 @@ CREATE TABLE Antidote(
     antidoteDescription VARCHAR(255)
     );
 
+# Table holding actions that form the antidote making game
+CREATE TABLE ActionType(
+	actionId INT AUTO_INCREMENT PRIMARY KEY,
+    actionType VARCHAR(255)
+    );
+
+# Table matching Antidotes to Actions
+CREATE TABLE AntidoteAction(
+	FOREIGN KEY (actionId) REFERENCES ActionType(actionId),
+    FOREIGN KEY (antidoteId) REFERENCES Antidote(antidoteId),
+	actionId INT,
+    antidoteId INT
+    );
+
+
 # Table linking Plants to antidote, one antidote could have many plants,
 # and one plant could be a part of many antidotes
 CREATE TABLE PlantAntidote(
