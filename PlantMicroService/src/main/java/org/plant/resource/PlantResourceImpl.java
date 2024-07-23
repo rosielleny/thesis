@@ -36,7 +36,7 @@ public class PlantResourceImpl implements PlantResource {
 
     // Get plant by plant name
     @CrossOrigin
-    @GetMapping(path = "/plants/name/{plantName]", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/plants/name/{plantName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Plant> getPlantByName(@PathVariable String plantName) {
 
         Plant plant = plantService.getPlantByName(plantName);
