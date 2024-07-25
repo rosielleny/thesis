@@ -1,18 +1,18 @@
-package org.game.entity;
+package org.player.entity;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.game.entity.key.AntidoteActionKey;
+import org.player.entity.key.PlayerPlantKey;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AntidoteAction {
+public class PlayerPlant {
 
     @EmbeddedId
-    AntidoteActionKey antidoteActionKey;
+    private PlayerPlantKey playerPlantKey;
 }

@@ -1,10 +1,11 @@
 package org.game.entity;
 
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.game.entity.key.PlantAntidoteKey;
 
 @Entity
 @Data
@@ -12,7 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PlantAntidote {
 
-    @Id
-    private int antidoteId;
-    private int plantId;
+    @EmbeddedId
+    private PlantAntidoteKey plantAntidoteKey;
 }

@@ -23,4 +23,7 @@ public class Quest {
     private String endText; // Concluding cutscene
     private int requiredLevel; // Determines when quest unlocks
     private int xpValue;
+    private String stage1Text;
+    private String stage2Text;
+    private String stage3Text;
 }

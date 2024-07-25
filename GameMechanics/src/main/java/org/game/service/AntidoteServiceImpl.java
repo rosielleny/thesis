@@ -38,12 +38,12 @@ public class AntidoteServiceImpl implements AntidoteService {
 
     // Uses the junction table to return list of actions for that antidote
     public List<ActionType> getActionTypeByAntidoteId(int antidoteId) {
-        List<AntidoteAction> actionIds = antidoteDao.findAntidoteActionByAntidoteId(antidoteId).orElse(null);
+        List<AntidoteAction> actionIds = antidoteDao.findAntidoteActionsByAntidoteId(antidoteId);
         List<ActionType> actionTypes = new ArrayList<ActionType>();
 
         if(actionIds != null) {
             for (AntidoteAction actionId : actionIds) {
-                ActionType actionType = antidoteDao.findActionTypeByActionId(actionId.getActionId()).orElse(null);
+                ActionType actionType = antidoteDao.findActionTypeByActionId(actionId.getAntidoteActionKey().getActionId()).orElse(null);
                 actionTypes.add(actionType);
             }
             return actionTypes;
