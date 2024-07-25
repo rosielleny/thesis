@@ -2,18 +2,6 @@ DROP SCHEMA IF EXISTS PlantEducation;
 CREATE SCHEMA PlantEducation;
 USE PlantEducation;
 
-DROP TABLE IF EXISTS Plant;
-DROP TABLE IF EXISTS CompendiumPage;
-DROP TABLE IF EXISTS Player;
-DROP TABLE IF EXISTS Antidote;
-DROP TABLE IF EXISTS PlantAntidote;
-DROP TABLE IF EXISTS GameCharacter;
-DROP TABLE IF EXISTS Quest;
-DROP TABLE IF EXISTS PlayerPlantPictures;
-DROP TABLE IF EXISTS PlayerPlants;
-DROP TABLE IF EXISTS PlayerAntidotes;
-DROP TABLE IF EXISTS PlayerQuests;
-
 # Holds information about plants to be used in quests
 CREATE TABLE Plant(
 	plantId INT AUTO_INCREMENT PRIMARY KEY,
@@ -30,13 +18,13 @@ CREATE TABLE Plant(
 # Holds large amounts of plant information categorised by subject to be used in
 # the compendium
 CREATE TABLE CompendiumPage(
-	FOREIGN KEY (plantId) REFERENCES Plant(plantId),
     plantId INT,
 	medicinalInfo TEXT,
     culturalInfo TEXT,
     ecosystemInfo TEXT,
     scientificInfo TEXT,
-    additionalInfo TEXT
+    additionalInfo TEXT,
+	FOREIGN KEY (plantId) REFERENCES Plant(plantId)
     );
     
     
@@ -67,20 +55,22 @@ CREATE TABLE ActionType(
 
 # Table matching Antidotes to Actions
 CREATE TABLE AntidoteAction(
-	FOREIGN KEY (actionId) REFERENCES ActionType(actionId),
-    FOREIGN KEY (antidoteId) REFERENCES Antidote(antidoteId),
 	actionId INT,
-    antidoteId INT
+    antidoteId INT,
+	PRIMARY KEY (antidoteId, actionId),
+	FOREIGN KEY (actionId) REFERENCES ActionType(actionId),
+    FOREIGN KEY (antidoteId) REFERENCES Antidote(antidoteId)
     );
 
 
 # Table linking Plants to antidote, one antidote could have many plants,
 # and one plant could be a part of many antidotes
 CREATE TABLE PlantAntidote(
+	plantId INT,
+    antidoteId INT,
+	PRIMARY KEY (antidoteId, plantId),
 	FOREIGN KEY (plantId) REFERENCES Plant(plantId),
-    FOREIGN KEY (antidoteId) REFERENCES Antidote(antidoteId),
-    plantId INT,
-    antidoteId INT
+    FOREIGN KEY (antidoteId) REFERENCES Antidote(antidoteId)
     );
 
 # Table holding information for game npcs
@@ -93,55 +83,122 @@ CREATE TABLE GameCharacter(
 # Table holding quest information
 CREATE TABLE Quest(
 	questId INT AUTO_INCREMENT PRIMARY KEY,
-    FOREIGN KEY (plantId) REFERENCES Plant(plantId),
-    FOREIGN KEY (antidoteId) REFERENCES Antidote(antidoteId),
-    FOREIGN KEY (questGiverId) REFERENCES GameCharacter(gameCharacterId),
-    FOREIGN KEY (patientId) REFERENCES GameCharacter(gameCharacterId),
-    plantId INT,
+	plantId INT,
     antidoteId INT,
     questGiverId INT,
     patientId INT,
     startText TEXT,
     endText TEXT,
     requiredLevel TINYINT,
-    xpValue TINYINT
+    xpValue TINYINT,
+    stage1Text VARCHAR(255),
+    stage2Text VARCHAR(255),
+    stage3Text VARCHAR(255),
+    FOREIGN KEY (plantId) REFERENCES Plant(plantId),
+    FOREIGN KEY (antidoteId) REFERENCES Antidote(antidoteId),
+    FOREIGN KEY (questGiverId) REFERENCES GameCharacter(gameCharacterId),
+    FOREIGN KEY (patientId) REFERENCES GameCharacter(gameCharacterId)
     );
+
     
 # The following tables allow for player progress to be saved
 # Pictures players have taken of plants
-CREATE TABLE PlayerPlantPictures(
+CREATE TABLE PlayerPlantPicture(
 	pictureId INT AUTO_INCREMENT PRIMARY KEY,
-    FOREIGN KEY (plantId) REFERENCES Plant(plantId),
-    FOREIGN KEY (playerId) REFERENCES Player(playerId),
     plantId INT,
     playerId INT,
-    picture VARCHAR(255)
+    picture VARCHAR(255),
+	FOREIGN KEY (plantId) REFERENCES Plant(plantId),
+    FOREIGN KEY (playerId) REFERENCES Player(playerId) ON DELETE CASCADE
 	);
 
 # Plants the player has discovered
-CREATE TABLE PlayerPlants(
-	FOREIGN KEY (plantId) REFERENCES Plant(plantId),
-    FOREIGN KEY (playerId) REFERENCES Player(playerId),
+CREATE TABLE PlayerPlant(
     plantId INT,
-    playerId INT
+    playerId INT,
+	PRIMARY KEY (playerId, plantId),
+	FOREIGN KEY (plantId) REFERENCES Plant(plantId),
+    FOREIGN KEY (playerId) REFERENCES Player(playerId) ON DELETE CASCADE
 );
  
  # Antidotes the player has discovered, how many they have made,
  # how many they have used
- CREATE TABLE PlayerAntidotes(
-	FOREIGN KEY (antidoteId) REFERENCES Antidote(antidoteId),
-    FOREIGN KEY (playerId) REFERENCES Player(playerId),
+ CREATE TABLE PlayerAntidote(
     antidoteId INT,
     playerId INT,
     numberMade INT,
-    numberUsed INT
+    numberUsed INT,
+    PRIMARY KEY(playerId, antidoteId),
+	FOREIGN KEY (antidoteId) REFERENCES Antidote(antidoteId),
+    FOREIGN KEY (playerId) REFERENCES Player(playerId) ON DELETE CASCADE
  );
  
  # Quests the user has completed/activated/has unlocked
- CREATE TABLE PlayerQuests(
-	FOREIGN KEY (questId) REFERENCES Quest(questId),
-    FOREIGN KEY (playerId) REFERENCES Player(playerId),
+ CREATE TABLE PlayerQuest(
     questId INT,
     playerId INT,
-    questStatus ENUM('active', 'inactive', 'complete') NOT NULL
+    questStatus ENUM('Active', 'Inactive', 'Complete') NOT NULL,
+    questStage ENUM('Beginning', 'PlantFound', 'AntidoteMade') NOT NULL,
+	PRIMARY KEY(playerId, questId),
+	FOREIGN KEY (questId) REFERENCES Quest(questId),
+    FOREIGN KEY (playerId) REFERENCES Player(playerId) ON DELETE CASCADE
  );
+ 
+ CREATE TABLE GameLevel(
+	gameLevelId INT AUTO_INCREMENT PRIMARY KEY,
+    requiredXP INT 
+    );
+ 
+ 
+ # TEST VALUES BELOW
+ 
+ -- Inserting a test plant
+INSERT INTO Plant (plantName, plantLocation, defaultPicture, uniqueFeature1, uniqueFeature2, uniqueFeature3, treatmentFor, season)
+VALUES ('Bluebell', 'Woodlands', 'bluebell.jpg', 'Blue Flowers', 'Bell-shaped', 'Spring Bloom', 'Nausea', 'Spring');
+
+-- Inserting a test game character (quest giver and patient)
+INSERT INTO GameCharacter (gameCharacterName, gameCharacterPicture)
+VALUES ('Elder Mage', 'elder_mage.jpg');
+
+-- Inserting a test antidote
+INSERT INTO Antidote (antidoteName, antidotePicture, antidoteDescription)
+VALUES ('Cure Elixir', 'cure_elixir.jpg', 'An ancient remedy for common ailments');
+
+-- Inserting a test action type for antidote making game
+INSERT INTO ActionType (actionType)
+VALUES ('Mixing');
+
+-- Linking antidote to action
+INSERT INTO AntidoteAction (actionId, antidoteId)
+VALUES (1, 1);
+
+-- Linking plants to antidote
+INSERT INTO PlantAntidote (plantId, antidoteId)
+VALUES (1, 1);
+
+-- Inserting a test player
+INSERT INTO Player (playerName, playerEmail, playerPhone, playerPicture, playerTotalXP, playerLevel)
+VALUES ('Jane Doe', 'janedoe@example.com', '123-456-7890', 'janedoe.jpg', 100, 1);
+
+-- Inserting a quest involving the test plant, antidote, and game characters
+INSERT INTO Quest (plantId, antidoteId, questGiverId, patientId, startText, endText, requiredLevel, xpValue, stage1Text, stage2Text, stage3Text)
+VALUES (1, 1, 1, 1, 'Help needed to cure the Elder Mage.', 'Thank you for your help!', 1, 10, 'Find the Bluebell.', 'Mix the Cure Elixir.', 'Deliver the antidote.');
+
+-- Inserting a picture taken by the player of the plant
+INSERT INTO PlayerPlantPicture (plantId, playerId, picture)
+VALUES (1, 1, 'bluebell_forest.jpg');
+
+-- Inserting plant discovery by the player
+INSERT INTO PlayerPlant (plantId, playerId)
+VALUES (1, 1);
+
+-- Inserting antidote information for the player
+INSERT INTO PlayerAntidote (antidoteId, playerId, numberMade, numberUsed)
+VALUES (1, 1, 5, 2);
+
+-- Inserting a player quest entry
+INSERT INTO PlayerQuest (questId, playerId, questStatus, questStage)
+VALUES (1, 1, 'Active', 'Beginning');
+
+INSERT INTO GameLevel (gameLevelId, requiredXP)
+VALUES (1, 0);

@@ -11,4 +11,5 @@ public interface QuestResource {
     ResponseEntity<Quest> getQuestById(@PathVariable int questId);
     ResponseEntity<GameCharacter> getCharacterById(@PathVariable int characterId);
     ResponseEntity<GameLevel> getLevelById(@PathVariable int levelId);
+
 }

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class QuestResourceImpl implements QuestResource {
@@ -20,7 +21,7 @@ public class QuestResourceImpl implements QuestResource {
 
     @CrossOrigin
     @GetMapping(path = "/quest/{questId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Quest> getQuestById(int questId) {
+    public ResponseEntity<Quest> getQuestById(@PathVariable int questId) {
 
         Quest quest = questService.getQuestByQuestId(questId);
 
@@ -34,7 +35,7 @@ public class QuestResourceImpl implements QuestResource {
 
     @CrossOrigin
     @GetMapping(path = "/quest/character/{gameCharacterId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GameCharacter> getCharacterById(int gameCharacterId) {
+    public ResponseEntity<GameCharacter> getCharacterById(@PathVariable int gameCharacterId) {
 
         GameCharacter gameCharacter = questService.getGameCharacterById(gameCharacterId);
 
@@ -48,7 +49,7 @@ public class QuestResourceImpl implements QuestResource {
 
     @CrossOrigin
     @GetMapping(path = "/quest/level/{levelId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GameLevel> getLevelById(int levelId) {
+    public ResponseEntity<GameLevel> getLevelById(@PathVariable int levelId) {
 
         GameLevel gameLevel = questService.getGameLevelById(levelId);
 
@@ -59,4 +60,6 @@ public class QuestResourceImpl implements QuestResource {
             return new ResponseEntity<GameLevel>(gameLevel, HttpStatus.NO_CONTENT);
         }
     }
+
+
 }
