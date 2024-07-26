@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/* This entity reflects the database table of the same name
+* It describes one antidote and is linked to the plants involved via
+* the PlantAntidote table/entity */
 @Entity
 @Data
 @NoArgsConstructor

@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/* This entity reflects a database table which stores the levels it is possible for a player to be
+* and the amount of experience points they need to reach that level*/
 @Entity
 @Data
 @NoArgsConstructor

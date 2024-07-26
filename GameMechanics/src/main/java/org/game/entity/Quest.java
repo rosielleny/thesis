@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/* This entity reflects the Quest database table*/
 @Entity
 @Data
 @NoArgsConstructor
@@ -22,8 +23,8 @@ public class Quest {
     private String startText; // Introductory cutscene
     private String endText; // Concluding cutscene
     private int requiredLevel; // Determines when quest unlocks
-    private int xpValue;
-    private String stage1Text;
-    private String stage2Text;
-    private String stage3Text;
+    private int xpValue; // The number of experience points the player is rewarded with
+    private String stage1Text; // E.g. "Find the plant."
+    private String stage2Text; // E.g. "Make the antidote."
+    private String stage3Text; // E.g. "Hand in the quest."
 }

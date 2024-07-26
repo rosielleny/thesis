@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/* This DAO retrieves data for Question and Quiz*/
 @Repository
 public interface RevisionDao extends JpaRepository<Question, Integer> {
 

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/* This DAO accesses data for Antidote, AntidoteAction, ActionType, and PlantAntidote*/
 @Repository
 public interface AntidoteDao extends JpaRepository<Antidote, Integer> {
 
