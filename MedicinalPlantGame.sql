@@ -150,7 +150,33 @@ CREATE TABLE PlayerPlant(
     );
  
  
+ CREATE TABLE Quiz(
+	quizId INT AUTO_INCREMENT PRIMARY KEY,
+	isExam BOOLEAN,
+    questionNumber TINYINT,
+    xpWorth INT
+	);
+    
+CREATE TABLE Question(
+	questionId INT AUTO_INCREMENT PRIMARY KEY,
+    questionCategory ENUM('Medicine', 'Identification') NOT NULL,
+    questionSubject ENUM('Plant', 'PlantPicture', 'Ailment') NOT NULL,
+    questionAnswer ENUM('Plant', 'PlantPicture', 'Ailment') NOT NULL,
+    question VARCHAR(255)
+    );
+    
  # TEST VALUES BELOW
+ 
+ -- Inserting quizzes and questions
+ INSERT INTO Question(questionCategory, questionSubject, questionAnswer, question)
+ VALUES('Identification', 'Plant', 'PlantPicture', 'Identify the {Plant}'),
+ ('Identification', 'PlantPicture', 'Plant','This plant is a'),
+ ('Medicine', 'Plant', 'Ailment', '{Plant} can be used to treat' ),
+ ('Medicine', 'Ailment', 'PlantPicture', 'Which plant is a treatment for {Ailment}' );
+ 
+  INSERT INTO Quiz(isExam, questionNumber, xpWorth)
+ VALUES(false, '10', '100'),
+ (true, '20', '200');
  
  -- Inserting a test plant
 INSERT INTO Plant (plantName, plantLocation, defaultPicture, uniqueFeature1, uniqueFeature2, uniqueFeature3, treatmentFor, season)
