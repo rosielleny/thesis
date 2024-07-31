@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.game.entity.key.PlantAntidoteKey;
+import org.druid.entity.original.key.PlantAntidoteKey;
 
 /* This entity reflects a database junction table joining plants to the
  * antidotes they are used in */

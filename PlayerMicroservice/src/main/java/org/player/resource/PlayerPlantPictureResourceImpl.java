@@ -22,13 +22,13 @@ public class PlayerPlantPictureResourceImpl implements PlayerPlantPictureResourc
     private PlayerPlantPictureService playerPlantPictureService;
 
     // Create/Update
-    @PostMapping(path = "/player-plant-picture/new", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/player-plant-picture/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PlayerPlantPicture> savePicture(@RequestBody PlayerPlantPicture picture) {
 
         PlayerPlantPicture newPpp = playerPlantPictureService.savePlayerPlantPicture(picture);
 
         if(newPpp != null) {
-            return new ResponseEntity<>(newPpp, HttpStatus.CREATED);
+            return new ResponseEntity<>(newPpp, HttpStatus.OK);
         } else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

@@ -18,7 +18,7 @@ public class PlayerQuestResourceImpl implements PlayerQuestResource {
     @Autowired
     PlayerQuestService playerQuestService;
 
-    @PostMapping(path = "/player-quests/new", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/player-quests/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PlayerQuest> savePlayerQuest(@RequestBody PlayerQuest playerQuest) {
 
         PlayerQuest newPq = playerQuestService.savePlayerQuest(playerQuest);

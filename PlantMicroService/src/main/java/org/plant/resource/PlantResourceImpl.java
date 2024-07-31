@@ -12,11 +12,28 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 @Controller
 public class PlantResourceImpl implements PlantResource {
 
     @Autowired
     private PlantService plantService;
+
+    //
+    @CrossOrigin
+    @GetMapping(path = "/plants/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Plant>> getAllPlants() {
+
+        List<Plant> plants = plantService.getAllPlants();
+
+        if(plants != null){
+            return new ResponseEntity<List<Plant>>(plants, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<List<Plant>>(plants, HttpStatus.NO_CONTENT);
+        }
+    }
 
     // Get plant by plant ID
     @CrossOrigin

@@ -18,7 +18,7 @@ public class PlayerPlantResourceImpl implements PlayerPlantResource {
     @Autowired
     private PlayerPlantService plantService;
 
-    @PostMapping(path = "/player-plants/new", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/player-plants/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PlayerPlant> savePlayerPlant(@RequestBody PlayerPlant playerPlant) {
 
         PlayerPlant newPp = plantService.savePlayerPlant(playerPlant);
@@ -32,7 +32,7 @@ public class PlayerPlantResourceImpl implements PlayerPlantResource {
 
 
     @CrossOrigin
-    @GetMapping(path = "/player-plant-picture/{playerId}/{plantId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/player-plant-picture/{playerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<PlayerPlant>> getPlayersPlants( @PathVariable int playerId) {
 
         List<PlayerPlant> playerPlants = plantService.getPlayerPlants(playerId);

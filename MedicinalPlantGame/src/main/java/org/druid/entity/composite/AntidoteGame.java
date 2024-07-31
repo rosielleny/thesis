@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.druid.entity.original.ActionType;
+import org.druid.entity.original.Antidote;
 import org.druid.entity.original.Plant;
 
 import java.util.List;
@@ -20,4 +21,13 @@ public class AntidoteGame {
 
     private List<Plant> antidotePlants;
     private List<ActionType> antidoteActions;
+
+    public void setAntidoteGameFromAntidote(Antidote antidote){
+
+        this.antidoteId = antidote.getAntidoteId();
+        this.antidoteName = antidote.getAntidoteName();
+        this.antidotePicture = antidote.getAntidotePicture();
+        this.antidoteDescription = antidote.getAntidoteDescription();
+
+    }
 }
