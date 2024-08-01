@@ -116,6 +116,7 @@ CREATE TABLE PlayerPlantPicture(
 CREATE TABLE PlayerPlant(
     plantId INT,
     playerId INT,
+    discoveredOrder INT,
 	PRIMARY KEY (playerId, plantId),
 	FOREIGN KEY (plantId) REFERENCES Plant(plantId),
     FOREIGN KEY (playerId) REFERENCES Player(playerId) ON DELETE CASCADE
@@ -157,12 +158,12 @@ CREATE TABLE PlayerPlant(
     xpWorth INT
 	);
     
-CREATE TABLE Question(
+CREATE TABLE QuestionTemplate(
 	questionId INT AUTO_INCREMENT PRIMARY KEY,
     questionCategory ENUM('Medicine', 'Identification') NOT NULL,
     questionSubject ENUM('Plant', 'PlantPicture', 'Ailment') NOT NULL,
     questionAnswer ENUM('Plant', 'PlantPicture', 'Ailment') NOT NULL,
-    question VARCHAR(255)
+    questionText VARCHAR(255)
     );
     
  # TEST VALUES BELOW
