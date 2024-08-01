@@ -18,5 +18,5 @@ public class PlayerQuest {
     private PlayerQuestKey playerQuestKey;
 
     private String questStatus; // Will be Active, Inactive, or Complete
-    private int questStage; // Will be "Beginning", "PlantFound", or "AntidoteMade"
+    private String questStage; // Will be "Beginning", "PlantFound", or "AntidoteMade"
 }

@@ -17,13 +17,13 @@ public class PlayerAntidoteResourceImpl implements PlayerAntidoteResource {
     @Autowired
     PlayerAntidoteService playerAntidoteService;
     // Create/Update
-    @PostMapping(path = "/player-antidote/new", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/player-antidote/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PlayerAntidote> savePlayerAntidote(@RequestBody PlayerAntidote playerAntidote) {
 
         PlayerAntidote newPa = playerAntidoteService.savePlayerAntidote(playerAntidote);
 
         if(newPa != null) {
-            return new ResponseEntity<>(newPa, HttpStatus.CREATED);
+            return new ResponseEntity<>(newPa, HttpStatus.OK);
         } else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

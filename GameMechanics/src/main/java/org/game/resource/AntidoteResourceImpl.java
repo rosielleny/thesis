@@ -65,7 +65,7 @@ public class AntidoteResourceImpl implements AntidoteResource {
         }
     }
 
-    // Getting all plant/antidote combinations
+    // Getting all plant/antidote combinations for one antidote
     @CrossOrigin
     @GetMapping(path = "/antidotes/plant-antidotes/{antidoteId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<PlantAntidote>> getPlantAntidoteByAntidoteId(@PathVariable int antidoteId) {

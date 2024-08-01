@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.game.entity.key.PlantAntidoteKey;
 
+/* This entity reflects a database junction table joining plants to the
+ * antidotes they are used in */
 @Entity
 @Data
 @NoArgsConstructor

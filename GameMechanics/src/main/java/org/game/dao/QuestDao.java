@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
+/* This DAO accesses data for Quest, GameCharacter, and GameLevel*/
 @Repository
 public interface QuestDao extends JpaRepository<Quest, Integer>{
 

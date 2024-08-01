@@ -116,6 +116,7 @@ CREATE TABLE PlayerPlantPicture(
 CREATE TABLE PlayerPlant(
     plantId INT,
     playerId INT,
+    discoveredOrder INT,
 	PRIMARY KEY (playerId, plantId),
 	FOREIGN KEY (plantId) REFERENCES Plant(plantId),
     FOREIGN KEY (playerId) REFERENCES Player(playerId) ON DELETE CASCADE
@@ -165,6 +166,30 @@ CREATE TABLE Question(
     );
     
  -- TEST VALUES BELOW
+ 
+ -- Inserting quizzes and questions
+ INSERT INTO Question(questionCategory, questionSubject, questionAnswer, question)
+ VALUES('Identification', 'Plant', 'PlantPicture', 'Identify the {Plant}'),
+ ('Identification', 'PlantPicture', 'Plant','This plant is a'),
+ ('Medicine', 'Plant', 'Ailment', '{Plant} can be used to treat' ),
+ ('Medicine', 'Ailment', 'PlantPicture', 'Which plant is a treatment for {Ailment}' );
+ 
+
+ CREATE TABLE Quiz(
+	quizId INT AUTO_INCREMENT PRIMARY KEY,
+	isExam BOOLEAN,
+    questionNumber TINYINT,
+    xpWorth INT
+	);
+    
+CREATE TABLE QuestionTemplate(
+	questionId INT AUTO_INCREMENT PRIMARY KEY,
+    questionCategory ENUM('Medicine', 'Identification') NOT NULL,
+    questionSubject ENUM('Plant', 'PlantPicture', 'Ailment') NOT NULL,
+    questionAnswer ENUM('Plant', 'PlantPicture', 'Ailment') NOT NULL,
+    questionText VARCHAR(255)
+    );
+    
  
  -- Inserting quizzes and questions
  INSERT INTO Question(questionCategory, questionSubject, questionAnswer, question)
