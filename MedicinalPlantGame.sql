@@ -150,7 +150,31 @@ CREATE TABLE PlayerPlant(
     requiredXP INT 
     );
  
+ CREATE TABLE Quiz(
+	quizId INT AUTO_INCREMENT PRIMARY KEY,
+	isExam BOOLEAN,
+    questionNumber TINYINT,
+    xpWorth INT
+	);
+    
+CREATE TABLE Question(
+	questionId INT AUTO_INCREMENT PRIMARY KEY,
+    questionCategory ENUM('Medicine', 'Identification') NOT NULL,
+    questionSubject ENUM('Plant', 'PlantPicture', 'Ailment') NOT NULL,
+    questionAnswer ENUM('Plant', 'PlantPicture', 'Ailment') NOT NULL,
+    question VARCHAR(255)
+    );
+    
+ -- TEST VALUES BELOW
  
+ -- Inserting quizzes and questions
+ INSERT INTO Question(questionCategory, questionSubject, questionAnswer, question)
+ VALUES('Identification', 'Plant', 'PlantPicture', 'Identify the {Plant}'),
+ ('Identification', 'PlantPicture', 'Plant','This plant is a'),
+ ('Medicine', 'Plant', 'Ailment', '{Plant} can be used to treat' ),
+ ('Medicine', 'Ailment', 'PlantPicture', 'Which plant is a treatment for {Ailment}' );
+ 
+
  CREATE TABLE Quiz(
 	quizId INT AUTO_INCREMENT PRIMARY KEY,
 	isExam BOOLEAN,
@@ -166,7 +190,6 @@ CREATE TABLE QuestionTemplate(
     questionText VARCHAR(255)
     );
     
- # TEST VALUES BELOW
  
  -- Inserting quizzes and questions
  INSERT INTO Question(questionCategory, questionSubject, questionAnswer, question)
@@ -181,15 +204,15 @@ CREATE TABLE QuestionTemplate(
  
  -- Inserting a test plant
 INSERT INTO Plant (plantName, plantLocation, defaultPicture, uniqueFeature1, uniqueFeature2, uniqueFeature3, treatmentFor, season)
-VALUES ('Bluebell', 'Woodlands', 'bluebell.jpg', 'Blue Flowers', 'Bell-shaped', 'Spring Bloom', 'Nausea', 'Spring');
+VALUES ('Bluebell', 'map-location', 'bluebell.jpg', 'Blue Flowers', 'Bell-shaped', 'Spring Bloom', 'Nausea', 'Spring');
 
 -- Inserting a test game character (quest giver and patient)
 INSERT INTO GameCharacter (gameCharacterName, gameCharacterPicture)
-VALUES ('Elder Mage', 'elder_mage.jpg');
+VALUES ('Druid Mentor', 'druid_mentor.jpg');
 
 -- Inserting a test antidote
 INSERT INTO Antidote (antidoteName, antidotePicture, antidoteDescription)
-VALUES ('Cure Elixir', 'cure_elixir.jpg', 'An ancient remedy for common ailments');
+VALUES ('Cure Elixir', 'cure_elixir.jpg', 'A remedy for common ailments');
 
 -- Inserting a test action type for antidote making game
 INSERT INTO ActionType (actionType)
@@ -209,7 +232,7 @@ VALUES ('Jane Doe', 'janedoe@example.com', '123-456-7890', 'janedoe.jpg', 100, 1
 
 -- Inserting a quest involving the test plant, antidote, and game characters
 INSERT INTO Quest (plantId, antidoteId, questGiverId, patientId, startText, endText, requiredLevel, xpValue, stage1Text, stage2Text, stage3Text)
-VALUES (1, 1, 1, 1, 'Help needed to cure the Elder Mage.', 'Thank you for your help!', 1, 10, 'Find the Bluebell.', 'Mix the Cure Elixir.', 'Deliver the antidote.');
+VALUES (1, 1, 1, 1, 'Help needed to cure yiur Druid Mentor.', 'Thank you for your help!', 1, 10, 'Find the Bluebell.', 'Mix the Cure Elixir.', 'Deliver the antidote.');
 
 -- Inserting a picture taken by the player of the plant
 INSERT INTO PlayerPlantPicture (plantId, playerId, picture)
@@ -229,3 +252,4 @@ VALUES (1, 1, 'Active', 'Beginning');
 
 INSERT INTO GameLevel (gameLevelId, requiredXP)
 VALUES (1, 0);
+
