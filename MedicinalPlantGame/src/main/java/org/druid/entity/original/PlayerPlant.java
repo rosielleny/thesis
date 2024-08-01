@@ -15,4 +15,5 @@ public class PlayerPlant {
 
     @EmbeddedId
     private PlayerPlantKey playerPlantKey;
+    private int discoveredOrder;
 }

@@ -1,7 +1,6 @@
 package org.game.resource;
 
-import org.game.entity.Antidote;
-import org.game.entity.Question;
+import org.game.entity.QuestionTemplate;
 import org.game.entity.Quiz;
 import org.game.service.RevisionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +22,15 @@ public class RevisionResourceImpl implements RevisionResource {
     // Get all Questions
     @CrossOrigin
     @GetMapping(path = "/revision/questions", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Question>> getAllQuestions() {
+    public ResponseEntity<List<QuestionTemplate>> getAllQuestions() {
 
-        List<Question> questions = revisionService.getAllQuestions();
+        List<QuestionTemplate> questionTemplates = revisionService.getAllQuestions();
 
-        if(questions != null){
-            return new ResponseEntity<List<Question>>(questions, HttpStatus.OK);
+        if(questionTemplates != null){
+            return new ResponseEntity<List<QuestionTemplate>>(questionTemplates, HttpStatus.OK);
         }
         else{
-            return new ResponseEntity<List<Question>>(questions, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<List<QuestionTemplate>>(questionTemplates, HttpStatus.NO_CONTENT);
         }
     }
 

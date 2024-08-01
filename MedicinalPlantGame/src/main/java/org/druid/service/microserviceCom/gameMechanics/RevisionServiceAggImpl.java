@@ -1,8 +1,6 @@
 package org.druid.service.microserviceCom.gameMechanics;
 
-import org.druid.entity.original.Antidote;
-import org.druid.entity.original.Quest;
-import org.druid.entity.original.Question;
+import org.druid.entity.original.QuestionTemplate;
 import org.druid.entity.original.Quiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -27,13 +25,13 @@ public class RevisionServiceAggImpl implements RevisionServiceAgg {
 
     // Getting templates which will be used to make questions
     @Override
-    public List<Question> getAllQuestions() {
+    public List<QuestionTemplate> getAllQuestions() {
 
         String url = startUrl + "questions";
 
-        ResponseEntity<List<Question>> response =
+        ResponseEntity<List<QuestionTemplate>> response =
                 restTemplate.exchange(url, HttpMethod.GET, null,
-                        new ParameterizedTypeReference<List<Question>>() {});
+                        new ParameterizedTypeReference<List<QuestionTemplate>>() {});
 
         if(response.getStatusCode() == HttpStatus.OK){
             return response.getBody();

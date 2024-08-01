@@ -3,7 +3,7 @@ package org.druid.entity.composite;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.druid.entity.original.Question;
+import org.druid.entity.original.QuestionTemplate;
 import org.druid.entity.original.Quiz;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class QuizGame {
     private boolean isExam;
     private int xpWorth;
 
-    private List<Question> quizQuestions;
+    private List<QuestionGame> quizQuestions;
 
     public void setQuizGameAttributesFromQuiz(Quiz quiz) {
         this.quizId = quiz.getQuizId();

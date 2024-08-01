@@ -1,6 +1,6 @@
 package org.game.dao;
 
-import org.game.entity.Question;
+import org.game.entity.QuestionTemplate;
 import org.game.entity.Quiz;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 /* This DAO retrieves data for Question and Quiz*/
 @Repository
-public interface RevisionDao extends JpaRepository<Question, Integer> {
+public interface RevisionDao extends JpaRepository<QuestionTemplate, Integer> {
 
     @Query("FROM Quiz WHERE quizId = :quizId")
     Optional<Quiz> findQuizById(@Param("quizId")int quizId);

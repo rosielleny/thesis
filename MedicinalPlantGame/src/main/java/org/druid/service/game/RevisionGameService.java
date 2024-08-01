@@ -4,5 +4,5 @@ import org.druid.entity.composite.QuizGame;
 
 public interface RevisionGameService {
 
-    QuizGame getQuizGame(int playerId, int quizId);
+    QuizGame getMixedQuizGame(int playerId, int quizId);
 }
