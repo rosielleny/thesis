@@ -201,11 +201,13 @@ VALUES ('Mashing');
 
 -- Linking antidote to action
 INSERT INTO AntidoteAction (actionId, antidoteId)
-VALUES (1, 1);
+VALUES (1, 1),
+		(1, 2);
 
 -- Linking plants to antidote
 INSERT INTO PlantAntidote (plantId, antidoteId)
-VALUES (1, 1);
+VALUES (1, 1),
+	(2,2);
 
 -- Inserting a test player
 INSERT INTO Player (playerName, playerEmail, playerPhone, playerPicture, playerTotalXP, playerLevel)
@@ -226,8 +228,8 @@ VALUES (1, 1, 'dockLeaf.jpg'),
 
 -- Inserting plant discovery by the player
 INSERT INTO PlayerPlant (plantId, playerId)
-VALUES (1, 1),
-	(2,1);
+VALUES (1, 1, 1),
+	(2,1, 2);
 
 -- Inserting antidote information for the player
 INSERT INTO PlayerAntidote (antidoteId, playerId, numberMade, numberUsed)
@@ -236,7 +238,7 @@ VALUES (1, 1, 1, 1),
 
 -- Inserting a player quest entry
 INSERT INTO PlayerQuest (questId, playerId, questStatus, questStage)
-VALUES (1, 1, 'Active', 'Beginning');
+VALUES (1, 1, 'Complete', 'AntidoteMade');
 
 INSERT INTO GameLevel (gameLevelId, requiredXP) VALUES 
 (1, 100),
