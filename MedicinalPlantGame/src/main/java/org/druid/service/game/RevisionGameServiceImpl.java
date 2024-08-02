@@ -79,6 +79,7 @@ public class RevisionGameServiceImpl implements RevisionGameService {
     private List<QuestionGame> formulateQuestions(List<QuestionTemplate> questionTemplates, List<Plant> randomTestPlants) {
 
         List<QuestionGame> allQuestions = new ArrayList<>();
+        List<Plant> allPlants = plantService.getAllPlants();
 
        // Generating all possible questions for these plants
         for(Plant p : randomTestPlants){
@@ -106,7 +107,7 @@ public class RevisionGameServiceImpl implements RevisionGameService {
                     case "PlantPicture" -> question.setAnswer(p.getDefaultPicture());
                     default -> question.setAnswer("");
                 }
-                question = addWrongAnswers(question);
+                question = addWrongAnswers(question, allPlants);
 
                 allQuestions.add(question);
             }
@@ -129,13 +130,13 @@ public class RevisionGameServiceImpl implements RevisionGameService {
         return chosenQuestions;
     }
 
-    private QuestionGame addWrongAnswers(QuestionGame question) {
+    private QuestionGame addWrongAnswers(QuestionGame question, List<Plant> allPlants) {
         Random random = new Random();
 
         // Finally, each question should have three wrong answers
         List<String> wrongAnswers = new ArrayList<>();
         // We take these from any plant in the plant table
-        List<Plant> allPlants = plantService.getAllPlants();
+
 
         for(int i = 1; i <=3; i++ ) {
             int randomIndex = random.nextInt(allPlants.size());
@@ -156,6 +157,7 @@ public class RevisionGameServiceImpl implements RevisionGameService {
                 wrongAnswers.add(wrongAnswer);
             }
         }
+        question.setWrongAnswers(wrongAnswers);
         return question;
     }
 

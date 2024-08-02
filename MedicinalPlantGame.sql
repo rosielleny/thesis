@@ -166,34 +166,38 @@ CREATE TABLE QuestionTemplate(
     questionText VARCHAR(255)
     );
     
+
+    
  # TEST VALUES BELOW
  
  -- Inserting quizzes and questions
- INSERT INTO Question(questionCategory, questionSubject, questionAnswer, question)
+ INSERT INTO QuestionTemplate(questionCategory, questionSubject, questionAnswer, questionText)
  VALUES('Identification', 'Plant', 'PlantPicture', 'Identify the {Plant}'),
  ('Identification', 'PlantPicture', 'Plant','This plant is a'),
  ('Medicine', 'Plant', 'Ailment', '{Plant} can be used to treat' ),
  ('Medicine', 'Ailment', 'PlantPicture', 'Which plant is a treatment for {Ailment}' );
  
   INSERT INTO Quiz(isExam, questionNumber, xpWorth)
- VALUES(false, '10', '100'),
- (true, '20', '200');
+ VALUES(false, 10, 2),
+ (true, 20, 50); 
  
  -- Inserting a test plant
 INSERT INTO Plant (plantName, plantLocation, defaultPicture, uniqueFeature1, uniqueFeature2, uniqueFeature3, treatmentFor, season)
-VALUES ('Bluebell', 'Woodlands', 'bluebell.jpg', 'Blue Flowers', 'Bell-shaped', 'Spring Bloom', 'Nausea', 'Spring');
+VALUES ('Broad Leaf Dock', 'map-location', 'dockleaf.jpg', 'Look at the base of the plant - the leaves emerge from a basal rosette.', 'See the leaves? In broad leaf dock these should be smooth and oblong shaped.', 'Now look at the stocks: these are normally quite long.', 'Nettle stings', 'Summer'),
+	('Burdock', 'map-location', 'burdock.jpg', 'Look at the leaves - their hearshaped appearance might be the reason for one of the plant\'s other names: Love Leaves.', 'Look more closely, the leaves should be dark green on top, and paler and a little downy on the underside.', 'See the flowers? They\'re a purple colour when in bloom, and dry out into a burr. These burrs get stuck in animals\' fur, helping to carry the seeds away from the parent plant.', 'Eczema', 'Summer-Autumn');
 
 -- Inserting a test game character (quest giver and patient)
 INSERT INTO GameCharacter (gameCharacterName, gameCharacterPicture)
-VALUES ('Elder Mage', 'elder_mage.jpg');
+VALUES ('Druid Rowan', 'druid_rowan.jpg');
 
 -- Inserting a test antidote
 INSERT INTO Antidote (antidoteName, antidotePicture, antidoteDescription)
-VALUES ('Cure Elixir', 'cure_elixir.jpg', 'An ancient remedy for common ailments');
+VALUES ('Balm for Nettle Stings', 'dock_elixir.jpg', 'A popular remedy for nettle stings.'),
+	('Poltice for Eczema', 'burdock_elicir.jpg', 'A soothing poltice made to reduce inflamation and prevent infection.');
 
 -- Inserting a test action type for antidote making game
 INSERT INTO ActionType (actionType)
-VALUES ('Mixing');
+VALUES ('Mashing');
 
 -- Linking antidote to action
 INSERT INTO AntidoteAction (actionId, antidoteId)
@@ -209,23 +213,39 @@ VALUES ('Jane Doe', 'janedoe@example.com', '123-456-7890', 'janedoe.jpg', 100, 1
 
 -- Inserting a quest involving the test plant, antidote, and game characters
 INSERT INTO Quest (plantId, antidoteId, questGiverId, patientId, startText, endText, requiredLevel, xpValue, stage1Text, stage2Text, stage3Text)
-VALUES (1, 1, 1, 1, 'Help needed to cure the Elder Mage.', 'Thank you for your help!', 1, 10, 'Find the Bluebell.', 'Mix the Cure Elixir.', 'Deliver the antidote.');
+VALUES (1, 1, 1, 1, 'There I was, head in the clouds, not realising I\'d walked into a huge patch of stinging nettles! Now I\'m just covered in stings. First things first, we\'ll need to find some dock leafs.', 'Much better, thank you!', 1, 10, 'Find the Dock Leaves.', 'Prepare the antidote.', 'Deliver the antidote.');
 
 -- Inserting a picture taken by the player of the plant
 INSERT INTO PlayerPlantPicture (plantId, playerId, picture)
-VALUES (1, 1, 'bluebell_forest.jpg');
+VALUES (1, 1, 'dockLeaf.jpg'),
+		(1,1, 'dockLeaf2.jpg'),
+        (1, 1, 'dockLeaf3.jpg'),
+        (2, 1, 'burdock.jpg'),
+		(2,1, 'burdock2.jpg'),
+        (2, 1, 'burdock3.jpg');
 
 -- Inserting plant discovery by the player
 INSERT INTO PlayerPlant (plantId, playerId)
-VALUES (1, 1);
+VALUES (1, 1),
+	(2,1);
 
 -- Inserting antidote information for the player
 INSERT INTO PlayerAntidote (antidoteId, playerId, numberMade, numberUsed)
-VALUES (1, 1, 5, 2);
+VALUES (1, 1, 1, 1),
+		(2,1,0,0);
 
 -- Inserting a player quest entry
 INSERT INTO PlayerQuest (questId, playerId, questStatus, questStage)
 VALUES (1, 1, 'Active', 'Beginning');
 
-INSERT INTO GameLevel (gameLevelId, requiredXP)
-VALUES (1, 0);
+INSERT INTO GameLevel (gameLevelId, requiredXP) VALUES 
+(1, 100),
+(2, 200),
+(3, 400),
+(4, 800),
+(5, 1600),
+(6, 3200),
+(7, 6400),
+(8, 12800),
+(9, 25600),
+(10, 51200);
