@@ -32,15 +32,15 @@ public class PlayerPlantResourceImpl implements PlayerPlantResource {
 
 
     @CrossOrigin
-    @GetMapping(path = "/player-plant-picture/{playerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/player-plants/{playerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<PlayerPlant>> getPlayersPlants( @PathVariable int playerId) {
 
         List<PlayerPlant> playerPlants = plantService.getPlayerPlants(playerId);
 
         if(playerPlants != null) {
-            return new ResponseEntity<List<PlayerPlant>>(playerPlants, HttpStatus.CREATED);
+            return new ResponseEntity<List<PlayerPlant>>(playerPlants, HttpStatus.OK);
         } else{
-            return new ResponseEntity<List<PlayerPlant>>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<List<PlayerPlant>>(HttpStatus.NOT_FOUND);
         }
     }
 }

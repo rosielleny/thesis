@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Profile</title>
+</head>
+<body>
+<h1>Profile</h1>
+
+Edit Personal Details
+
+<form th:action="@{/profile/edit/saved}" th:object="${player}" method="post">
+<br><br>
+<label class="updateInput" >
+    Name:
+    <textarea th:value="${player.playerName}" th:field="*{playerName}" id="playerName" maxlength="255" wrap="soft" required></textarea>
+</label>
+<br><br>
+    <label class="updateInput" >
+        Email:
+        <textarea th:value="${player.playerEmail}" th:field="*{playerEmail}" id="playerEmail" maxlength="255" wrap="soft" required></textarea>
+    </label>
+    <br><br>
+    <label class="updateInput" >
+        Phone:
+        <textarea th:value="${player.playerPhone}" th:field="*{playerPhone}" id="playerPhone" maxlength="255" wrap="soft" required></textarea>
+    </label>
+    <br><br>
+
+    <button type = "submit" id = "updateButton">Save</button>
+</form>
+
+<nav class="bottom-nav">
+    <a href="http://localhost:7004/quests" class="nav-item">
+        <img src="/images/quests-icon.png" alt="Quests">
+    </a>
+    <a href="http://localhost:7004/revision" class="nav-item">
+        <img src="/images/revision-icon.png" alt="Revision">
+    </a>
+    <a href="http://localhost:7004/compendium" class="nav-item">
+        <img src="/images/compendium-icon.png" alt="Compendium">
+    </a>
+    <a href="http://localhost:7004/antidotes" class="nav-item">
+        <img src="/images/antidotes-icon.png" alt="Antidotes">
+    </a>
+    <a href="http://localhost:7004/profile" class="nav-item">
+        <img src="/images/profile-icon.png" alt="Profile">
+    </a>
+</nav>
+</body>
+</html>

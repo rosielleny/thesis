@@ -48,4 +48,21 @@ public class RevisionServiceAggImpl implements RevisionServiceAgg {
         String url = startUrl + "quiz/" + quizId;
         return restTemplate.getForObject(url, Quiz.class);
     }
+
+    @Override
+    public List<Quiz> getAllQuizzes() {
+
+        String url = startUrl + "quizzes";
+
+        ResponseEntity<List<Quiz>> response =
+                restTemplate.exchange(url, HttpMethod.GET, null,
+                        new ParameterizedTypeReference<List<Quiz>>() {});
+
+        if(response.getStatusCode() == HttpStatus.OK){
+            return response.getBody();
+        }
+        else{
+            return null;
+        }
+    }
 }

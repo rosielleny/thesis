@@ -9,4 +9,5 @@ public interface RevisionServiceAgg {
 
     List<QuestionTemplate> getAllQuestions();
     Quiz getQuizById(int quizId);
+    List<Quiz> getAllQuizzes();
 }

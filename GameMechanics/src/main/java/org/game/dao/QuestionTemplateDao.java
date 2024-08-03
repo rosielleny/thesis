@@ -11,8 +11,6 @@ import java.util.Optional;
 
 /* This DAO retrieves data for Question and Quiz*/
 @Repository
-public interface RevisionDao extends JpaRepository<QuestionTemplate, Integer> {
+public interface QuestionTemplateDao extends JpaRepository<QuestionTemplate, Integer> {
 
-    @Query("FROM Quiz WHERE quizId = :quizId")
-    Optional<Quiz> findQuizById(@Param("quizId")int quizId);
 }

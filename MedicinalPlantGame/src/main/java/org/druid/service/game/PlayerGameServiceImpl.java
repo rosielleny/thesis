@@ -1,9 +1,13 @@
 package org.druid.service.game;
 
 import org.druid.entity.composite.PlayerProfile;
-import org.druid.entity.original.Player;
-import org.druid.entity.original.PlayerAntidote;
-import org.druid.entity.original.PlayerQuest;
+import org.druid.entity.original.*;
+import org.druid.entity.original.key.PlayerAntidoteKey;
+import org.druid.entity.original.key.PlayerPlantKey;
+import org.druid.entity.original.key.PlayerQuestKey;
+import org.druid.service.microserviceCom.gameMechanics.AntidoteServiceAgg;
+import org.druid.service.microserviceCom.gameMechanics.QuestServiceAgg;
+import org.druid.service.microserviceCom.plant.PlantServiceAgg;
 import org.druid.service.microserviceCom.player.PlayerAntidoteServiceAgg;
 import org.druid.service.microserviceCom.player.PlayerPlantServiceAgg;
 import org.druid.service.microserviceCom.player.PlayerQuestServiceAgg;
@@ -11,8 +15,11 @@ import org.druid.service.microserviceCom.player.PlayerServiceAgg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
-public class PlayerProfileServiceImpl implements PlayerProfileService {
+public class PlayerGameServiceImpl implements PlayerGameService {
 
     @Autowired
     PlayerServiceAgg playerService;
@@ -22,6 +29,12 @@ public class PlayerProfileServiceImpl implements PlayerProfileService {
     PlayerPlantServiceAgg playerPlantService;
     @Autowired
     PlayerAntidoteServiceAgg playerAntidoteService;
+    @Autowired
+    PlantServiceAgg plantService;
+    @Autowired
+    AntidoteServiceAgg antidoteService;
+    @Autowired
+    QuestServiceAgg questService;
 
     /* Returns a composite entity that can be used for displaying the player's
     * profile information */
@@ -39,6 +52,57 @@ public class PlayerProfileServiceImpl implements PlayerProfileService {
         pProfile.setAntidotesMade(calculateAntidotesMade(playerId));
 
         return pProfile;
+    }
+
+    @Override
+    public List<Plant> getPlayersPlants(int playerId) {
+
+        List<Plant> playersDiscoveredPlants = new ArrayList<>();
+        List<PlayerPlant> playerPlants = playerPlantService.getPlayerPlants(playerId);
+
+        for (PlayerPlant playerPlant : playerPlants) {
+            PlayerPlantKey key = playerPlant.getPlayerPlantKey();
+
+            Plant plant = plantService.getPlantById(key.getPlantId());
+
+            playersDiscoveredPlants.add(plant);
+        }
+
+        return playersDiscoveredPlants;
+    }
+
+    @Override
+    public List<Antidote> getPlayersAntidotes(int playerId) {
+
+        List<Antidote> playersDiscoveredAntidotes = new ArrayList<>();
+        List<PlayerAntidote> playerAntidotes = playerAntidoteService.getPlayerAntidotesByPlayerId(playerId);
+
+        for (PlayerAntidote playerAntidote : playerAntidotes) {
+            PlayerAntidoteKey key = playerAntidote.getPlayerAntidoteKey();
+
+            Antidote antidote = antidoteService.getAntidoteById(key.getAntidoteId());
+
+            playersDiscoveredAntidotes.add(antidote);
+        }
+
+        return playersDiscoveredAntidotes;
+    }
+
+    @Override
+    public List<Quest> getPlayersQuests(int playerId) {
+
+        List<Quest> playersDiscoveredQuests = new ArrayList<>();
+        List<PlayerQuest> playerQuests = playerQuestService.getPlayerQuestsByPlayerId(playerId);
+
+        for (PlayerQuest playerQuest : playerQuests) {
+            PlayerQuestKey key = playerQuest.getPlayerQuestKey();
+
+            Quest quest = questService.getQuestByQuestId(key.getQuestId());
+
+            playersDiscoveredQuests.add(quest);
+        }
+
+        return playersDiscoveredQuests;
     }
 
     /* Function called by getPlayerProfile to count the number of quests

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Compendium</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<h1>Plant Compendium</h1>
+
+<div class = "contents-page">
+    <ul>
+        <li th:each="plant : ${plantList}">
+            <a th:href="@{/compendium/plant/{plantId}(plantId=${plant.plantId})}" th:text="${plant.plantName}"></a>
+        </li>
+    </ul>
+
+</div>
+
+<nav class="bottom-nav">
+    <a href="http://localhost:7004/quests" class="nav-item">
+        <img src="/images/quests-icon.png" alt="Quests">
+    </a>
+    <a href="http://localhost:7004/revision" class="nav-item">
+        <img src="/images/revision-icon.png" alt="Revision">
+    </a>
+    <a href="http://localhost:7004/map" class="nav-item">
+        <img src="/images/compendium-icon.png" alt="Compendium">
+    </a>
+    <a href="http://localhost:7004/antidotes" class="nav-item">
+        <img src="/images/antidotes-icon.png" alt="Antidotes">
+    </a>
+    <a href="http://localhost:7004/profile" class="nav-item">
+        <img src="/images/profile-icon.png" alt="Profile">
+    </a>
+</nav>
+
+</body>
+
+</html>

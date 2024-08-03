@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Profile</title>
+</head>
+<body>
+<h1>Profile</h1>
+
+<img th:if="${!#strings.isEmpty(profile.playerPicture)}"
+     th:src="@{'/images/' + ${profile.playerPicture}}"
+     class="picture"
+     alt="Profile Picture"/>
+
+Name: <span th:text="${profile.playerName}">Player name.</span><br>
+Email: <span th:text="${profile.playerEmail}">Player email.</span><br>
+Phone: <span th:text="${profile.playerPhone}">Player phone.</span><br>
+<a th:href="@{/profile/edit/{playerId}(playerId=${profile.playerId})}" >Edit Info</a>
+<br><br>
+Level: <span th:text="${profile.playerLevel}">Player level.</span><br>
+Total XP: <span th:text="${profile.playerTotalXP}">Total XP.</span><br>
+Quests Completed: <span th:text="${profile.questsCompleted}">Quests Completed.</span><br>
+Pages Unlocked: <span th:text="${profile.pagesUnlocked}">Pages Unlocked.</span><br>
+Antidotes Made: <span th:text="${profile.antidotesMade}">Antidotes Made.</span><br>
+
+
+<nav class="bottom-nav">
+    <a href="http://localhost:7004/quests" class="nav-item">
+        <img src="/images/quests-icon.png" alt="Quests">
+    </a>
+    <a href="http://localhost:7004/revision" class="nav-item">
+        <img src="/images/revision-icon.png" alt="Revision">
+    </a>
+    <a href="http://localhost:7004/compendium" class="nav-item">
+        <img src="/images/compendium-icon.png" alt="Compendium">
+    </a>
+    <a href="http://localhost:7004/antidotes" class="nav-item">
+        <img src="/images/antidotes-icon.png" alt="Antidotes">
+    </a>
+    <a href="http://localhost:7004/map" class="nav-item">
+        <img src="/images/profile-icon.png" alt="Profile">
+    </a>
+</nav>
+</body>
+</html>

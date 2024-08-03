@@ -1,6 +1,7 @@
 package org.game.service;
 
-import org.game.dao.RevisionDao;
+import org.game.dao.QuestionTemplateDao;
+import org.game.dao.QuizDao;
 import org.game.entity.QuestionTemplate;
 import org.game.entity.Quiz;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,24 @@ import java.util.List;
 public class RevisionServiceImpl implements RevisionService {
 
     @Autowired
-    private RevisionDao revisionDao;
+    private QuestionTemplateDao questionDao;
+    @Autowired
+    private QuizDao quizDao;
 
     public List<QuestionTemplate> getAllQuestions() {
-        return revisionDao.findAll();
+
+        return questionDao.findAll();
     }
 
     public Quiz getQuizById(int quizId) {
-        return revisionDao.findQuizById(quizId).orElse(null);
+
+        return quizDao.findQuizById(quizId).orElse(null);
     }
+
+    @Override
+    public List<Quiz> getQuizzes() {
+        return quizDao.findAll();
+    }
+
+
 }

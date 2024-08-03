@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Score</title>
+</head>
+<body>
+<h1 th:text="${quizGame.quizName  + ' Quiz'}" ></h1>
+<h2>Score: <span th:text="*{quizGame.correctAnswers}">0</span> out of <span th:text="*{quizGame.quizQuestions.size()}">0</span></h2>
+
+<button onclick="window.location.href='http://localhost:7004/revision';">Continue</button>
+
+<nav class="bottom-nav">
+    <a href="http://localhost:7004/quests" class="nav-item">
+        <img src="/images/quests-icon.png" alt="Quests">
+    </a>
+    <a href="http://localhost:7004/revision" class="nav-item">
+        <img src="/images/revision-icon.png" alt="Revision">
+    </a>
+    <a href="http://localhost:7004/compendium" class="nav-item">
+        <img src="/images/compendium-icon.png" alt="Compendium">
+    </a>
+    <a href="http://localhost:7004/antidotes" class="nav-item">
+        <img src="/images/antidotes-icon.png" alt="Antidotes">
+    </a>
+    <a href="http://localhost:7004/profile" class="nav-item">
+        <img src="/images/profile-icon.png" alt="Profile">
+    </a>
+</nav>
+</body>
+</html>

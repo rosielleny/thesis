@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.player.entity.key.PlayerAntidoteKey;
+import org.druid.entity.original.key.PlayerAntidoteKey;
 
 @Entity
 @Data
