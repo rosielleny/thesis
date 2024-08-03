@@ -9,4 +9,5 @@ public interface RevisionService {
 
     List<QuestionTemplate> getAllQuestions();
     Quiz getQuizById(int quizId);
+    List<Quiz> getQuizzes();
 }

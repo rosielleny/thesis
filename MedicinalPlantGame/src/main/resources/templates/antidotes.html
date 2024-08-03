@@ -5,17 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Compendium</title>
+    <title>Antidotes</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 
-<h1>Plant Compendium</h1>
+<h1>Antidotes</h1>
 
-<div class = "contents-page">
+<div class = "antidote-shelf">
     <ul>
-        <li th:each="plant : ${plantList}">
-            <a th:href="@{/compendium/plant/{plantId}(plantId=${plant.plantId})}" th:text="${plant.plantName}"></a>
+        <li th:each="antidote : ${antidoteList}">
+            <a th:href="@{/antidote/make/{antidoteId}(antidoteId=${antidote.antidoteId})}" th:text="${antidote.antidoteName}"></a>
         </li>
     </ul>
 
@@ -28,10 +28,10 @@
     <a href="http://localhost:7004/revision" class="nav-item">
         <img src="/images/revision-icon.png" alt="Revision">
     </a>
-    <a href="http://localhost:7004/map" class="nav-item">
+    <a href="http://localhost:7004/compendium" class="nav-item">
         <img src="/images/compendium-icon.png" alt="Compendium">
     </a>
-    <a href="http://localhost:7004/antidotes" class="nav-item">
+    <a href="http://localhost:7004/map" class="nav-item">
         <img src="/images/antidotes-icon.png" alt="Antidotes">
     </a>
     <a href="http://localhost:7004/profile" class="nav-item">

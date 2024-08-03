@@ -15,6 +15,7 @@ public class Quiz {
 
     @Id
     private int quizId;
+    private String quizName;
     private boolean isExam;
     private int questionNumber; // eg. a normal quiz may be 10 questions, an exam may be 20
     private int xpWorth; // The xp the player will be rewarded with

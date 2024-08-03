@@ -1,17 +1,15 @@
 package org.druid.controller;
 
-import jakarta.validation.Valid;
+
 import org.druid.entity.composite.CompendiumEntry;
 import org.druid.entity.original.Plant;
 import org.druid.service.game.CompendiumService;
 import org.druid.service.game.PlayerGameService;
-import org.druid.service.microserviceCom.plant.PlantServiceAgg;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -42,12 +40,12 @@ public class CompendiumController {
     }
 
     @CrossOrigin
-    @RequestMapping("/compendium/plant")
-    public ModelAndView showCompendiumPage(@Valid @ModelAttribute("plant") Plant plant, BindingResult results){
+    @RequestMapping(value = "/compendium/plant/{plantId}", method = RequestMethod.GET)
+    public ModelAndView showCompendiumPage(@PathVariable("plantId") int plantId){
 
         ModelAndView mav = new ModelAndView("compendiumPage");
 
-        CompendiumEntry page = compendiumService.getCompendiumEntry(plant.getPlantId(), DUMMY_PLAYER_ID);
+        CompendiumEntry page = compendiumService.getCompendiumEntry(plantId, DUMMY_PLAYER_ID);
         mav.addObject("page", page);
         return mav;
     }

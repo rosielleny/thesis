@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title th:text="${page.plantName}">Plant</title>
+</head>
+<body>
+
+<h1 th:text="${page.plantName}">Plant</h1>
+<div class = "plant-photo">
+    <img th:src="${#lists.isEmpty(page.playerPictures) ? '/images/' + page.defaultPlantPicture : '/images/' + page.playerPictures[0]}"
+         th:alt="'Photo of ' + ${page.plantName}"
+         th:data-error-url="'/images/' + ${page.defaultPlantPicture}"
+         onerror="this.src = this.getAttribute('data-error-url');"
+         class="picture"/>
+</div>
+<div class = "plant-information">
+    <p th:text="${page.medicinalInfo}">Medicinal Information.</p>
+</div>
+<div class = "plant-photo">
+    <img th:if="${!#lists.isEmpty(page.playerPictures) and page.playerPictures.size() > 1}"
+         th:src="'/images/' +${page.playerPictures[1]}"
+         th:alt="'Photo of ' + ${page.plantName}"
+         class="picture"/>
+</div>
+<div class = "plant-information">
+    <p th:text="${page.culturalInfo}">Cultural Information.</p>
+</div>
+<div class = "plant-photo">
+    <img th:if="${!#lists.isEmpty(page.playerPictures) and page.playerPictures.size() > 1}"
+         th:src="'/images/' +${page.playerPictures[2]}"
+         th:alt="'Photo of ' + ${page.plantName}"
+         class="picture"/>
+</div>
+<div class = "plant-information">
+    <p th:text="${page.ecosystemInfo}">Ecosystem Information.</p>
+</div>
+<div class = "plant-photo">
+    <img th:if="${!#lists.isEmpty(page.playerPictures) and page.playerPictures.size() > 1}"
+         th:src="'/images/' + ${page.playerPictures[3]}"
+         th:alt="'Photo of ' + ${page.plantName}"
+         class="picture"/>
+</div>
+<div class = "plant-information">
+    <p th:text="${page.scientificInfo}">Scientific Information.</p>
+</div>
+<div class = "plant-information">
+    <p th:if="${page.additionalInfo != null and !page.additionalInfo.isEmpty()}" th:text="${page.additionalInfo}"></p>
+</div>
+<br><br><br><br>
+<nav class="bottom-nav">
+    <a href="http://localhost:7004/quests" class="nav-item">
+        <img src="/images/quests-icon.png" alt="Quests">
+    </a>
+    <a href="http://localhost:7004/revision" class="nav-item">
+        <img src="/images/revision-icon.png" alt="Revision">
+    </a>
+    <a href="http://localhost:7004/compendium" class="nav-item">
+        <img src="/images/compendium-icon.png" alt="Compendium">
+    </a>
+    <a href="http://localhost:7004/antidotes" class="nav-item">
+        <img src="/images/antidotes-icon.png" alt="Antidotes">
+    </a>
+    <a href="http://localhost:7004/profile" class="nav-item">
+        <img src="/images/profile-icon.png" alt="Profile">
+    </a>
+</nav>
+
+</body>
+</html>

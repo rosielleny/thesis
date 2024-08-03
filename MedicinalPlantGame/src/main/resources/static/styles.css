@@ -17,6 +17,7 @@ body, html {
     height: 10vh;
 }
 
+
 .nav-item {
     text-align: center;
     flex-grow: 1;
@@ -39,5 +40,24 @@ body, html {
 @media (max-height: 700px) {
     .bottom-nav {
         height: 10vh;
+
     }
+    .picture {
+        width: 100%; /* Adjusts the width of the container to be within the viewport */
+        padding: 0;
+        margin: 0 auto; /* Centers the container and removes margins that could cause overflow */
+    }
+
+    .answer-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .answer-grid img {
+        width: 100%;
+        height: auto;
+    }
+
+
 }

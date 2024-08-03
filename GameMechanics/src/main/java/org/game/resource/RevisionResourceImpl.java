@@ -48,4 +48,18 @@ public class RevisionResourceImpl implements RevisionResource {
             return new ResponseEntity<Quiz>(quiz, HttpStatus.NO_CONTENT);
         }
     }
+
+    @CrossOrigin
+    @GetMapping(path = "/revision/quizzes", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Quiz>> getAllQuizzes() {
+
+        List<Quiz> quizzes = revisionService.getQuizzes();
+
+        if(quizzes != null){
+            return new ResponseEntity<List<Quiz>>(quizzes, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<List<Quiz>>(quizzes, HttpStatus.NO_CONTENT);
+        }
+    }
 }

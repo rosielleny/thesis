@@ -24,7 +24,7 @@ public class PlayerQuestResourceImpl implements PlayerQuestResource {
         PlayerQuest newPq = playerQuestService.savePlayerQuest(playerQuest);
 
         if(newPq != null) {
-            return new ResponseEntity<>(newPq, HttpStatus.CREATED);
+            return new ResponseEntity<>(newPq, HttpStatus.OK);
         } else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -37,7 +37,7 @@ public class PlayerQuestResourceImpl implements PlayerQuestResource {
         List<PlayerQuest> playerQuests = playerQuestService.getPlayerQuestsByPlayerId(playerId);
 
         if(playerQuests != null) {
-            return new ResponseEntity<List<PlayerQuest>>(playerQuests, HttpStatus.CREATED);
+            return new ResponseEntity<List<PlayerQuest>>(playerQuests, HttpStatus.OK);
         } else{
             return new ResponseEntity<List<PlayerQuest>>(HttpStatus.BAD_REQUEST);
         }
@@ -50,7 +50,7 @@ public class PlayerQuestResourceImpl implements PlayerQuestResource {
         PlayerQuest playerQuest = playerQuestService.getPlayerQuestById(playerId, questId);
 
         if(playerQuest != null) {
-            return new ResponseEntity<PlayerQuest>(playerQuest, HttpStatus.CREATED);
+            return new ResponseEntity<PlayerQuest>(playerQuest, HttpStatus.OK);
         } else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

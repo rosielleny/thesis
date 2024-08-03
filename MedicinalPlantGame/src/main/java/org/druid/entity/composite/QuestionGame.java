@@ -20,7 +20,7 @@ public class QuestionGame {
 
     private String answer; // The specific answer of this question
     private List<String> wrongAnswers;
-
+    private List<String> allAnswers;
     public void setQuestionGameAttributesFromQuestionTemplate(QuestionTemplate questionTemplate){
         this.questionId = questionTemplate.getQuestionId();
         this.questionCategory = questionTemplate.getQuestionCategory();

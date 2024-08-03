@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.game</groupId>
-	<artifactId>GameMechanics</artifactId>
+	<artifactId>GameMechanicsMicroservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>GameMechanics</name>
 	<description>GameMechanics</description>

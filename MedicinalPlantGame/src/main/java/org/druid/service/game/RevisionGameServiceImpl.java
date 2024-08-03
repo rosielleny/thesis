@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 public class RevisionGameServiceImpl implements RevisionGameService {
@@ -30,6 +31,7 @@ public class RevisionGameServiceImpl implements RevisionGameService {
 
     @Override
     public QuizGame getMixedQuizGame(int playerId, int quizId) {
+
 
         Quiz quiz = revisionService.getQuizById(quizId);
         QuizGame quizGame = new QuizGame();
@@ -45,6 +47,7 @@ public class RevisionGameServiceImpl implements RevisionGameService {
         quizGame.setQuizGameAttributesFromQuiz(quiz); // Using the quiz object to fill out most values
         quizGame.setQuizQuestions(questions); // Setting the questions
 
+        System.out.println(quizGame);
         return quizGame;
     }
 
@@ -78,8 +81,8 @@ public class RevisionGameServiceImpl implements RevisionGameService {
     /* Edits the question text itself with the appropriate plant name */
     private List<QuestionGame> formulateQuestions(List<QuestionTemplate> questionTemplates, List<Plant> randomTestPlants) {
 
+
         List<QuestionGame> allQuestions = new ArrayList<>();
-        List<Plant> allPlants = plantService.getAllPlants();
 
        // Generating all possible questions for these plants
         for(Plant p : randomTestPlants){
@@ -92,22 +95,27 @@ public class RevisionGameServiceImpl implements RevisionGameService {
                 String currentQuestion = question.getQuestionText();
 
                 switch (question.getQuestionSubjectType()) {
-                    case "Plant" -> question.setQuestionText(currentQuestion.replace("{Plant}", p.getPlantName()));
-
-                    case "Ailment" -> question.setQuestionText(currentQuestion.replace("{Ailment}", p.getTreatmentFor()));
-
+                    case "Plant": question.setQuestionText(currentQuestion.replace("{Plant}", p.getPlantName()));
+                                        break;
+                    case "Ailment": question.setQuestionText(currentQuestion.replace("{Ailment}", p.getTreatmentFor()));
+                                        break;
                     // If the question subject is PlantPicture, the subject becomes the plant's default picture as there is nothing to replace in the question text itself
-                    case "PlantPicture" -> question.setQuestionSubjectType(p.getDefaultPicture());
-
-                    default -> question.setQuestionText(currentQuestion);
+                    case "PlantPicture":question.setQuestionSubjectType(p.getDefaultPicture());
+                                        break;
+                    default: question.setQuestionText(currentQuestion);
+                        break;
                 }
                 switch (question.getQuestionAnswerType()) {
-                    case "Plant" -> question.setAnswer(p.getPlantName());
-                    case "Ailment" -> question.setAnswer(p.getTreatmentFor());
-                    case "PlantPicture" -> question.setAnswer(p.getDefaultPicture());
-                    default -> question.setAnswer("");
+                    case "Plant": question.setAnswer(p.getPlantName());
+                        break;
+                    case "Ailment": question.setAnswer(p.getTreatmentFor());
+                        break;
+                    case "PlantPicture": question.setAnswer(p.getDefaultPicture());
+                        break;
+                    default: question.setAnswer("");
+                         break;
                 }
-                question = addWrongAnswers(question, allPlants);
+                question = addWrongAnswers(question);
 
                 allQuestions.add(question);
             }
@@ -130,34 +138,50 @@ public class RevisionGameServiceImpl implements RevisionGameService {
         return chosenQuestions;
     }
 
-    private QuestionGame addWrongAnswers(QuestionGame question, List<Plant> allPlants) {
-        Random random = new Random();
 
-        // Finally, each question should have three wrong answers
-        List<String> wrongAnswers = new ArrayList<>();
-        // We take these from any plant in the plant table
+    private QuestionGame addWrongAnswers(QuestionGame question) {
 
 
-        for(int i = 1; i <=3; i++ ) {
-            int randomIndex = random.nextInt(allPlants.size());
+        List<Plant> allPlants = plantService.getAllPlants();
 
-            String wrongAnswer = "";
+        List<String> answers = new ArrayList<>();
+        List<String> potentialAnswers = new ArrayList<>();
 
-            switch (question.getQuestionAnswerType()) {
-                case "Plant" -> wrongAnswer = allPlants.get(randomIndex).getPlantName();
-                case "Ailment" -> wrongAnswer = allPlants.get(randomIndex).getTreatmentFor();
-                case "PlantPicture" -> wrongAnswer = allPlants.get(randomIndex).getDefaultPicture();
-                default -> wrongAnswer = "";
+        // Getting a list of strings with potential answers
+        for (Plant p : allPlants) {
+            String potentialAnswer = null;
+            switch(question.getQuestionAnswerType()) {
+                case "Plant":
+                    potentialAnswer = p.getPlantName();
+                    break;
+                case "Ailment":
+                    potentialAnswer = p.getTreatmentFor();
+                    break;
+                case "PlantPicture":
+                    potentialAnswer = p.getDefaultPicture();
+                    break;
             }
-
-            // Prevents duplicate wrong answers or wrong answers which match the real answer
-            if (wrongAnswers.contains(wrongAnswer) || wrongAnswers.contains(question.getAnswer())) {
-                i--;
-            } else {
-                wrongAnswers.add(wrongAnswer);
+            if (potentialAnswer != null && !potentialAnswer.equals(question.getAnswer())) {
+                potentialAnswers.add(potentialAnswer);
             }
         }
-        question.setWrongAnswers(wrongAnswers);
+
+        Collections.shuffle(potentialAnswers);
+        answers.add(question.getAnswer());
+
+        while(answers.size() < 4){
+
+            String answer = potentialAnswers.get(0);
+            if(answers.contains(answer)){
+                potentialAnswers.remove(0);
+            }
+            else {
+                answers.add(potentialAnswers.get(0));
+                potentialAnswers.remove(0);
+            }
+        }
+
+        question.setAllAnswers(answers);
         return question;
     }
 

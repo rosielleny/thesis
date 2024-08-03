@@ -1,34 +1,36 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Compendium</title>
     <link rel="stylesheet" href="/styles.css">
+    <title>Revision</title>
 </head>
 <body>
-
-<h1>Plant Compendium</h1>
-
-<div class = "contents-page">
+<h1>Revision</h1>
+<br><br>
+Available Quizzes
+<br>
+<div class = "available-quizzes">
     <ul>
-        <li th:each="plant : ${plantList}">
-            <a th:href="@{/compendium/plant/{plantId}(plantId=${plant.plantId})}" th:text="${plant.plantName}"></a>
+        <li th:each="quiz : ${quizzes}">
+            <a th:href="@{/revision/quiz/{quizId}(quizId=${quiz.quizId})}" th:text="${quiz.quizName  + ' Quiz'}"></a>
         </li>
     </ul>
 
 </div>
 
+
+
+
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">
         <img src="/images/quests-icon.png" alt="Quests">
     </a>
-    <a href="http://localhost:7004/revision" class="nav-item">
+    <a href="http://localhost:7004/map" class="nav-item">
         <img src="/images/revision-icon.png" alt="Revision">
     </a>
-    <a href="http://localhost:7004/map" class="nav-item">
+    <a href="http://localhost:7004/compendium" class="nav-item">
         <img src="/images/compendium-icon.png" alt="Compendium">
     </a>
     <a href="http://localhost:7004/antidotes" class="nav-item">
@@ -38,7 +40,5 @@
         <img src="/images/profile-icon.png" alt="Profile">
     </a>
 </nav>
-
 </body>
-
 </html>
