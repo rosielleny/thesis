@@ -36,7 +36,8 @@ CREATE TABLE Player(
     playerPhone VARCHAR(255),
     playerPicture VARCHAR(255),
     playerTotalXP BIGINT UNSIGNED DEFAULT 0,
-    playerLevel TINYINT
+    playerLevel TINYINT,
+    playerCanDoExam BOOLEAN
     );
     
 # Table holding antidote information
@@ -86,6 +87,7 @@ CREATE TABLE Quest(
 	plantId INT,
     antidoteId INT,
     questGiverId INT,
+    questName INT,
     patientId INT,
     startText TEXT,
     endText TEXT,
@@ -181,7 +183,8 @@ CREATE TABLE QuestionTemplate(
   INSERT INTO Quiz(isExam, questionNumber, quizName ,xpWorth)
  VALUES (false, 10, 'General',2),
  (false, 10, 'Medicine',2),
- (false, 10, 'Identification',2); 
+ (false, 10, 'Identification',2),
+ (true, 20, 'General', 10); 
  
  -- Inserting a test plant
 INSERT INTO Plant (plantName, plantLocation, defaultPicture, uniqueFeature1, uniqueFeature2, uniqueFeature3, treatmentFor, season)
@@ -223,7 +226,7 @@ has noticeably wavy leaves.', '' );
 
 -- Inserting a test game character (quest giver and patient)
 INSERT INTO GameCharacter (gameCharacterName, gameCharacterPicture)
-VALUES ('Druid Rowan', 'druid_rowan.jpg');
+VALUES ('Druid Rowan', 'druidMentor.png');
 
 -- Inserting a test antidote
 INSERT INTO Antidote (antidoteName, antidotePicture, antidoteDescription)
@@ -245,14 +248,14 @@ VALUES (1, 1),
 	(2,2);
 
 -- Inserting a test player
-INSERT INTO Player (playerName, playerEmail, playerPhone, playerPicture, playerTotalXP, playerLevel)
-VALUES ('Jane Doe', 'janedoe@example.com', '123-456-7890', 'player1profile.png', 100, 1);
+INSERT INTO Player (playerName, playerEmail, playerPhone, playerPicture, playerTotalXP, playerLevel, playerCanDoExam)
+VALUES ('Jane Doe', 'janedoe@example.com', '123-456-7890', 'player1profile.png', 100, 1, false);
 
 -- Inserting a quest involving the test plant, antidote, and game characters
 INSERT INTO Quest (plantId, antidoteId, questGiverId, patientId, startText, endText, requiredLevel, xpValue, stage1Text, stage2Text, stage3Text)
 VALUES (1, 1, 1, 1, 'There I was, head in the clouds, not realising I\'d walked into a huge patch of stinging nettles! Now I\'m just covered in stings. First things first, we\'ll need to find some dock leafs.', 
 'Much better, thank you!', 1, 10, 'Find the Dock Leaves.', 'Prepare the antidote.', 'Deliver the antidote.'),
-(2, 2, 1, 1, 'Your first patient is suffering from eczema. Fortunately I know the perfect plant - burdock. You should see its location on your map.', 'Excellent, the patient should be much more comfortable now.', 
+(2, 2, 1, 1, 'Your first patient is suffering from uncomfortable eczema. Fortunately, I know the perfect plant - burdock! Its anti-inflamatory and antibacterial properties make it the perfect treatment. You should see its location on your map.', 'Excellent, the patient should be much more comfortable now.', 
  1, 12, 'Find the burdock plant.', 'Prepare the antidote.', 'Deliver the antidote.');
 
 -- Inserting a picture taken by the player of the plant

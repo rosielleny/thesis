@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 @Controller
 public class QuestResourceImpl implements QuestResource {
 
@@ -58,6 +60,20 @@ public class QuestResourceImpl implements QuestResource {
         }
         else{
             return new ResponseEntity<GameLevel>(gameLevel, HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @Override
+    @GetMapping(path = "/quest/quest-by-level/{levelId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Quest>> getQuestsByLevelId(int levelId) {
+
+        List<Quest> quests = questService.getQuestsByLevelId(levelId);
+
+        if(!quests.isEmpty()){
+            return new ResponseEntity<List<Quest>>(quests, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<List<Quest>>(quests, HttpStatus.NO_CONTENT);
         }
     }
 

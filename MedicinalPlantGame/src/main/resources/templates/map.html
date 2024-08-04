@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles.css">
-    <title>Score</title>
+    <title>Map</title>
 </head>
 <body>
-<h1 th:text="${quizGame.quizName  + ' Quiz'}" ></h1>
-<h2>Score: <span th:text="*{quizGame.correctAnswers}">0</span> out of <span th:text="*{quizGame.quizQuestions.size()}">0</span></h2>
-
-<div th:if="${passed == true}">
-    <p>You passed the exam and leveled up!</p>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="map-container">
+    <img th:src="@{/images/botanics-map.jpg}"
+         alt="Map of the botanic gardens"
+         class="map-image"/>
+    <img th:src="@{/images/quests-icon.png}" alt="Marker"
+         th:if="${quest.questName != 'no-quest'}"
+         th:style="'top:' + ${20} + '%; left:' + ${10} + '%;'"
+         class="map-marker"
+         onclick="document.getElementById('quest-dialog').showModal()"/>
 </div>
-<div th:if="${passed == false && quizGame.isExam()}">
-    <p>You didn't pass the exam, you'll have to try again to level up.</p>
-</div>
 
-<button onclick="window.location.href='http://localhost:7004/revision';">Continue</button>
+<dialog id="quest-dialog">
+    <p>Are you at the quest location?</p>
+    <div>
+        <button onclick="window.location.href='/find-plant';">Yes</button>
+        <button onclick="document.getElementById('quest-dialog').close();">No</button>
+    </div>
+</dialog>
 
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">

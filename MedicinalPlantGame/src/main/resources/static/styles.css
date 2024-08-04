@@ -17,7 +17,11 @@ body, html {
     height: 10vh;
 }
 
-
+.picture {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+}
 .nav-item {
     text-align: center;
     flex-grow: 1;
@@ -37,16 +41,39 @@ body, html {
     }
 }
 
-@media (max-height: 700px) {
-    .bottom-nav {
-        height: 10vh;
 
-    }
-    .picture {
-        width: 100%; /* Adjusts the width of the container to be within the viewport */
-        padding: 0;
-        margin: 0 auto; /* Centers the container and removes margins that could cause overflow */
-    }
+
+.map-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+}
+
+.map-image {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-marker {
+    position: absolute; /* Absolute positioning relative to the map container */
+    width: 30px;
+    height: 30px;
+}
+
+.bottom-left-image {
+    position: fixed;
+    bottom: 10vh;
+    left: 0;
+    width: auto;
+    height: auto;
+    max-height: min(50vh, 400px);
+    max-width: 100%;
+    object-fit: contain;
+}
 
     .answer-grid {
         display: grid;
@@ -59,5 +86,27 @@ body, html {
         height: auto;
     }
 
+    @media (max-height: 700px) {
+    .bottom-nav {
+        height: 10vh;
 
-}
+    }
+    .picture {
+        width: 100%;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+
+    .bottom-left-image {
+        position: fixed;
+        bottom: 10vh;
+        left: 0;
+        width: auto;
+        height: auto;
+        max-height: min(50vh, 400px);
+        max-width: 100%;
+        object-fit: contain;
+
+
+}}

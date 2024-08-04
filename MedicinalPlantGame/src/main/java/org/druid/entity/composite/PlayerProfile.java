@@ -17,6 +17,7 @@ public class PlayerProfile {
     private String playerPicture;
     private int playerTotalXP;
     private int playerLevel;
+    private boolean playerCanDoExam;
 
     // New calculated data
     private int questsCompleted;
@@ -32,5 +33,6 @@ public class PlayerProfile {
         this.playerPicture = player.getPlayerPicture();
         this.playerTotalXP = player.getPlayerTotalXP();
         this.playerLevel = player.getPlayerLevel();
+        this.playerCanDoExam = player.isPlayerCanDoExam();
     }
 }

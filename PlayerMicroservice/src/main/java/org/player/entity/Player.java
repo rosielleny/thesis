@@ -20,4 +20,5 @@ public class Player {
     private String playerPicture;
     private int playerTotalXP;
     private int playerLevel;
+    private boolean playerCanDoExam;
 }

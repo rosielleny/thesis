@@ -2,14 +2,13 @@ package org.druid.service.game;
 
 import org.druid.entity.composite.QuestionGame;
 import org.druid.entity.composite.QuizGame;
-import org.druid.entity.original.Plant;
-import org.druid.entity.original.PlayerPlant;
-import org.druid.entity.original.QuestionTemplate;
-import org.druid.entity.original.Quiz;
+import org.druid.entity.original.*;
 import org.druid.entity.original.key.PlayerPlantKey;
+import org.druid.service.microserviceCom.gameMechanics.QuestServiceAgg;
 import org.druid.service.microserviceCom.gameMechanics.RevisionServiceAgg;
 import org.druid.service.microserviceCom.plant.PlantServiceAgg;
 import org.druid.service.microserviceCom.player.PlayerPlantServiceAgg;
+import org.druid.service.microserviceCom.player.PlayerServiceAgg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +27,12 @@ public class RevisionGameServiceImpl implements RevisionGameService {
     PlayerPlantServiceAgg playerPlantService;
     @Autowired
     PlantServiceAgg plantService;
+    @Autowired
+    PlayerServiceAgg playerService;
+    @Autowired
+    QuestServiceAgg questService;
 
+    /* Gets a quiz with all question types, not filtered by subject*/
     @Override
     public QuizGame getMixedQuizGame(int playerId, int quizId) {
 
@@ -49,6 +53,44 @@ public class RevisionGameServiceImpl implements RevisionGameService {
 
         System.out.println(quizGame);
         return quizGame;
+    }
+
+    @Override
+    public void awardQuizXP(int xpWorth, int totalQuestions, int playerId, int correctAnswers) {
+        // Calculating awarded XP based on the number of correct answers
+        int awardedXP = (xpWorth*2)*(correctAnswers/totalQuestions);
+        Player player = playerService.getPlayer(playerId);
+        player.setPlayerTotalXP(player.getPlayerTotalXP() + awardedXP);
+        playerService.savePlayer(player);
+    }
+
+    /* This method will be called any time a player is awarded XP by any function in the program
+    * It checks if the player's XP is high enough to level up, and if so unlocks a level up exam*/
+    @Override
+    public void canPlayerDoLevelUpExam(int playerId) {
+
+        Player player = playerService.getPlayer(playerId);
+        GameLevel gameLevel = questService.getGameLevelById(playerId +1);
+        if(player.getPlayerTotalXP() >= gameLevel.getRequiredXP()){
+            player.setPlayerCanDoExam(true);
+            playerService.savePlayer(player);
+        }
+    }
+
+    /*Called when a player completes a levelUp exam. If they scored over 50%
+    * then they are allowed to level up*/
+    @Override
+    public boolean hasPlayerPassedExam(int playerId, int correctAnswers, int questionNumber) {
+        if(correctAnswers >= (questionNumber/2)){
+            Player player = playerService.getPlayer(playerId);
+            player.setPlayerCanDoExam(false);
+            player.setPlayerLevel(player.getPlayerLevel() + 1);
+
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     /* Provides a list of random plants from the plants the player has discovered.
@@ -138,7 +180,7 @@ public class RevisionGameServiceImpl implements RevisionGameService {
         return chosenQuestions;
     }
 
-
+    /*Gets some random wrong answers for the question and adds them*/
     private QuestionGame addWrongAnswers(QuestionGame question) {
 
 

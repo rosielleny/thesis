@@ -49,7 +49,6 @@ public class ProfileController {
     @RequestMapping("/profile/edit/saved")
     public ModelAndView saveNewProfileInfo(@Valid @ModelAttribute("player")Player player, BindingResult bindingResult){
 
-        ModelAndView mav = new ModelAndView("profile");
 
         if(bindingResult.hasErrors()){
             return new ModelAndView("profileUpdate", "player", player);
@@ -64,8 +63,8 @@ public class ProfileController {
             // Saving the changes
             playerService.savePlayer(finalPlayer);
             PlayerProfile profile = playerGameService.getPlayerProfile(DUMMY_PLAYER_ID);
-            mav.addObject("profile", profile);
         }
-        return mav;
+
+        return new ModelAndView("redirect:/profile");
     }
 }

@@ -11,6 +11,9 @@
 <br><br>
 Available Quizzes
 <br>
+<div th:if="${canLevelUpExam == 'true'}">
+    <a th:href="@{/revision/quiz/{quizId}(quizId=${exam.quizId})}">Level Up Exam</a>
+</div>
 <div class = "available-quizzes">
     <ul>
         <li th:each="quiz : ${quizzes}">

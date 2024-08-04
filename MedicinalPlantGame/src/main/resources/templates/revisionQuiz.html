@@ -31,7 +31,7 @@
             <div th:each="answer, stat : ${quizGame.quizQuestions[quizGame.quizProgress - 1].allAnswers}">
                 <input type="radio" th:id="${'answer' + stat.index}" th:name="selectedAnswer" th:value="${answer}" />
                 <label th:for="${'answer' + stat.index}">
-                    <img th:src="@{'/images/' + ${answer}}" alt="Answer Image">
+                    <img class = answer-grid-img th:src="@{'/images/' + ${answer}}" alt="Answer Image">
                 </label>
             </div>
         </div>

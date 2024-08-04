@@ -1,13 +1,16 @@
 package org.druid.service.microserviceCom.gameMechanics;
 
-import org.druid.entity.original.GameCharacter;
-import org.druid.entity.original.GameLevel;
-import org.druid.entity.original.Player;
-import org.druid.entity.original.Quest;
+import org.druid.entity.original.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service
 public class QuestServiceAggImpl implements QuestServiceAgg {
@@ -38,5 +41,21 @@ public class QuestServiceAggImpl implements QuestServiceAgg {
     public GameLevel getGameLevelById(int gameLevelId) {
         String url = startUrl + "level/" + gameLevelId;
         return restTemplate.getForObject(url, GameLevel.class);
+    }
+
+    @Override
+    public List<Quest> getQuestsByGameLevelId(int gameLevelId) {
+        String url = startUrl + "quest-by-level/" + gameLevelId;
+
+        ResponseEntity<List<Quest>> response =
+                restTemplate.exchange(url, HttpMethod.GET, null,
+                        new ParameterizedTypeReference<List<Quest>>() {});
+
+        if(response.getStatusCode() == HttpStatus.OK){
+            return response.getBody();
+        }
+        else{
+            return null;
+        }
     }
 }

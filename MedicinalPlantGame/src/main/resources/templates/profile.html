@@ -9,10 +9,12 @@
 <body>
 <h1>Profile</h1>
 
+<div class = "picture">
 <img th:if="${!#strings.isEmpty(profile.playerPicture)}"
      th:src="@{'/images/' + ${profile.playerPicture}}"
      class="picture"
      alt="Profile Picture"/>
+</div>
 
 Name: <span th:text="${profile.playerName}">Player name.</span><br>
 Email: <span th:text="${profile.playerEmail}">Player email.</span><br>

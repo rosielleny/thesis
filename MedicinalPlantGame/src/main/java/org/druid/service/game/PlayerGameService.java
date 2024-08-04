@@ -14,5 +14,5 @@ public interface PlayerGameService {
     PlayerProfile getPlayerProfile(int playerId);
     List<Plant> getPlayersPlants(int playerId);
     List<Antidote> getPlayersAntidotes(int playerId);
-    List<Quest> getPlayersQuests(int playerId);
+    List<QuestGame> getPlayersQuests(int playerId);
 }

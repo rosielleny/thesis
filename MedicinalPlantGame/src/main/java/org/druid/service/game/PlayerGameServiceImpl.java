@@ -1,6 +1,7 @@
 package org.druid.service.game;
 
 import org.druid.entity.composite.PlayerProfile;
+import org.druid.entity.composite.QuestGame;
 import org.druid.entity.original.*;
 import org.druid.entity.original.key.PlayerAntidoteKey;
 import org.druid.entity.original.key.PlayerPlantKey;
@@ -35,6 +36,8 @@ public class PlayerGameServiceImpl implements PlayerGameService {
     AntidoteServiceAgg antidoteService;
     @Autowired
     QuestServiceAgg questService;
+    @Autowired
+    QuestGameService questGameService;
 
     /* Returns a composite entity that can be used for displaying the player's
     * profile information */
@@ -89,15 +92,15 @@ public class PlayerGameServiceImpl implements PlayerGameService {
     }
 
     @Override
-    public List<Quest> getPlayersQuests(int playerId) {
+    public List<QuestGame> getPlayersQuests(int playerId) {
 
-        List<Quest> playersDiscoveredQuests = new ArrayList<>();
+        List<QuestGame> playersDiscoveredQuests = new ArrayList<>();
         List<PlayerQuest> playerQuests = playerQuestService.getPlayerQuestsByPlayerId(playerId);
 
         for (PlayerQuest playerQuest : playerQuests) {
             PlayerQuestKey key = playerQuest.getPlayerQuestKey();
 
-            Quest quest = questService.getQuestByQuestId(key.getQuestId());
+            QuestGame quest = questGameService.getQuestGame(key.getQuestId(), playerId);
 
             playersDiscoveredQuests.add(quest);
         }
