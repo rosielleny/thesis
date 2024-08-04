@@ -2,11 +2,13 @@ package org.druid.controller;
 
 import org.druid.entity.composite.QuestGame;
 import org.druid.entity.original.Antidote;
+import org.druid.entity.original.Plant;
 import org.druid.entity.original.PlayerQuest;
 import org.druid.entity.original.Quest;
 import org.druid.service.game.PlayerGameService;
 import org.druid.service.game.QuestGameService;
 import org.druid.service.game.QuestGameServiceImpl;
+import org.druid.service.microserviceCom.plant.PlantServiceAgg;
 import org.druid.service.microserviceCom.player.PlayerQuestServiceAgg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,7 @@ public class QuestController {
     @Autowired
     private QuestGameService questGameService;
     @Autowired
-    private QuestGameServiceImpl questGameServiceImpl;
+    private PlantServiceAgg plantService;
 
     @CrossOrigin
     @RequestMapping("/quests")
@@ -92,6 +94,15 @@ public class QuestController {
     public ModelAndView markQuestAsActive(@RequestParam("questId") int questId){
 
         PlayerQuest playerQuest = playerQuestService.getPlayerQuestById(DUMMY_PLAYER_ID, questId);
+        List<PlayerQuest> playerQuests = playerQuestService.getPlayerQuestsByPlayerId(DUMMY_PLAYER_ID);
+        // Whichever quest was previously active must now be inactive
+        for(PlayerQuest pq : playerQuests){
+            if(pq.getQuestStatus().equals("Active")){
+                pq.setQuestStatus("Inactive");
+                playerQuestService.savePlayerQuest(pq);
+                break;
+            }
+        }
         playerQuest.setQuestStatus("Active");
         playerQuestService.savePlayerQuest(playerQuest);
 
@@ -132,15 +143,66 @@ public class QuestController {
 
         List<PlayerQuest> playerQuests = playerQuestService.getPlayerQuestsByPlayerId(DUMMY_PLAYER_ID);
         QuestGame quest = new QuestGame();
+        Plant plant = new Plant();
         for(PlayerQuest pq : playerQuests){
             if(pq.getQuestStatus().equals("Active") && pq.getQuestStage().equals("Beginning")){
                 quest = questGameService.getQuestGame(pq.getPlayerQuestKey().getQuestId(), DUMMY_PLAYER_ID);
+                plant = plantService.getPlantById(quest.getPlantId());
             }
             else{
                 quest.setQuestName("no-quest");
+                plant.setPlantName("no-plant");
             }
         }
         mav.addObject("quest", quest);
+        mav.addObject("plant", plant);
         return mav;
+
+
     }
+
+
+@CrossOrigin
+@RequestMapping("/find-plant/{questId}")
+public ModelAndView findPlant(@PathVariable("questId") int questId){
+
+    ModelAndView mav = new ModelAndView("findPlant");
+
+    QuestGame quest = questGameService.getQuestGame(questId, DUMMY_PLAYER_ID);
+    Plant plant = plantService.getPlantById(quest.getPlantId());
+    mav.addObject("plant", plant);
+    mav.addObject("quest", quest);
+    return mav;
+
+}
+
+
+@CrossOrigin
+@RequestMapping("/found-plant/{plantId}/{questId}")
+public ModelAndView foundPlant(@PathVariable("questId") int questId, @PathVariable("plantId") int plantId){
+
+    ModelAndView mav = new ModelAndView("foundPlant");
+
+    QuestGame quest = questGameService.getQuestGame(questId, DUMMY_PLAYER_ID);
+    Plant plant = plantService.getPlantById(quest.getPlantId());
+    mav.addObject("plant", plant);
+    mav.addObject("quest", quest);
+    return mav;
+
+    }
+
+/*This is the point in the game play loop where image recognition should be implemented
+* to verify the player has found the correct plant*/
+@CrossOrigin
+@RequestMapping("/confirm-plant/{plantId}/{questId}")
+public ModelAndView confirmPlant(@PathVariable("questId") int questId, @PathVariable("plantId") int plantId){
+
+    ModelAndView mav = new ModelAndView("confirmPlant");
+
+    QuestGame quest = questGameService.getQuestGame(questId, DUMMY_PLAYER_ID);
+    Plant plant = plantService.getPlantById(quest.getPlantId());
+    mav.addObject("plant", plant);
+    return mav;
+
+}
 }

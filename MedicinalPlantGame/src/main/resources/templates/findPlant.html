@@ -4,29 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles.css">
-    <title>Map</title>
+    <title>Find Plant</title>
 </head>
 <body>
-<br><br><br><br><br><br><br><br><br><br><br><br>
-<div class="map-container">
-    <img th:src="@{/images/botanics-map.jpg}"
-         alt="Map of the botanic gardens"
-         class="map-image"/>
-    <img th:src="@{/images/quests-icon.png}" alt="Marker"
-         th:if="${quest.questName != 'no-quest'}"
-         th:style="'top:' + ${plant.getPlantLocationT()} + '%; left:' + ${plant.getPlantLocationL()} + '%;'"
-         class="map-marker"
-         onclick="document.getElementById('quest-dialog').showModal()"/>
-</div>
+<h1 th:text="'Search for ' + ${plant.plantName}"></h1>
 
-<dialog id="quest-dialog">
-    <p>Are you at the quest location?</p>
-    <div>
-        <button th:onclick="|window.location.href='/find-plant/${quest.questId}';|">Yes</button>
+<p th:text="${plant.plantDescription}"></p>
 
-        <button onclick="document.getElementById('quest-dialog').close();">No</button>
-    </div>
-</dialog>
+<a th:href="@{/found-plant/{plantId}/{questId}(plantId=${plant.plantId},questId=${quest.questId})}">
+    Found It
+</a>
 
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">

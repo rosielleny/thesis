@@ -6,7 +6,9 @@ USE PlantEducation;
 CREATE TABLE Plant(
 	plantId INT AUTO_INCREMENT PRIMARY KEY,
     plantName VARCHAR(255) NOT NULL,
-    plantLocation VARCHAR(255),
+    plantLocationT TINYINT,
+    plantLocationL TINYINT,
+    plantDescription VARCHAR(255),
     defaultPicture VARCHAR(255),
     uniqueFeature1 VARCHAR(255),
     uniqueFeature2 VARCHAR(255),
@@ -187,20 +189,20 @@ CREATE TABLE QuestionTemplate(
  (true, 20, 'General', 10); 
  
  -- Inserting a test plant
-INSERT INTO Plant (plantName, plantLocation, defaultPicture, uniqueFeature1, uniqueFeature2, uniqueFeature3, treatmentFor, season)
-VALUES ('Broad Leaf Dock', 'map-location', 'defaultDockLeaf.jpg', 'Look at the base of the plant - the leaves emerge from a basal rosette.', 'See the leaves? In broad leaf dock these should be smooth and oblong shaped.', 'Now look at the stocks: these are normally quite long.', 'Nettle stings', 'Summer'),
-	('Burdock', 'map-location', 'defaultBurdock.jpg', 'Look at the leaves - their heartshaped appearance might be the reason for one of the plant\'s other names: Love Leaves.', 'Look more closely, the leaves should be dark green on top, and paler and a little downy on the underside.', 'See the flowers? They\'re a purple colour when in bloom, and dry out into a burr. These burrs get stuck in animals\' fur, helping to carry the seeds away from the parent plant.', 'Eczema', 'Summer-Autumn'),
+INSERT INTO Plant (plantName, plantLocationT, plantLocationL, defaultPicture, uniqueFeature1, uniqueFeature2, uniqueFeature3, treatmentFor, season, plantDescription)
+VALUES ('Broad Leaf Dock', 20, 10, 'defaultDockLeaf.jpg', 'Look at the base of the plant - the leaves emerge from a basal rosette.', 'See the leaves? In broad leaf dock these should be smooth and oblong shaped.', 'Now look at the stocks: these are normally quite long.', 'Nettle stings', 'Summer', 'The plant you are looking for has large, oblong leaves. It grows on the ground up from a basal roset and is often found near stinging nettles.'),
+	('Burdock', 30, 10, 'defaultBurdock.jpg', 'Look at the leaves - their heartshaped appearance might be the reason for one of the plant\'s other names: Love Leaves.', 'Look more closely, the leaves should be dark green on top, and paler and a little downy on the underside.', 'See the flowers? They\'re a purple colour when in bloom, and dry out into a burr. These burrs get stuck in animals\' fur, helping to carry the seeds away from the parent plant.', 'Eczema', 'Summer-Autumn', 'The plant you are looking for as distinctive purple flowers which are round and spikey. The smaller leaves are heart shaped and the larger leaves more spear shaped.'),
     -- Below this point plants are chatgpt generated for testing purposes. Those above are hand researched and written. Those below need to be changed to handcrafted entries.
-     ('Willow Herb', 'forest edges', 'willowHerb.jpg', 'Notice the unique spike of pink flowers.', 'Leaves are lance-shaped with a toothed margin.', 'The plant has a hairy stem which helps distinguish it.', 'Skin irritation', 'Spring-Summer'),
-    ('Fireweed', 'burned clearings', 'fireweed.jpg', 'Easily recognized by its tall, dominant red flowers.', 'The leaves are spirally arranged, with a slightly reddish tinge.', 'The seeds have silky hairs that aid in wind dispersal.', 'Burns', 'Summer'),
-    ('Chickweed', 'garden beds', 'chickweed.jpg', 'Small white star-shaped flowers are a key identifier.', 'The leaves are oval and grow in opposite pairs.', 'Stems are trailing and can root at the nodes.', 'Itchy skin', 'Spring-Autumn'),
-    ('Hemlock', 'damp areas', 'hemlock.jpg', 'The plant has small white flowers arranged in umbels.', 'Its leaves are finely divided and fern-like.', 'Hemlock stems have purple spots.', 'Not applicable - poisonous', 'Late Spring'),
-    ('Lavender', 'gardens', 'lavender.jpg', 'Known for its calming fragrance.', 'Produces small purple flowers on long spikes.', 'Leaves are narrow and gray-green in color.', 'Anxiety and sleep issues', 'Summer'),
-    ('Dandelion', 'meadows', 'dandelion.jpg', 'Bright yellow flowers that turn into fluffy seed heads.', 'Leaves are jagged and grow in a rosette at the base.', 'Taproot is thick and can regenerate if not fully removed.', 'Digestive ailments', 'Spring-Autumn'),
-    ('Stinging Nettle', 'rich soil near water', 'stingingNettle.jpg', 'Leaves have stinging hairs that cause irritation.', 'The small green flowers are wind-pollinated.', 'The plant is rich in vitamins A and C.', 'Arthritis pain', 'Spring-Fall'),
-    ('Yarrow', 'fields', 'yarrow.jpg', 'Produces clusters of small white to pink flowers.', 'Leaves are finely divided and have a feathery appearance.', 'Known for its use in traditional medicine to staunch bleeding.', 'Colds and fevers', 'Summer'),
-    ('Elderberry', 'woodlands', 'elderberry.jpg', 'Produces clusters of tiny white flowers.', 'Berries are dark purple and used in syrups and jams.', 'Leaves are compound with 5 to 7 leaflets.', 'Flu symptoms', 'Late Summer'),
-    ('Mullein', 'disturbed soil', 'mullein.jpg', 'Tall stalk with dense yellow flowers.', 'Leaves are large, woolly, and basal.', 'The plant is biennial, forming a rosette in the first year and flowering in the second.', 'Respiratory problems', 'Summer');
+     ('Willow Herb', 20, 10, 'willowHerb.jpg', 'Notice the unique spike of pink flowers.', 'Leaves are lance-shaped with a toothed margin.', 'The plant has a hairy stem which helps distinguish it.', 'Skin irritation', 'Spring-Summer', ''),
+    ('Fireweed', 20, 10, 'fireweed.jpg', 'Easily recognized by its tall, dominant red flowers.', 'The leaves are spirally arranged, with a slightly reddish tinge.', 'The seeds have silky hairs that aid in wind dispersal.', 'Burns', 'Summer', ''),
+    ('Chickweed', 20, 10, 'chickweed.jpg', 'Small white star-shaped flowers are a key identifier.', 'The leaves are oval and grow in opposite pairs.', 'Stems are trailing and can root at the nodes.', 'Itchy skin', 'Spring-Autumn', ''),
+    ('Hemlock', 20, 10, 'hemlock.jpg', 'The plant has small white flowers arranged in umbels.', 'Its leaves are finely divided and fern-like.', 'Hemlock stems have purple spots.', 'Not applicable - poisonous', 'Late Spring', ''),
+    ('Lavender', 20, 10, 'lavender.jpg', 'Known for its calming fragrance.', 'Produces small purple flowers on long spikes.', 'Leaves are narrow and gray-green in color.', 'Anxiety and sleep issues', 'Summer', ''),
+    ('Dandelion', 20, 10, 'dandelion.jpg', 'Bright yellow flowers that turn into fluffy seed heads.', 'Leaves are jagged and grow in a rosette at the base.', 'Taproot is thick and can regenerate if not fully removed.', 'Digestive ailments', 'Spring-Autumn', ''),
+    ('Stinging Nettle', 20, 10, 'stingingNettle.jpg', 'Leaves have stinging hairs that cause irritation.', 'The small green flowers are wind-pollinated.', 'The plant is rich in vitamins A and C.', 'Arthritis pain', 'Spring-Fall', ''),
+    ('Yarrow', 20, 10, 'yarrow.jpg', 'Produces clusters of small white to pink flowers.', 'Leaves are finely divided and have a feathery appearance.', 'Known for its use in traditional medicine to staunch bleeding.', 'Colds and fevers', 'Summer', ''),
+    ('Elderberry', 20, 10, 'elderberry.jpg', 'Produces clusters of tiny white flowers.', 'Berries are dark purple and used in syrups and jams.', 'Leaves are compound with 5 to 7 leaflets.', 'Flu symptoms', 'Late Summer', ''),
+    ('Mullein', 20, 10, 'mullein.jpg', 'Tall stalk with dense yellow flowers.', 'Leaves are large, woolly, and basal.', 'The plant is biennial, forming a rosette in the first year and flowering in the second.', 'Respiratory problems', 'Summer', '');
     
 
 INSERT INTO CompendiumPage (plantId, medicinalInfo, culturalInfo, ecosystemInfo, scientificInfo, additionalInfo)
