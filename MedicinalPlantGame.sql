@@ -6,7 +6,9 @@ USE PlantEducation;
 CREATE TABLE Plant(
 	plantId INT AUTO_INCREMENT PRIMARY KEY,
     plantName VARCHAR(255) NOT NULL,
-    plantLocation VARCHAR(255),
+    plantLocationT TINYINT,
+    plantLocationL TINYINT,
+    plantDescription VARCHAR(255),
     defaultPicture VARCHAR(255),
     uniqueFeature1 VARCHAR(255),
     uniqueFeature2 VARCHAR(255),
@@ -36,7 +38,8 @@ CREATE TABLE Player(
     playerPhone VARCHAR(255),
     playerPicture VARCHAR(255),
     playerTotalXP BIGINT UNSIGNED DEFAULT 0,
-    playerLevel TINYINT
+    playerLevel TINYINT,
+    playerCanDoExam BOOLEAN
     );
     
 # Table holding antidote information
@@ -86,11 +89,12 @@ CREATE TABLE Quest(
 	plantId INT,
     antidoteId INT,
     questGiverId INT,
+    questName INT,
     patientId INT,
     startText TEXT,
     endText TEXT,
     requiredLevel TINYINT,
-    xpValue TINYINT,
+    xpValue INT,
     stage1Text VARCHAR(255),
     stage2Text VARCHAR(255),
     stage3Text VARCHAR(255),
@@ -207,24 +211,26 @@ CREATE TABLE QuestionTemplate(
   INSERT INTO Quiz(isExam, questionNumber, quizName ,xpWorth)
  VALUES (false, 10, 'General',2),
  (false, 10, 'Medicine',2),
- (false, 10, 'Identification',2); 
+ (false, 10, 'Identification',2),
+ (true, 20, 'General', 10); 
  
  -- Inserting a test plant
-INSERT INTO Plant (plantName, plantLocation, defaultPicture, uniqueFeature1, uniqueFeature2, uniqueFeature3, treatmentFor, season)
 
-VALUES ('Broad Leaf Dock', 'map-location', 'defaultDockLeaf.jpg', 'Look at the base of the plant - the leaves emerge from a basal rosette.', 'See the leaves? In broad leaf dock these should be smooth and oblong shaped.', 'Now look at the stocks: these are normally quite long.', 'Nettle stings', 'Summer'),
-	('Burdock', 'map-location', 'defaultBurdock.jpg', 'Look at the leaves - their heartshaped appearance might be the reason for one of the plant\'s other names: Love Leaves.', 'Look more closely, the leaves should be dark green on top, and paler and a little downy on the underside.', 'See the flowers? They\'re a purple colour when in bloom, and dry out into a burr. These burrs get stuck in animals\' fur, helping to carry the seeds away from the parent plant.', 'Eczema', 'Summer-Autumn'),
+INSERT INTO Plant (plantName, plantLocationT, plantLocationL, defaultPicture, uniqueFeature1, uniqueFeature2, uniqueFeature3, treatmentFor, season, plantDescription)
+VALUES ('Broad Leaf Dock', 20, 10, 'defaultDockLeaf.jpg', 'Look at the base of the plant - the leaves emerge from a basal rosette.', 'See the leaves? In broad leaf dock these should be smooth and oblong shaped.', 'Now look at the stocks: these are normally quite long.', 'Nettle stings', 'Summer', 'The plant you are looking for has large, oblong leaves. It grows on the ground up from a basal roset and is often found near stinging nettles.'),
+	('Burdock', 30, 10, 'defaultBurdock.jpg', 'Look at the leaves - their heartshaped appearance might be the reason for one of the plant\'s other names: Love Leaves.', 'Look more closely, the leaves should be dark green on top, and paler and a little downy on the underside.', 'See the flowers? They\'re a purple colour when in bloom, and dry out into a burr. These burrs get stuck in animals\' fur, helping to carry the seeds away from the parent plant.', 'Eczema', 'Summer-Autumn', 'The plant you are looking for as distinctive purple flowers which are round and spikey. The smaller leaves are heart shaped and the larger leaves more spear shaped.'),
+
     -- Below this point plants are chatgpt generated for testing purposes. Those above are hand researched and written. Those below need to be changed to handcrafted entries.
-     ('Willow Herb', 'forest edges', 'willowHerb.jpg', 'Notice the unique spike of pink flowers.', 'Leaves are lance-shaped with a toothed margin.', 'The plant has a hairy stem which helps distinguish it.', 'Skin irritation', 'Spring-Summer'),
-    ('Fireweed', 'burned clearings', 'fireweed.jpg', 'Easily recognized by its tall, dominant red flowers.', 'The leaves are spirally arranged, with a slightly reddish tinge.', 'The seeds have silky hairs that aid in wind dispersal.', 'Burns', 'Summer'),
-    ('Chickweed', 'garden beds', 'chickweed.jpg', 'Small white star-shaped flowers are a key identifier.', 'The leaves are oval and grow in opposite pairs.', 'Stems are trailing and can root at the nodes.', 'Itchy skin', 'Spring-Autumn'),
-    ('Hemlock', 'damp areas', 'hemlock.jpg', 'The plant has small white flowers arranged in umbels.', 'Its leaves are finely divided and fern-like.', 'Hemlock stems have purple spots.', 'Not applicable - poisonous', 'Late Spring'),
-    ('Lavender', 'gardens', 'lavender.jpg', 'Known for its calming fragrance.', 'Produces small purple flowers on long spikes.', 'Leaves are narrow and gray-green in color.', 'Anxiety and sleep issues', 'Summer'),
-    ('Dandelion', 'meadows', 'dandelion.jpg', 'Bright yellow flowers that turn into fluffy seed heads.', 'Leaves are jagged and grow in a rosette at the base.', 'Taproot is thick and can regenerate if not fully removed.', 'Digestive ailments', 'Spring-Autumn'),
-    ('Stinging Nettle', 'rich soil near water', 'stingingNettle.jpg', 'Leaves have stinging hairs that cause irritation.', 'The small green flowers are wind-pollinated.', 'The plant is rich in vitamins A and C.', 'Arthritis pain', 'Spring-Fall'),
-    ('Yarrow', 'fields', 'yarrow.jpg', 'Produces clusters of small white to pink flowers.', 'Leaves are finely divided and have a feathery appearance.', 'Known for its use in traditional medicine to staunch bleeding.', 'Colds and fevers', 'Summer'),
-    ('Elderberry', 'woodlands', 'elderberry.jpg', 'Produces clusters of tiny white flowers.', 'Berries are dark purple and used in syrups and jams.', 'Leaves are compound with 5 to 7 leaflets.', 'Flu symptoms', 'Late Summer'),
-    ('Mullein', 'disturbed soil', 'mullein.jpg', 'Tall stalk with dense yellow flowers.', 'Leaves are large, woolly, and basal.', 'The plant is biennial, forming a rosette in the first year and flowering in the second.', 'Respiratory problems', 'Summer');
+     ('Willow Herb', 20, 10, 'willowHerb.jpg', 'Notice the unique spike of pink flowers.', 'Leaves are lance-shaped with a toothed margin.', 'The plant has a hairy stem which helps distinguish it.', 'Skin irritation', 'Spring-Summer', ''),
+    ('Fireweed', 20, 10, 'fireweed.jpg', 'Easily recognized by its tall, dominant red flowers.', 'The leaves are spirally arranged, with a slightly reddish tinge.', 'The seeds have silky hairs that aid in wind dispersal.', 'Burns', 'Summer', ''),
+    ('Chickweed', 20, 10, 'chickweed.jpg', 'Small white star-shaped flowers are a key identifier.', 'The leaves are oval and grow in opposite pairs.', 'Stems are trailing and can root at the nodes.', 'Itchy skin', 'Spring-Autumn', ''),
+    ('Hemlock', 20, 10, 'hemlock.jpg', 'The plant has small white flowers arranged in umbels.', 'Its leaves are finely divided and fern-like.', 'Hemlock stems have purple spots.', 'Not applicable - poisonous', 'Late Spring', ''),
+    ('Lavender', 20, 10, 'lavender.jpg', 'Known for its calming fragrance.', 'Produces small purple flowers on long spikes.', 'Leaves are narrow and gray-green in color.', 'Anxiety and sleep issues', 'Summer', ''),
+    ('Dandelion', 20, 10, 'dandelion.jpg', 'Bright yellow flowers that turn into fluffy seed heads.', 'Leaves are jagged and grow in a rosette at the base.', 'Taproot is thick and can regenerate if not fully removed.', 'Digestive ailments', 'Spring-Autumn', ''),
+    ('Stinging Nettle', 20, 10, 'stingingNettle.jpg', 'Leaves have stinging hairs that cause irritation.', 'The small green flowers are wind-pollinated.', 'The plant is rich in vitamins A and C.', 'Arthritis pain', 'Spring-Fall', ''),
+    ('Yarrow', 20, 10, 'yarrow.jpg', 'Produces clusters of small white to pink flowers.', 'Leaves are finely divided and have a feathery appearance.', 'Known for its use in traditional medicine to staunch bleeding.', 'Colds and fevers', 'Summer', ''),
+    ('Elderberry', 20, 10, 'elderberry.jpg', 'Produces clusters of tiny white flowers.', 'Berries are dark purple and used in syrups and jams.', 'Leaves are compound with 5 to 7 leaflets.', 'Flu symptoms', 'Late Summer', ''),
+    ('Mullein', 20, 10, 'mullein.jpg', 'Tall stalk with dense yellow flowers.', 'Leaves are large, woolly, and basal.', 'The plant is biennial, forming a rosette in the first year and flowering in the second.', 'Respiratory problems', 'Summer', '');
     
 
 INSERT INTO CompendiumPage (plantId, medicinalInfo, culturalInfo, ecosystemInfo, scientificInfo, additionalInfo)
@@ -246,16 +252,17 @@ caterpillars, and these insects in turn provide a food source for birds and hedg
 for birds, rodents, and deer. The plant can adapt to many environments, from roadsides and waste land, to woodlands, shorelines and riverbanks.',
 'The scientific name of Broad-Leaf Dock is Rumex obtusifolius. It can be identified by its large oval leaves which emerge from a basal rosette on long stems. 
 The tops of the leaves are smooth while the underside can have small, soft hairs. The edges of the leaves are generally smooth or slightly wavy, while Rumex crisps, curly dock, 
-has noticeably wavy leaves.', '' );
+has noticeably wavy leaves.', '' ),
+(2, '', '', '', '', '');
 
 -- Inserting a test game character (quest giver and patient)
 INSERT INTO GameCharacter (gameCharacterName, gameCharacterPicture)
-VALUES ('Druid Rowan', 'druid_rowan.jpg');
+VALUES ('Druid Rowan', 'druidMentor.png');
 
 -- Inserting a test antidote
 INSERT INTO Antidote (antidoteName, antidotePicture, antidoteDescription)
-VALUES ('Balm for Nettle Stings', 'dock_elixir.jpg', 'A popular remedy for nettle stings.'),
-	('Poltice for Eczema', 'burdock_elicir.jpg', 'A soothing poltice made to reduce inflamation and prevent infection.');
+VALUES ('Balm for Nettle Stings', 'dock_elixir.jpg', 'A popular remedy for nettle stings consisting of crushed dock leaves.'),
+	('Poultice for Eczema', 'burdock_elicir.jpg', 'A soothing poultice made to reduce inflamation and prevent infection.');
 
 
 -- Inserting a test action type for antidote making game
@@ -273,15 +280,15 @@ VALUES (1, 1),
 	(2,2);
 
 -- Inserting a test player
-INSERT INTO Player (playerName, playerEmail, playerPhone, playerPicture, playerTotalXP, playerLevel)
-VALUES ('Jane Doe', 'janedoe@example.com', '123-456-7890', 'player1profile.png', 100, 1);
+INSERT INTO Player (playerName, playerEmail, playerPhone, playerPicture, playerTotalXP, playerLevel, playerCanDoExam)
+VALUES ('Jane Doe', 'janedoe@example.com', '123-456-7890', 'player1profile.png', 100, 1, false);
 
 -- Inserting a quest involving the test plant, antidote, and game characters
 INSERT INTO Quest (plantId, antidoteId, questGiverId, patientId, startText, endText, requiredLevel, xpValue, stage1Text, stage2Text, stage3Text)
 
 VALUES (1, 1, 1, 1, 'There I was, head in the clouds, not realising I\'d walked into a huge patch of stinging nettles! Now I\'m just covered in stings. First things first, we\'ll need to find some dock leafs.', 
 'Much better, thank you!', 1, 10, 'Find the Dock Leaves.', 'Prepare the antidote.', 'Deliver the antidote.'),
-(2, 2, 1, 1, 'Your first patient is suffering from eczema. Fortunately I know the perfect plant - burdock. You should see its location on your map.', 'Excellent, the patient should be much more comfortable now.', 
+(2, 2, 1, 1, 'Your first patient is suffering from uncomfortable eczema. Fortunately, I know the perfect plant - burdock! Its anti-inflamatory and antibacterial properties make it the perfect treatment. You should see its location on your map.', 'Excellent, the patient should be much more comfortable now.', 
  1, 12, 'Find the burdock plant.', 'Prepare the antidote.', 'Deliver the antidote.');
 
 
@@ -293,13 +300,13 @@ VALUES (1, 1, 'dockLeaf.jpg'),
         (1,1, 'dockLeaf2.jpg'),
         (1, 1, 'dockLeaf3.jpg'),
         (2, 1, 'burdock.jpg'),
+        (2,1, 'burdock1.jpg'),
 		(2,1, 'burdock2.jpg'),
         (2, 1, 'burdock3.jpg');
 
 -- Inserting plant discovery by the player
 INSERT INTO PlayerPlant (plantId, playerId, discoveredOrder)
-VALUES (1, 1, 1),
-	(2,1, 2);
+VALUES (1, 1, 1);
 
 -- Inserting antidote information for the player
 INSERT INTO PlayerAntidote (antidoteId, playerId, numberMade, numberUsed)

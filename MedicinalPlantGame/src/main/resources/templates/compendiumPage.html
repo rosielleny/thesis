@@ -7,9 +7,15 @@
     <title th:text="${page.plantName}">Plant</title>
 </head>
 <body>
-
+<nav class="top-nav">
+    <a href="http://localhost:7004/compendium" class="nav-close">X</a>
+    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-empty"></div>
+    <div class="nav-empty"></div>
+</nav>
+<br><br>
 <h1 th:text="${page.plantName}">Plant</h1>
-<div class = "plant-photo">
+<div class = "picture">
     <img th:src="${#lists.isEmpty(page.playerPictures) ? '/images/' + page.defaultPlantPicture : '/images/' + page.playerPictures[0]}"
          th:alt="'Photo of ' + ${page.plantName}"
          th:data-error-url="'/images/' + ${page.defaultPlantPicture}"
@@ -19,7 +25,7 @@
 <div class = "plant-information">
     <p th:text="${page.medicinalInfo}">Medicinal Information.</p>
 </div>
-<div class = "plant-photo">
+<div class = "picture">
     <img th:if="${!#lists.isEmpty(page.playerPictures) and page.playerPictures.size() > 1}"
          th:src="'/images/' +${page.playerPictures[1]}"
          th:alt="'Photo of ' + ${page.plantName}"
@@ -28,7 +34,7 @@
 <div class = "plant-information">
     <p th:text="${page.culturalInfo}">Cultural Information.</p>
 </div>
-<div class = "plant-photo">
+<div class = "picture">
     <img th:if="${!#lists.isEmpty(page.playerPictures) and page.playerPictures.size() > 1}"
          th:src="'/images/' +${page.playerPictures[2]}"
          th:alt="'Photo of ' + ${page.plantName}"
@@ -37,7 +43,7 @@
 <div class = "plant-information">
     <p th:text="${page.ecosystemInfo}">Ecosystem Information.</p>
 </div>
-<div class = "plant-photo">
+<div class = "picture">
     <img th:if="${!#lists.isEmpty(page.playerPictures) and page.playerPictures.size() > 1}"
          th:src="'/images/' + ${page.playerPictures[3]}"
          th:alt="'Photo of ' + ${page.plantName}"

@@ -2,12 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Quests</title>
 </head>
 <body>
 
+<nav class="top-nav">
+    <a href="http://localhost:7004/map" class="nav-close">X</a>
+    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-empty"></div>
+    <div class="nav-empty"></div>
+</nav>
+
+<br><br>
+<h1>Quests</h1>
+<div class="quests-contents">
+    <!-- Active Quests (probably just one)-->
+    <div th:if="${!activeQuest.isEmpty()}">
+        <h3>Active</h3>
+        <ul>
+            <li th:each="quest : ${activeQuest}">
+                <a th:href="@{/quests/{questId}(questId=${quest.questId})}" th:text="${quest.questName}"></a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Inactive Quests -->
+    <div th:if="${!inactiveQuests.isEmpty()}">
+        <h3>Inactive</h3>
+        <ul>
+            <li th:each="quest : ${inactiveQuests}">
+                <a th:href="@{/quests/{questId}(questId=${quest.questId})}" th:text="${quest.questName}"></a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Completed Quests -->
+    <div th:if="${!completedQuests.isEmpty()}">
+        <h3>Completed</h3>
+        <ul>
+            <li th:each="quest : ${completedQuests}">
+                <a th:href="@{/quests/{questId}(questId=${quest.questId})}" th:text="${quest.questName}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
 <nav class="bottom-nav">
-    <a href="http://localhost:7004/quests" class="nav-item">
+    <a href="http://localhost:7004/map" class="nav-item">
         <img src="/images/quests-icon.png" alt="Quests">
     </a>
     <a href="http://localhost:7004/revision" class="nav-item">

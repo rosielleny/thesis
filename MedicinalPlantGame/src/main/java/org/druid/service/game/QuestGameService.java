@@ -7,5 +7,7 @@ import java.util.List;
 public interface QuestGameService {
 
     QuestGame getQuestGame(int questId, int playerId);
+    Boolean completedQuest(int questId, int playerId);
+    void unlockQuestsAfterLevelUp(int playerId);
 
 }

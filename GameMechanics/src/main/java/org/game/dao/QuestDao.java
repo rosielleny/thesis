@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 /* This DAO accesses data for Quest, GameCharacter, and GameLevel*/
@@ -19,5 +20,8 @@ public interface QuestDao extends JpaRepository<Quest, Integer>{
 
     @Query("FROM GameLevel WHERE gameLevelId = :gameLevelId")
     Optional<GameLevel> findByGameLevelId(@Param("gameLevelId")int gameLevelId);
+
+    @Query("FROM Quest WHERE requiredLevel = :playerLevel")
+    List<Quest> findQuestByRequiredLevel(@Param("playerLevel")int playerLevel);
 
 }

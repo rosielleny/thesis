@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antidotes</title>
     <link rel="stylesheet" href="/styles.css">
+    <title>Found Plant</title>
 </head>
 <body>
 <nav class="top-nav">
@@ -16,17 +14,15 @@
     <div class="nav-empty"></div>
 </nav>
 <br><br>
+<h1 th:text="'Photograph the ' + ${plant.plantName}"></h1>
 
-<h1>Antidotes</h1>
-
-<div class = "antidote-shelf">
-    <ul>
-        <li th:each="antidote : ${antidoteList}">
-            <a th:href="@{/antidotes/{antidoteId}(antidoteId=${antidote.antidoteId})}" th:text="${antidote.antidoteName}"></a>
-        </li>
-    </ul>
-
+<div class="placeholder-square">
+    Here is where the player takes a photo of the plant for the app to verify using image recognition.
 </div>
+<br><br>
+<a th:href="@{/confirm-plant/{plantId}/{questId}(plantId=${plant.plantId},questId=${quest.questId})}">
+    Take Photograph
+</a>
 
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">
@@ -38,14 +34,12 @@
     <a href="http://localhost:7004/compendium" class="nav-item">
         <img src="/images/compendium-icon.png" alt="Compendium">
     </a>
-    <a href="http://localhost:7004/map" class="nav-item">
+    <a href="http://localhost:7004/antidotes" class="nav-item">
         <img src="/images/antidotes-icon.png" alt="Antidotes">
     </a>
     <a href="http://localhost:7004/profile" class="nav-item">
         <img src="/images/profile-icon.png" alt="Profile">
     </a>
 </nav>
-
 </body>
-
 </html>

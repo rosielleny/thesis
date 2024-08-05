@@ -26,5 +26,9 @@ public class QuestServiceImpl implements QuestService {
         return questDao.findByGameLevelId(gameLevelId).orElse(null);
     }
 
+    public List<Quest> getQuestsByLevelId(int levelId) {
+        return questDao.findQuestByRequiredLevel(levelId);
+    }
+
 
 }

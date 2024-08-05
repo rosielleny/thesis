@@ -7,6 +7,13 @@
     <title>Quiz</title>
 </head>
 <body>
+<nav class="top-nav">
+    <a href="http://localhost:7004/revision" class="nav-close">X</a>
+    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-empty"></div>
+    <div class="nav-empty"></div>
+</nav>
+<br><br>
 <h1 th:text="${quizGame.quizName  + ' Quiz'}" ></h1>
 <br>
 <p th:text="'Question ' + ${quizGame.quizProgress}" ></p>
@@ -31,7 +38,7 @@
             <div th:each="answer, stat : ${quizGame.quizQuestions[quizGame.quizProgress - 1].allAnswers}">
                 <input type="radio" th:id="${'answer' + stat.index}" th:name="selectedAnswer" th:value="${answer}" />
                 <label th:for="${'answer' + stat.index}">
-                    <img th:src="@{'/images/' + ${answer}}" alt="Answer Image">
+                    <img class = answer-grid-img th:src="@{'/images/' + ${answer}}" alt="Answer Image">
                 </label>
             </div>
         </div>

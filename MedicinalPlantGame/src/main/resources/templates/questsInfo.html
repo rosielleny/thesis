@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title th:text="${quest.questName}">Quest</title>
+</head>
+<body>
+<nav class="top-nav">
+    <a href="http://localhost:7004/quests" class="nav-close">X</a>
+    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-empty"></div>
+    <div class="nav-empty"></div>
+</nav>
+<br><br>
+<!-- The image of the character speaking -->
+<div class = "bottom-left-image">
+<img th:src="@{'/images/' + ${quest.questGiverPicture}}"
+     alt="Druid Mentor - an older woman with tanned skin and white hair in a braid. There are leaves woven into her hair. She is holding a staff and smiling while talking."
+     class="bottom-left-image">
+</div>
+<!-- Determining what text to display -->
+<div th:if="${quest.getPlayerQuestStatus() != 'Complete'}"
+        class = "quest-information">
+    <p th:text=" '\'\'' + ${quest.getStartText()} + '\'\''">Quest Information.</p>
+</div>
+<div th:if="${quest.getPlayerQuestStatus() == 'Complete' && !fromCompleter.equals('fromCompleter')}">
+    <p th:text=" '\'\'' + ${quest.getStartText()} + '\'\''">Quest Information.</p>
+    <p th:text=" '\'\'' + ${quest.getEndText()} + '\'\''">Quest Information.</p>
+</div>
+
+<!-- Determining what stage text to display -->
+<div th:if="${quest.getPlayerStage() == 'Beginning'}">
+    <p th:text="${quest.getStagesText().get(0)}">Stage Information.</p>
+</div>
+
+<div th:if="${quest.getPlayerStage() == 'PlantFound'}">
+    <p th:text="${quest.getStagesText().get(1)}">Stage Information.</p>
+</div>
+
+<div th:if="${quest.getPlayerStage() == 'AntidoteMade' && quest.getPlayerQuestStatus() != 'Complete'}">
+    <form th:action="@{/quests/mark-complete}" method="post">
+        <input type="hidden" th:name="questId" th:value="${quest.questId}" />
+        <button type="submit" th:text="${quest.stagesText[2]}">Complete Quest</button>
+    </form>
+</div>
+
+<div th:if="${quest.getPlayerQuestStatus() == 'Inactive'}">
+    <form th:action="@{/quests/mark-active}" method="post">
+        <input type="hidden" th:name="questId" th:value="${quest.questId}" />
+        <button type="submit">Start Quest</button>
+    </form>
+</div>
+
+<!-- Determining what messages to display if player tried to complete quest -->
+<div th:if="${quest.getPlayerQuestStatus() == 'Complete' && fromCompleter.equals('fromCompleter')}">
+    <p th:text=" '\'\'' + ${quest.getEndText()} + '\'\''">Quest Information.</p>
+</div>
+<div th:if="${quest.getPlayerQuestStatus() != 'Complete' && fromCompleter.equals('fromCompleter')}">
+    <p>You do not have the antidote required for this quest.</p>
+</div>
+
+
+
+
+
+<nav class="bottom-nav">
+    <a href="http://localhost:7004/quests" class="nav-item">
+        <img src="/images/quests-icon.png" alt="Quests">
+    </a>
+    <a href="http://localhost:7004/revision" class="nav-item">
+        <img src="/images/revision-icon.png" alt="Revision">
+    </a>
+    <a href="http://localhost:7004/compendium" class="nav-item">
+        <img src="/images/compendium-icon.png" alt="Compendium">
+    </a>
+    <a href="http://localhost:7004/antidotes" class="nav-item">
+        <img src="/images/antidotes-icon.png" alt="Antidotes">
+    </a>
+    <a href="http://localhost:7004/profile" class="nav-item">
+        <img src="/images/profile-icon.png" alt="Profile">
+    </a>
+</nav>
+</body>
+</html>

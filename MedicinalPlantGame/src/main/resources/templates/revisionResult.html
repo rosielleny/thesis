@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles.css">
     <title>Score</title>
 </head>
 <body>
+<nav class="top-nav">
+    <a href="http://localhost:7004/revision" class="nav-close">X</a>
+    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-empty"></div>
+    <div class="nav-empty"></div>
+</nav>
+<br><br>
 <h1 th:text="${quizGame.quizName  + ' Quiz'}" ></h1>
 <h2>Score: <span th:text="*{quizGame.correctAnswers}">0</span> out of <span th:text="*{quizGame.quizQuestions.size()}">0</span></h2>
+
+<div th:if="${passed == true}">
+    <p>You passed the exam and leveled up!</p>
+</div>
+<div th:if="${passed == false && quizGame.isExam()}">
+    <p>You didn't pass the exam, you'll have to try again to level up.</p>
+</div>
 
 <button onclick="window.location.href='http://localhost:7004/revision';">Continue</button>
 

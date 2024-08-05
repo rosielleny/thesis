@@ -1,6 +1,7 @@
 package org.druid.service.game;
 
 import org.druid.entity.composite.PlayerProfile;
+import org.druid.entity.composite.QuestGame;
 import org.druid.entity.original.*;
 import org.druid.entity.original.key.PlayerAntidoteKey;
 import org.druid.entity.original.key.PlayerPlantKey;
@@ -35,6 +36,8 @@ public class PlayerGameServiceImpl implements PlayerGameService {
     AntidoteServiceAgg antidoteService;
     @Autowired
     QuestServiceAgg questService;
+    @Autowired
+    QuestGameService questGameService;
 
     /* Returns a composite entity that can be used for displaying the player's
     * profile information */
@@ -89,15 +92,15 @@ public class PlayerGameServiceImpl implements PlayerGameService {
     }
 
     @Override
-    public List<Quest> getPlayersQuests(int playerId) {
+    public List<QuestGame> getPlayersQuests(int playerId) {
 
-        List<Quest> playersDiscoveredQuests = new ArrayList<>();
+        List<QuestGame> playersDiscoveredQuests = new ArrayList<>();
         List<PlayerQuest> playerQuests = playerQuestService.getPlayerQuestsByPlayerId(playerId);
 
         for (PlayerQuest playerQuest : playerQuests) {
             PlayerQuestKey key = playerQuest.getPlayerQuestKey();
 
-            Quest quest = questService.getQuestByQuestId(key.getQuestId());
+            QuestGame quest = questGameService.getQuestGame(key.getQuestId(), playerId);
 
             playersDiscoveredQuests.add(quest);
         }
@@ -141,5 +144,55 @@ public class PlayerGameServiceImpl implements PlayerGameService {
         }
 
         return antidotesMade;
+    }
+
+    /* A plant is not unlocked without also unlocking a new antidote, so these are triggered
+    * at the same time. They are unlocked by adding new entries in the PlayerPlant and PlayerAntidote
+    * tables*/
+    public void addNewPlayerPlantAndAntidote(int plantId, int playerId, int questId){
+
+        PlayerPlantKey key = new PlayerPlantKey(playerId, plantId);
+        PlayerPlant plantUnlocked = new PlayerPlant();
+        plantUnlocked.setPlayerPlantKey(key);
+
+        int lastDiscovered = 0;
+        for(PlayerPlant p: playerPlantService.getPlayerPlants(playerId)){
+
+            if(p.getDiscoveredOrder() > lastDiscovered){
+
+                lastDiscovered = p.getDiscoveredOrder();
+            }
+        }
+
+        plantUnlocked.setDiscoveredOrder(lastDiscovered + 1);
+
+        playerPlantService.savePlayerPlant(plantUnlocked);
+        addNewPlayerAntidote(questId, playerId);
+    }
+
+    /*Updates the quest stage when player completes a stage*/
+    @Override
+    public void updateQuestStage(int questId, int playerId, String stage) {
+        PlayerQuest pq = playerQuestService.getPlayerQuestById(playerId, questId);
+        pq.setQuestStage(stage);
+        System.out.println(pq);
+        playerQuestService.savePlayerQuest(pq);
+    }
+
+    /*Called by addNewPlayerPlantAndAntidote to handle the antidote portion
+    * of the save*/
+    private void addNewPlayerAntidote(int questId, int playerId){
+
+        Quest quest = questService.getQuestByQuestId(questId);
+        int antidoteId = quest.getAntidoteId();
+
+        PlayerAntidoteKey key = new PlayerAntidoteKey(playerId, antidoteId);
+        PlayerAntidote antidoteUnlocked = new PlayerAntidote();
+        antidoteUnlocked.setPlayerAntidoteKey(key);
+
+        antidoteUnlocked.setNumberUsed(0);
+        antidoteUnlocked.setNumberMade(0);
+
+        playerAntidoteService.savePlayerAntidote(antidoteUnlocked);
     }
 }

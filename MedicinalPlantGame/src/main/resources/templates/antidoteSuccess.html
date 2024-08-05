@@ -1,32 +1,33 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antidotes</title>
     <link rel="stylesheet" href="/styles.css">
+    <title>Antidote Success</title>
 </head>
 <body>
+
 <nav class="top-nav">
-    <a href="http://localhost:7004/map" class="nav-close">X</a>
+    <a href="http://localhost:7004/antidotes" class="nav-close">X</a>
     <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
     <div class="nav-empty"></div>
     <div class="nav-empty"></div>
 </nav>
 <br><br>
-
-<h1>Antidotes</h1>
-
-<div class = "antidote-shelf">
-    <ul>
-        <li th:each="antidote : ${antidoteList}">
-            <a th:href="@{/antidotes/{antidoteId}(antidoteId=${antidote.antidoteId})}" th:text="${antidote.antidoteName}"></a>
-        </li>
-    </ul>
-
+<h1>Success!</h1>
+<div class="picture">
+    <img th:if="${!antidote.antidotePicture.isEmpty()}"
+         th:src="'/images/' + ${antidote.antidotePicture}"
+         th:alt="|Image of ${antidote.antidoteName}|"
+         class="picture"/>
 </div>
+
+<p>You've crafted <span th:text="${antidote.antidoteName}"></span>.</p>
+<p th:if="${isQuest}">This is a quest item and can be handed-in in the quest log.</p>
+
+<button onclick="window.location.href='http://localhost:7004/antidotes';">Continue</button>
+
 
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">
@@ -38,14 +39,12 @@
     <a href="http://localhost:7004/compendium" class="nav-item">
         <img src="/images/compendium-icon.png" alt="Compendium">
     </a>
-    <a href="http://localhost:7004/map" class="nav-item">
+    <a href="http://localhost:7004/antidotes" class="nav-item">
         <img src="/images/antidotes-icon.png" alt="Antidotes">
     </a>
     <a href="http://localhost:7004/profile" class="nav-item">
         <img src="/images/profile-icon.png" alt="Profile">
     </a>
 </nav>
-
 </body>
-
 </html>

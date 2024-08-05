@@ -7,10 +7,20 @@
     <title>Revision</title>
 </head>
 <body>
+<nav class="top-nav">
+    <a href="http://localhost:7004/map" class="nav-close">X</a>
+    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-empty"></div>
+    <div class="nav-empty"></div>
+</nav>
+<br><br>
 <h1>Revision</h1>
 <br><br>
 Available Quizzes
 <br>
+<div th:if="${canLevelUpExam == 'true'}">
+    <a th:href="@{/revision/quiz/{quizId}(quizId=${exam.quizId})}">Level Up Exam</a>
+</div>
 <div class = "available-quizzes">
     <ul>
         <li th:each="quiz : ${quizzes}">
