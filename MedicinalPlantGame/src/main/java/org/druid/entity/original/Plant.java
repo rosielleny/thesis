@@ -25,7 +25,7 @@ public class Plant {
     private String uniqueFeature3;
     private String treatmentFor; // Used in the compendium page
     private String season;
-    private int plantLocationT; // Used to mark the plant on the botanic gardens map
-    private int plantLocationL;// Used to mark the plant on the botanic gardens map
+    private byte plantLocationT; // Used to mark the plant on the botanic gardens map
+    private byte plantLocationL;// Used to mark the plant on the botanic gardens map
     private String plantDescription;// Used in the compendium page, and potentially to filter plants
 }

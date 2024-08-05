@@ -6,7 +6,13 @@
     <title th:text="${quest.questName}">Quest</title>
 </head>
 <body>
-
+<nav class="top-nav">
+    <a href="http://localhost:7004/quests" class="nav-close">X</a>
+    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-empty"></div>
+    <div class="nav-empty"></div>
+</nav>
+<br><br>
 <!-- The image of the character speaking -->
 <div class = "bottom-left-image">
 <img th:src="@{'/images/' + ${quest.questGiverPicture}}"

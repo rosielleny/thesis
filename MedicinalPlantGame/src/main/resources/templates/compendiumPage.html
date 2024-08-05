@@ -7,7 +7,13 @@
     <title th:text="${page.plantName}">Plant</title>
 </head>
 <body>
-
+<nav class="top-nav">
+    <a href="http://localhost:7004/compendium" class="nav-close">X</a>
+    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-empty"></div>
+    <div class="nav-empty"></div>
+</nav>
+<br><br>
 <h1 th:text="${page.plantName}">Plant</h1>
 <div class = "picture">
     <img th:src="${#lists.isEmpty(page.playerPictures) ? '/images/' + page.defaultPlantPicture : '/images/' + page.playerPictures[0]}"

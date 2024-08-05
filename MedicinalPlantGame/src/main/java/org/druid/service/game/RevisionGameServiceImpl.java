@@ -58,9 +58,13 @@ public class RevisionGameServiceImpl implements RevisionGameService {
     @Override
     public void awardQuizXP(int xpWorth, int totalQuestions, int playerId, int correctAnswers) {
         // Calculating awarded XP based on the number of correct answers
-        int awardedXP = (xpWorth*2)*(correctAnswers/totalQuestions);
+        if(totalQuestions == correctAnswers) {
+            xpWorth = xpWorth*2;
+        }
+        
         Player player = playerService.getPlayer(playerId);
-        player.setPlayerTotalXP(player.getPlayerTotalXP() + awardedXP);
+        player.setPlayerTotalXP(player.getPlayerTotalXP() + xpWorth);
+
         playerService.savePlayer(player);
     }
 

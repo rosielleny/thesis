@@ -7,8 +7,16 @@
     <title>Quests</title>
 </head>
 <body>
-<h1>Quests</h1>
 
+<nav class="top-nav">
+    <a href="http://localhost:7004/map" class="nav-close">X</a>
+    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-empty"></div>
+    <div class="nav-empty"></div>
+</nav>
+
+<br><br>
+<h1>Quests</h1>
 <div class="quests-contents">
     <!-- Active Quests (probably just one)-->
     <div th:if="${!activeQuest.isEmpty()}">

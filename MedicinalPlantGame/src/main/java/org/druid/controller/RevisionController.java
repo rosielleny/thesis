@@ -103,7 +103,6 @@ public class RevisionController {
                 }
             }
             /* Player is rewarded with experience points*/
-            int xpWorth = quizGame.getXpWorth();
             revisionGameService.awardQuizXP(quizGame.getXpWorth(), quizGame.getQuizQuestions().size(), DUMMY_PLAYER_ID, quizGame.getCorrectAnswers());
             ModelAndView mav2 = new ModelAndView("revisionResult");
             mav.addObject("quizGame", quizGame);

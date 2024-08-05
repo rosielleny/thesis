@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antidotes</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles.css">
+    <title>Confirm Plant</title>
 </head>
 <body>
 <nav class="top-nav">
@@ -16,17 +13,17 @@
     <div class="nav-empty"></div>
 </nav>
 <br><br>
-
-<h1>Antidotes</h1>
-
-<div class = "antidote-shelf">
-    <ul>
-        <li th:each="antidote : ${antidoteList}">
-            <a th:href="@{/antidotes/{antidoteId}(antidoteId=${antidote.antidoteId})}" th:text="${antidote.antidoteName}"></a>
-        </li>
-    </ul>
-
+<p>"You've done it! You've found the <span th:text="${plant.plantName}">plant</span>!</p>
+<p>I'll harvest it while you have a closer look."</p>
+<!--Once image recognition and camera access is implemented, the druid mentor should say something like
+"Hmm, that doesn't look right. Give it another go!" if the plant is not recognised -->
+<div class = "bottom-left-image">
+    <img th:src="@{'/images/' + ${quest.questGiverPicture}}"
+         alt="Druid Mentor - an older woman with tanned skin and white hair in a braid. There are leaves woven into her hair. She is holding a staff and smiling while talking."
+         class="bottom-left-image">
 </div>
+
+<button th:onclick="'window.location.href=\'http://localhost:7004/plant-facts/' + ${quest.questId} + '/' + ${plant.plantId} + '/0\';'">Continue</button>
 
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">
@@ -38,14 +35,12 @@
     <a href="http://localhost:7004/compendium" class="nav-item">
         <img src="/images/compendium-icon.png" alt="Compendium">
     </a>
-    <a href="http://localhost:7004/map" class="nav-item">
+    <a href="http://localhost:7004/antidotes" class="nav-item">
         <img src="/images/antidotes-icon.png" alt="Antidotes">
     </a>
     <a href="http://localhost:7004/profile" class="nav-item">
         <img src="/images/profile-icon.png" alt="Profile">
     </a>
 </nav>
-
 </body>
-
 </html>

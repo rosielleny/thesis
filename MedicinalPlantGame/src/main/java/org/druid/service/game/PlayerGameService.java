@@ -15,4 +15,6 @@ public interface PlayerGameService {
     List<Plant> getPlayersPlants(int playerId);
     List<Antidote> getPlayersAntidotes(int playerId);
     List<QuestGame> getPlayersQuests(int playerId);
+    void addNewPlayerPlantAndAntidote(int plantId, int playerId, int questId);
+    void updateQuestStage(int questId,int playerId, String stage);
 }

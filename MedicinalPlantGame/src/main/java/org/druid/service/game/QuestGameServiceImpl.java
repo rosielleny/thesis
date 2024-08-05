@@ -112,6 +112,7 @@ public class QuestGameServiceImpl implements QuestGameService {
 
         Player player = playerService.getPlayer(playerId);
         player.setPlayerTotalXP(player.getPlayerTotalXP() + questXP);
+        playerService.savePlayer(player);
         // XP has been awarded, so it is possible a level up exam is available
         revisionGameService.canPlayerDoLevelUpExam(playerId);
     }

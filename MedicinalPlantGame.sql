@@ -94,7 +94,7 @@ CREATE TABLE Quest(
     startText TEXT,
     endText TEXT,
     requiredLevel TINYINT,
-    xpValue TINYINT,
+    xpValue INT,
     stage1Text VARCHAR(255),
     stage2Text VARCHAR(255),
     stage3Text VARCHAR(255),
@@ -224,7 +224,8 @@ caterpillars, and these insects in turn provide a food source for birds and hedg
 for birds, rodents, and deer. The plant can adapt to many environments, from roadsides and waste land, to woodlands, shorelines and riverbanks.',
 'The scientific name of Broad-Leaf Dock is Rumex obtusifolius. It can be identified by its large oval leaves which emerge from a basal rosette on long stems. 
 The tops of the leaves are smooth while the underside can have small, soft hairs. The edges of the leaves are generally smooth or slightly wavy, while Rumex crisps, curly dock, 
-has noticeably wavy leaves.', '' );
+has noticeably wavy leaves.', '' ),
+(2, '', '', '', '', '');
 
 -- Inserting a test game character (quest giver and patient)
 INSERT INTO GameCharacter (gameCharacterName, gameCharacterPicture)
@@ -232,8 +233,8 @@ VALUES ('Druid Rowan', 'druidMentor.png');
 
 -- Inserting a test antidote
 INSERT INTO Antidote (antidoteName, antidotePicture, antidoteDescription)
-VALUES ('Balm for Nettle Stings', 'dock_elixir.jpg', 'A popular remedy for nettle stings.'),
-	('Poltice for Eczema', 'burdock_elicir.jpg', 'A soothing poltice made to reduce inflamation and prevent infection.');
+VALUES ('Balm for Nettle Stings', 'dock_elixir.jpg', 'A popular remedy for nettle stings consisting of crushed dock leaves.'),
+	('Poultice for Eczema', 'burdock_elicir.jpg', 'A soothing poultice made to reduce inflamation and prevent infection.');
 
 -- Inserting a test action type for antidote making game
 INSERT INTO ActionType (actionType)
@@ -267,13 +268,13 @@ VALUES (1, 1, 'dockLeaf.jpg'),
         (1,1, 'dockLeaf2.jpg'),
         (1, 1, 'dockLeaf3.jpg'),
         (2, 1, 'burdock.jpg'),
+        (2,1, 'burdock1.jpg'),
 		(2,1, 'burdock2.jpg'),
         (2, 1, 'burdock3.jpg');
 
 -- Inserting plant discovery by the player
 INSERT INTO PlayerPlant (plantId, playerId, discoveredOrder)
-VALUES (1, 1, 1),
-	(2,1, 2);
+VALUES (1, 1, 1);
 
 -- Inserting antidote information for the player
 INSERT INTO PlayerAntidote (antidoteId, playerId, numberMade, numberUsed)

@@ -22,7 +22,7 @@ public class Quest {
     private int patientId; // FK to the GameCharacter table
     private String startText; // Introductory cutscene
     private String endText; // Concluding cutscene
-    private int requiredLevel; // Determines when quest unlocks
+    private byte requiredLevel; // Determines when quest unlocks
     private int xpValue; // The number of experience points the player is rewarded with
     private String stage1Text; // E.g. "Find the plant."
     private String stage2Text; // E.g. "Make the antidote."

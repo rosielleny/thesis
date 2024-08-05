@@ -1,13 +1,14 @@
 package org.druid.controller;
 
+import org.druid.entity.composite.CompendiumEntry;
 import org.druid.entity.composite.QuestGame;
-import org.druid.entity.original.Antidote;
-import org.druid.entity.original.Plant;
-import org.druid.entity.original.PlayerQuest;
-import org.druid.entity.original.Quest;
+import org.druid.entity.original.*;
+import org.druid.entity.original.key.PlayerPlantKey;
+import org.druid.service.game.CompendiumService;
 import org.druid.service.game.PlayerGameService;
 import org.druid.service.game.QuestGameService;
 import org.druid.service.game.QuestGameServiceImpl;
+import org.druid.service.microserviceCom.gameMechanics.AntidoteServiceAgg;
 import org.druid.service.microserviceCom.plant.PlantServiceAgg;
 import org.druid.service.microserviceCom.player.PlayerQuestServiceAgg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,17 @@ public class QuestController {
     private static final int DUMMY_PLAYER_ID = 1;
 
     @Autowired
-    PlayerGameService playerGameService;
+    private PlayerGameService playerGameService;
     @Autowired
-    PlayerQuestServiceAgg playerQuestService;
+    private PlayerQuestServiceAgg playerQuestService;
     @Autowired
     private QuestGameService questGameService;
     @Autowired
     private PlantServiceAgg plantService;
+    @Autowired
+    private CompendiumService compendiumService;
+    @Autowired
+    private AntidoteServiceAgg antidoteService;
 
     @CrossOrigin
     @RequestMapping("/quests")
@@ -113,7 +118,7 @@ public class QuestController {
     @RequestMapping("/quests/mark-complete")
     public ModelAndView markQuestAsComplete(@RequestParam("questId") int questId){
 
-        ModelAndView mav = new ModelAndView("redirect:/questsInfo");
+        ModelAndView mav = new ModelAndView("questsInfo");
 
         boolean completed = questGameService.completedQuest(questId, DUMMY_PLAYER_ID);
         PlayerQuest playerQuest = playerQuestService.getPlayerQuestById(DUMMY_PLAYER_ID, questId);
@@ -202,7 +207,45 @@ public ModelAndView confirmPlant(@PathVariable("questId") int questId, @PathVari
     QuestGame quest = questGameService.getQuestGame(questId, DUMMY_PLAYER_ID);
     Plant plant = plantService.getPlantById(quest.getPlantId());
     mav.addObject("plant", plant);
+    mav.addObject("quest", quest);
     return mav;
 
 }
+
+    @CrossOrigin
+    @RequestMapping("/plant-facts/{questId}/{plantId}/{factIndex}")
+    public ModelAndView displayPlantFacts(@PathVariable("questId") int questId, @PathVariable("plantId") int plantId, @PathVariable("factIndex")Byte factIndex){
+
+        ModelAndView mav = new ModelAndView();
+        byte maxFact = 0;
+        CompendiumEntry plant = compendiumService.getCompendiumEntry(plantId, DUMMY_PLAYER_ID);
+        QuestGame quest = questGameService.getQuestGame(questId, DUMMY_PLAYER_ID);
+        // This for loop counts how many unique features have been filled out for the plant, and thus how many times they need to be displayed
+        for(String fact: plant.getUniqueFeatures()){
+            if(!fact.isEmpty()){
+                maxFact ++;
+            }
+        }
+        if(maxFact > factIndex) {
+            factIndex++;
+            mav.setViewName("plantFacts");
+            mav.addObject("plant", plant);
+            mav.addObject("quest", quest);
+            mav.addObject("factIndex", factIndex);
+            return mav;
+        }
+        else{
+
+            playerGameService.addNewPlayerPlantAndAntidote(plantId, DUMMY_PLAYER_ID, questId);
+            playerGameService.updateQuestStage(questId, DUMMY_PLAYER_ID, "PlantFound");
+            String antidoteName = antidoteService.getAntidoteById(quest.getAntidoteId()).getAntidoteName();
+            mav.setViewName("plantSuccess");
+            mav.addObject("antidoteName", antidoteName);
+            mav.addObject("plant", plant);
+            mav.addObject("quest", quest);
+            return mav;
+        }
+
+    }
+
 }

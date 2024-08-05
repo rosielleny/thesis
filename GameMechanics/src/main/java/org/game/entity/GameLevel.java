@@ -15,6 +15,6 @@ import lombok.NoArgsConstructor;
 public class GameLevel {
 
     @Id
-    private int gameLevelId; // Doubles as the level number
+    private byte gameLevelId; // Doubles as the level number
     private int requiredXP; // Required xp to reach this level
 }
