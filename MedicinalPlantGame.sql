@@ -154,7 +154,31 @@ CREATE TABLE PlayerPlant(
     requiredXP INT 
     );
  
+ CREATE TABLE Quiz(
+	quizId INT AUTO_INCREMENT PRIMARY KEY,
+	isExam BOOLEAN,
+    questionNumber TINYINT,
+    xpWorth INT
+	);
+    
+CREATE TABLE Question(
+	questionId INT AUTO_INCREMENT PRIMARY KEY,
+    questionCategory ENUM('Medicine', 'Identification') NOT NULL,
+    questionSubject ENUM('Plant', 'PlantPicture', 'Ailment') NOT NULL,
+    questionAnswer ENUM('Plant', 'PlantPicture', 'Ailment') NOT NULL,
+    question VARCHAR(255)
+    );
+    
+ -- TEST VALUES BELOW
  
+ -- Inserting quizzes and questions
+ INSERT INTO Question(questionCategory, questionSubject, questionAnswer, question)
+ VALUES('Identification', 'Plant', 'PlantPicture', 'Identify the {Plant}'),
+ ('Identification', 'PlantPicture', 'Plant','This plant is a'),
+ ('Medicine', 'Plant', 'Ailment', '{Plant} can be used to treat' ),
+ ('Medicine', 'Ailment', 'PlantPicture', 'Which plant is a treatment for {Ailment}' );
+ 
+
  CREATE TABLE Quiz(
 	quizId INT AUTO_INCREMENT PRIMARY KEY,
 	isExam BOOLEAN,
@@ -172,8 +196,10 @@ CREATE TABLE QuestionTemplate(
     );
     
 
+
     
  # TEST VALUES BELOW
+
  
  -- Inserting quizzes and questions
  INSERT INTO QuestionTemplate(questionCategory, questionSubject, questionAnswer, questionText)
@@ -189,9 +215,11 @@ CREATE TABLE QuestionTemplate(
  (true, 20, 'General', 10); 
  
  -- Inserting a test plant
+
 INSERT INTO Plant (plantName, plantLocationT, plantLocationL, defaultPicture, uniqueFeature1, uniqueFeature2, uniqueFeature3, treatmentFor, season, plantDescription)
 VALUES ('Broad Leaf Dock', 20, 10, 'defaultDockLeaf.jpg', 'Look at the base of the plant - the leaves emerge from a basal rosette.', 'See the leaves? In broad leaf dock these should be smooth and oblong shaped.', 'Now look at the stocks: these are normally quite long.', 'Nettle stings', 'Summer', 'The plant you are looking for has large, oblong leaves. It grows on the ground up from a basal roset and is often found near stinging nettles.'),
 	('Burdock', 30, 10, 'defaultBurdock.jpg', 'Look at the leaves - their heartshaped appearance might be the reason for one of the plant\'s other names: Love Leaves.', 'Look more closely, the leaves should be dark green on top, and paler and a little downy on the underside.', 'See the flowers? They\'re a purple colour when in bloom, and dry out into a burr. These burrs get stuck in animals\' fur, helping to carry the seeds away from the parent plant.', 'Eczema', 'Summer-Autumn', 'The plant you are looking for as distinctive purple flowers which are round and spikey. The smaller leaves are heart shaped and the larger leaves more spear shaped.'),
+
     -- Below this point plants are chatgpt generated for testing purposes. Those above are hand researched and written. Those below need to be changed to handcrafted entries.
      ('Willow Herb', 20, 10, 'willowHerb.jpg', 'Notice the unique spike of pink flowers.', 'Leaves are lance-shaped with a toothed margin.', 'The plant has a hairy stem which helps distinguish it.', 'Skin irritation', 'Spring-Summer', ''),
     ('Fireweed', 20, 10, 'fireweed.jpg', 'Easily recognized by its tall, dominant red flowers.', 'The leaves are spirally arranged, with a slightly reddish tinge.', 'The seeds have silky hairs that aid in wind dispersal.', 'Burns', 'Summer', ''),
@@ -236,6 +264,7 @@ INSERT INTO Antidote (antidoteName, antidotePicture, antidoteDescription)
 VALUES ('Balm for Nettle Stings', 'dock_elixir.jpg', 'A popular remedy for nettle stings consisting of crushed dock leaves.'),
 	('Poultice for Eczema', 'burdock_elicir.jpg', 'A soothing poultice made to reduce inflamation and prevent infection.');
 
+
 -- Inserting a test action type for antidote making game
 INSERT INTO ActionType (actionType)
 VALUES ('Mashing');
@@ -256,10 +285,13 @@ VALUES ('Jane Doe', 'janedoe@example.com', '123-456-7890', 'player1profile.png',
 
 -- Inserting a quest involving the test plant, antidote, and game characters
 INSERT INTO Quest (plantId, antidoteId, questGiverId, patientId, startText, endText, requiredLevel, xpValue, stage1Text, stage2Text, stage3Text)
+
 VALUES (1, 1, 1, 1, 'There I was, head in the clouds, not realising I\'d walked into a huge patch of stinging nettles! Now I\'m just covered in stings. First things first, we\'ll need to find some dock leafs.', 
 'Much better, thank you!', 1, 10, 'Find the Dock Leaves.', 'Prepare the antidote.', 'Deliver the antidote.'),
 (2, 2, 1, 1, 'Your first patient is suffering from uncomfortable eczema. Fortunately, I know the perfect plant - burdock! Its anti-inflamatory and antibacterial properties make it the perfect treatment. You should see its location on your map.', 'Excellent, the patient should be much more comfortable now.', 
  1, 12, 'Find the burdock plant.', 'Prepare the antidote.', 'Deliver the antidote.');
+
+
 
 -- Inserting a picture taken by the player of the plant
 INSERT INTO PlayerPlantPicture (plantId, playerId, picture)
@@ -285,6 +317,7 @@ INSERT INTO PlayerQuest (questId, playerId, questStatus, questStage)
 VALUES (1, 1, 'Complete', 'AntidoteMade'),
 		(2, 1, 'Inactive', 'Beginning');
 
+
 INSERT INTO GameLevel (gameLevelId, requiredXP) VALUES 
 (1, 100),
 (2, 200),
@@ -296,3 +329,4 @@ INSERT INTO GameLevel (gameLevelId, requiredXP) VALUES
 (8, 12800),
 (9, 25600),
 (10, 51200);
+
