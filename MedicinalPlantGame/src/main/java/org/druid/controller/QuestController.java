@@ -153,6 +153,7 @@ public class QuestController {
             if(pq.getQuestStatus().equals("Active") && pq.getQuestStage().equals("Beginning")){
                 quest = questGameService.getQuestGame(pq.getPlayerQuestKey().getQuestId(), DUMMY_PLAYER_ID);
                 plant = plantService.getPlantById(quest.getPlantId());
+                break;
             }
             else{
                 quest.setQuestName("no-quest");

@@ -8,10 +8,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = "org.plant")
 @EnableJpaRepositories(basePackages = "org.plant.dao")
 @EntityScan("org.plant.entity")
-public class PlantMicroServiceApplication {
+public class PlantMicroserviceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PlantMicroServiceApplication.class, args);
+		SpringApplication.run(PlantMicroserviceApplication.class, args);
 	}
 
 }

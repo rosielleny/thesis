@@ -61,7 +61,7 @@ public class RevisionGameServiceImpl implements RevisionGameService {
         if(totalQuestions == correctAnswers) {
             xpWorth = xpWorth*2;
         }
-        
+
         Player player = playerService.getPlayer(playerId);
         player.setPlayerTotalXP(player.getPlayerTotalXP() + xpWorth);
 
@@ -101,9 +101,22 @@ public class RevisionGameServiceImpl implements RevisionGameService {
     * These will be used as question subjects*/
     private List<Plant> getRandomPlants(int questionNumber, int playerId, List<PlayerPlant> playerPlants){
 
-
-        // Next, we must select random plants for the questions from the player's plants
         List<Plant> randomTestPlants = new ArrayList<>();
+
+        // If the player has very few plants, we should include all of them
+        if(playerPlants.size() <= questionNumber) {
+            while (randomTestPlants.size() < questionNumber) {
+                for (PlayerPlant pp : playerPlants) {
+                    // Add elements to randomPlants until it reaches questionNumber
+                    if (randomTestPlants.size() >= questionNumber) {
+                        break;
+                    }
+                    randomTestPlants.add(plantService.getPlantById(pp.getPlayerPlantKey().getPlantId()));
+                }
+            }
+            return randomTestPlants;
+        }
+        // Next, we must select random plants for the questions from the player's plants
 
         Random random = new Random();
 
