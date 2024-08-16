@@ -192,17 +192,17 @@ CREATE TABLE QuestionTemplate(
 INSERT INTO Plant (plantName, plantLocationT, plantLocationL, defaultPicture, uniqueFeature1, uniqueFeature2, uniqueFeature3, treatmentFor, season, plantDescription)
 VALUES ('Broad Leaf Dock', 20, 10, 'defaultDockLeaf.jpg', 'Look at the base of the plant - the leaves emerge from a basal rosette.', 'See the leaves? In broad leaf dock these should be smooth and oblong shaped.', 'Now look at the stocks: these are normally quite long.', 'Nettle stings', 'Summer', 'The plant you are looking for has large, oblong leaves. It grows on the ground up from a basal roset and is often found near stinging nettles.'),
 	('Burdock', 30, 10, 'defaultBurdock.jpg', 'Look at the leaves - their heartshaped appearance might be the reason for one of the plant\'s other names: Love Leaves.', 'Look more closely, the leaves should be dark green on top, and paler and a little downy on the underside.', 'See the flowers? They\'re a purple colour when in bloom, and dry out into a burr. These burrs get stuck in animals\' fur, helping to carry the seeds away from the parent plant.', 'Eczema', 'Summer-Autumn', 'The plant you are looking for as distinctive purple flowers which are round and spikey. The smaller leaves are heart shaped and the larger leaves more spear shaped.'),
-    -- Below this point plants are chatgpt generated for testing purposes. Those above are hand researched and written. Those below need to be changed to handcrafted entries.
-     ('Willow Herb', 20, 10, 'willowHerb.jpg', 'Notice the unique spike of pink flowers.', 'Leaves are lance-shaped with a toothed margin.', 'The plant has a hairy stem which helps distinguish it.', 'Skin irritation', 'Spring-Summer', ''),
-    ('Fireweed', 20, 10, 'fireweed.jpg', 'Easily recognized by its tall, dominant red flowers.', 'The leaves are spirally arranged, with a slightly reddish tinge.', 'The seeds have silky hairs that aid in wind dispersal.', 'Burns', 'Summer', ''),
-    ('Chickweed', 20, 10, 'chickweed.jpg', 'Small white star-shaped flowers are a key identifier.', 'The leaves are oval and grow in opposite pairs.', 'Stems are trailing and can root at the nodes.', 'Itchy skin', 'Spring-Autumn', ''),
-    ('Hemlock', 20, 10, 'hemlock.jpg', 'The plant has small white flowers arranged in umbels.', 'Its leaves are finely divided and fern-like.', 'Hemlock stems have purple spots.', 'Not applicable - poisonous', 'Late Spring', ''),
-    ('Lavender', 20, 10, 'lavender.jpg', 'Known for its calming fragrance.', 'Produces small purple flowers on long spikes.', 'Leaves are narrow and gray-green in color.', 'Anxiety and sleep issues', 'Summer', ''),
-    ('Dandelion', 20, 10, 'dandelion.jpg', 'Bright yellow flowers that turn into fluffy seed heads.', 'Leaves are jagged and grow in a rosette at the base.', 'Taproot is thick and can regenerate if not fully removed.', 'Digestive ailments', 'Spring-Autumn', ''),
-    ('Stinging Nettle', 20, 10, 'stingingNettle.jpg', 'Leaves have stinging hairs that cause irritation.', 'The small green flowers are wind-pollinated.', 'The plant is rich in vitamins A and C.', 'Arthritis pain', 'Spring-Fall', ''),
-    ('Yarrow', 20, 10, 'yarrow.jpg', 'Produces clusters of small white to pink flowers.', 'Leaves are finely divided and have a feathery appearance.', 'Known for its use in traditional medicine to staunch bleeding.', 'Colds and fevers', 'Summer', ''),
-    ('Elderberry', 20, 10, 'elderberry.jpg', 'Produces clusters of tiny white flowers.', 'Berries are dark purple and used in syrups and jams.', 'Leaves are compound with 5 to 7 leaflets.', 'Flu symptoms', 'Late Summer', ''),
-    ('Mullein', 20, 10, 'mullein.jpg', 'Tall stalk with dense yellow flowers.', 'Leaves are large, woolly, and basal.', 'The plant is biennial, forming a rosette in the first year and flowering in the second.', 'Respiratory problems', 'Summer', '');
+     ('St John\'s Wort', 50, 70, 'defaultStJohnsWort.jpg', 'Have a look at the flowers. They have five distinct yellow petals.', 'Now look more closely at the stems, they should be woody and reddish.', 'See the wee leaves? They\'re oblong, and about three times as long as they are wide.', 'Anxiety and low mood', 'Summer', 'The plant you\'re looking for has small leaves clustered around woody stems and bright yellow flowers.'),
+        -- Below this point the additional details of the plant need to be filled in before being used in quests
+    ('Black Elderflower', 20, 10, 'defaultBlackElderflower.jpg', '', '', '', 'The Common Cold', '', ''),
+    ('Sweet Wormwood', 20, 10, 'defaultSweetWormwood.jpg', '', '', '', 'Malaria', '', ''),
+    ('Lungwort', 20, 10, 'defaultLungwort.jpg', '', '.', '', 'Lung problems', '', ''),
+    ('Poppy', 20, 10, 'defaultPoppy.jpg', '', '', '', 'Pain', '', ''),
+    ('Thyme', 20, 10, 'defaultThyme.jpg', '', '', '', 'Airway inflamation', '', ''),
+    ('Garlic', 20, 10, 'defaultGarlic.jpg', '', '', '', 'Inflamation and Infection', '', ''),
+    ('Snowdrop', 20, 10, 'defaultSnowdrop.jpg', '', '', '', 'Memory impairment', '', ''),
+    ('Willow', 20, 10, 'defaultWillow.jpg', '', '', '', 'Fever', '', ''),
+    ('Foxglove', 20, 10, 'defaultFoxglove.jpg', '', '.', '', 'Abnormal heart rhythm', 'Summer', '');
     
 
 INSERT INTO CompendiumPage (plantId, medicinalInfo, culturalInfo, ecosystemInfo, scientificInfo, additionalInfo)
@@ -223,9 +223,20 @@ be used in salad, soups, or cooked like spinach, and the ground seeds can be use
 caterpillars, and these insects in turn provide a food source for birds and hedgehogs.  In winter, the seeds provide nourishment 
 for birds, rodents, and deer. The plant can adapt to many environments, from roadsides and waste land, to woodlands, shorelines and riverbanks.',
 'The scientific name of Broad-Leaf Dock is Rumex obtusifolius. It can be identified by its large oval leaves which emerge from a basal rosette on long stems. 
-The tops of the leaves are smooth while the underside can have small, soft hairs. The edges of the leaves are generally smooth or slightly wavy, while Rumex crisps, curly dock, 
+The tops of the leaves are smooth while the underside can have small, soft hairs. The edges of the leaves are generally smooth or slightly wavy, while Rumex crispus, curly dock, 
 has noticeably wavy leaves.', '' ),
-(2, '', '', '', '', '');
+(2, 'Burdock roots can be used to treat eczema. The root is ground down, usually in a mortar and pestle or grater. Home remedies then involve mixing the crushed burdock with ground oats and lemon juice. Travelling people also use the leaves and flowers as a cure for rheumatism, sometimes as a treatment and sometimes as a magical ward against developing it.', 
+'Burdock has many different names in Britain. “Stickelburr” comes from the Old English “sticke”, meaning prickle, and “bur”, describing the plant’s seed heads. Other names include “Clotbur”, “Beggar’s Buttons”, “Burrseed”, “Love Leaves”, “Louse Bur”, and “Fox’s Clote”.
+Cornish folklore describes how the ‘piskies’, a type of fairy, like to cause mischief during the night by riding young horses through the fields and deliberately tangling their manes up with the burrs from the burdock plant.
+In West Lothian the burrs from the burdock are used in the creation of the Burry Man costume. The Burry Man appears as a humanoid covered in burdock burrs from head to toe. He visits homes each year on the second Friday of August. He is welcomed by the townsfolk and given gifts of money. The Burry Man costume takes two hours to put on, after which the wearer walks very slowly and must drink through a straw. ', 
+'Burdock is found across the world but is native to Europe and Asia, and considered invasive in parts of North America. It can usually be found at the edges of fields, around fences, railway tacks, roadsides, and at the edges of streams and woodland. Many species of moth use the plant for food, with the larva of the ghost moth in particular feeding on the plants roots. However, the burdock can be a danger to birds who can become tangled up in the burrs and struggle to free themselves. The burrs are designed to catch in the coats of animals so that the animals carry the seeds far and wide, dispersing them away from the parent plant. The sticking quality of these burdock heads is said to have inspired hook and loop fasteners, more commonly known as Velcro.',
+ 'The scientific name of Burdock is Arctium lappa or Arctium minus. The two subspecies are very similar, but Arctium minus is more widespread. It can be identified by its leaves which are heart-shaped near the base and spear-shaped on the bloom stem. The tops of the leaves are smooth while the underside is paler and slightly downy. The flowers are similar to the thistle with their purple tops but dry into a brown burr. The roots are usually long and black and can grow to be quite large.',
+ '')
+ (3, 'St John’s Wort can be used as an antidepressant for mild to moderate cases. It as been found to be more effective than placebo and just as effective as other antidepressant in mild/moderate cases. It can interact very badly with other medications however, so must be used with care. ',
+ 'St John’s Wort got its name from the time of year it flowers. It is usually in bloom around Midsummer’s day, otherwise known as the Feast of St John. It is also known as ‘Balm of the Warrior’s Wound’, ‘Rose of Sharon’, and. ‘Aaron’s beard’. In European folk magic, St John’s Wort is used for protection against evil. One way to use it for this purpose was to burn it on the midsummer bonfire and leap through the scented smoke. To protect against fairies, the plant would be gathered at midnight on St John’s Eve and then hung above the entrance to the home, preventing fairies from crossing the threshold.',
+ 'St Johns Wort is native to Britain and most commonly found in England and Wales, but some species also come from Turkey and the Mediterranean. The flowers of some of the plants are a food source for moth larvae of the Mottled Beuty, Bright-line Brown-eye, and V-Pug moths.',
+ 'St John’s Wort plants all belong to the family Hypericaceae and all share the distinctive yellow flowers.  The active ingredients used in anti-depressants are Hypericin and Hyperforin.',
+ '');
 
 -- Inserting a test game character (quest giver and patient)
 INSERT INTO GameCharacter (gameCharacterName, gameCharacterPicture)
@@ -234,7 +245,8 @@ VALUES ('Druid Rowan', 'druidMentor.png');
 -- Inserting a test antidote
 INSERT INTO Antidote (antidoteName, antidotePicture, antidoteDescription)
 VALUES ('Balm for Nettle Stings', 'dock_elixir.jpg', 'A popular remedy for nettle stings consisting of crushed dock leaves.'),
-	('Poultice for Eczema', 'burdock_elicir.jpg', 'A soothing poultice made to reduce inflamation and prevent infection.');
+	('Poultice for Eczema', 'burdock_elixir.jpg', 'A soothing burdock poultice made to reduce inflamation and prevent infection.'),
+    ('Tonic for the Mood', 'stJohn_elixir.jpg', 'A tonic of St John\'s Wort to lift the mood.');
 
 -- Inserting a test action type for antidote making game
 INSERT INTO ActionType (actionType)
@@ -243,12 +255,14 @@ VALUES ('Mashing');
 -- Linking antidote to action
 INSERT INTO AntidoteAction (actionId, antidoteId)
 VALUES (1, 1),
-		(1, 2);
+		(1, 2),
+        (1, 3);
 
 -- Linking plants to antidote
 INSERT INTO PlantAntidote (plantId, antidoteId)
 VALUES (1, 1),
-	(2,2);
+	(2,2),
+    (3,3);
 
 -- Inserting a test player
 INSERT INTO Player (playerName, playerEmail, playerPhone, playerPicture, playerTotalXP, playerLevel, playerCanDoExam)
@@ -256,10 +270,13 @@ VALUES ('Jane Doe', 'janedoe@example.com', '123-456-7890', 'player1profile.png',
 
 -- Inserting a quest involving the test plant, antidote, and game characters
 INSERT INTO Quest (plantId, antidoteId, questGiverId, patientId, startText, endText, requiredLevel, xpValue, stage1Text, stage2Text, stage3Text)
-VALUES (1, 1, 1, 1, 'There I was, head in the clouds, not realising I\'d walked into a huge patch of stinging nettles! Now I\'m just covered in stings. First things first, we\'ll need to find some dock leafs.', 
-'Much better, thank you!', 1, 10, 'Find the Dock Leaves.', 'Prepare the antidote.', 'Deliver the antidote.'),
-(2, 2, 1, 1, 'Your first patient is suffering from uncomfortable eczema. Fortunately, I know the perfect plant - burdock! Its anti-inflamatory and antibacterial properties make it the perfect treatment. You should see its location on your map.', 'Excellent, the patient should be much more comfortable now.', 
- 1, 12, 'Find the burdock plant.', 'Prepare the antidote.', 'Deliver the antidote.');
+VALUES (1, 1, 1, 1, 'There I was, head in the clouds, not realising I\'d walked into a huge patch of stinging nettles! Now I\'m just covered in stings. First things first, we\'ll need to find some dock leaves. I think I saw some of there - I\'ve marked the location on your map.', 
+'The stings are much better now, thank you!', 1, 10, 'Find the Dock Leaves.', 'Prepare the antidote.', 'Deliver the antidote.'),
+(2, 2, 1, 1, 'Your patient is suffering from uncomfortable eczema. Fortunately, I know the perfect plant - burdock! Its anti-inflamatory and antibacterial properties make it the perfect treatment. You should see its location on your map.', 'Excellent, the patient should be much more comfortable now.', 
+ 1, 12, 'Find the burdock plant.', 'Prepare the antidote.', 'Deliver the antidote.'),
+ (3,3,1,1, 'Your patient has been feeling a low lately. Some St John\'s Wort should help them feel a wee bit better. I\'ve marked its location on your map.',
+ 'This should help pep them up - well done!', 1, 2, 'Find the St John\'s Wort at the location on your map.', 'Prepare the antidote.', 'Deliver the antidote.' );
+ 
 
 -- Inserting a picture taken by the player of the plant
 INSERT INTO PlayerPlantPicture (plantId, playerId, picture)
@@ -270,20 +287,25 @@ VALUES (1, 1, 'dockLeaf.jpg'),
         (2, 1, 'burdock.jpg'),
         (2,1, 'burdock1.jpg'),
 		(2,1, 'burdock2.jpg'),
-        (2, 1, 'burdock3.jpg');
+        (2, 1, 'burdock3.jpg'),
+        (3, 1, 'stJohnsWort.jpg'),
+        (3,1, 'stJohnsWort1.jpg'),
+		(3,1, 'stJohnsWort2.jpg'),
+        (3, 1, 'stJohnsWort3.jpg');
 
 -- Inserting plant discovery by the player
-INSERT INTO PlayerPlant (plantId, playerId, discoveredOrder)
-VALUES (1, 1, 1);
+-- INSERT INTO PlayerPlant (plantId, playerId, discoveredOrder)
+-- VALUES (1, 1, 1);
 
 -- Inserting antidote information for the player
-INSERT INTO PlayerAntidote (antidoteId, playerId, numberMade, numberUsed)
-VALUES (1, 1, 1, 1);
+-- INSERT INTO PlayerAntidote (antidoteId, playerId, numberMade, numberUsed)
+-- VALUES (1, 1, 1, 1);
 
 -- Inserting a player quest entry
 INSERT INTO PlayerQuest (questId, playerId, questStatus, questStage)
-VALUES (1, 1, 'Complete', 'AntidoteMade'),
-		(2, 1, 'Inactive', 'Beginning');
+VALUES (1, 1, 'Inactive', 'Beginning'),
+		(2, 1, 'Inactive', 'Beginning'),
+        (3, 1, 'Inactive', 'Beginning');
 
 INSERT INTO GameLevel (gameLevelId, requiredXP) VALUES 
 (1, 100),

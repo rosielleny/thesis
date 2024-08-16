@@ -11,8 +11,8 @@
 	<groupId>org.game</groupId>
 	<artifactId>GameMechanicsMicroservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>GameMechanics</name>
-	<description>GameMechanics</description>
+	<name>GameMechanicsMicroservice</name>
+	<description>GameMechanicsMicroservice</description>
 	<url/>
 	<licenses>
 		<license/>
