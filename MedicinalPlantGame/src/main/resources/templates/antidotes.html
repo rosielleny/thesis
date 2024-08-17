@@ -11,38 +11,49 @@
 <body>
 <nav class="top-nav">
     <a href="http://localhost:7004/map" class="nav-close">X</a>
-    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-title">Antidotes</div>
     <div class="nav-empty"></div>
     <div class="nav-empty"></div>
 </nav>
+<div class = "page">
 <br><br>
 
 <h1>Antidotes</h1>
 
-<div class = "antidote-shelf">
+<div class = "contents-page">
     <ul>
         <li th:each="antidote : ${antidoteList}">
-            <a th:href="@{/antidotes/{antidoteId}(antidoteId=${antidote.antidoteId})}" th:text="${antidote.antidoteName}"></a>
+            <a th:href="@{/antidotes/{antidoteId}(antidoteId=${antidote.antidoteId})}" th:text="${antidote.antidoteName}" class="btn-custom"></a>
         </li>
     </ul>
 
 </div>
-
+</div>
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">
         <img src="/images/quests-icon.png" alt="Quests">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/revision" class="nav-item">
         <img src="/images/revision-icon.png" alt="Revision">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/compendium" class="nav-item">
         <img src="/images/compendium-icon.png" alt="Compendium">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/map" class="nav-item">
         <img src="/images/antidotes-icon.png" alt="Antidotes">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/profile" class="nav-item">
         <img src="/images/profile-icon.png" alt="Profile">
+
+        <div class="indicator"></div>
     </a>
 </nav>
 

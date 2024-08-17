@@ -9,45 +9,56 @@
 <body>
 <nav class="top-nav">
     <a href="http://localhost:7004/map" class="nav-close">X</a>
-    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-title">Revision</div>
     <div class="nav-empty"></div>
     <div class="nav-empty"></div>
 </nav>
+<div class = "page">
 <br><br>
 <h1>Revision</h1>
 <br><br>
-Available Quizzes
+
 <br>
 <div th:if="${canLevelUpExam == 'true'}">
     <a th:href="@{/revision/quiz/{quizId}(quizId=${exam.quizId})}">Level Up Exam</a>
 </div>
-<div class = "available-quizzes">
+<div class = "contents-page">
     <ul>
         <li th:each="quiz : ${quizzes}">
-            <a th:href="@{/revision/quiz/{quizId}(quizId=${quiz.quizId})}" th:text="${quiz.quizName  + ' Quiz'}"></a>
+            <a th:href="@{/revision/quiz/{quizId}(quizId=${quiz.quizId})}" th:text="${quiz.quizName  + ' Quiz'}" class="btn-custom"></a>
         </li>
     </ul>
 
 </div>
 
-
+</div>
 
 
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">
         <img src="/images/quests-icon.png" alt="Quests">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/map" class="nav-item">
         <img src="/images/revision-icon.png" alt="Revision">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/compendium" class="nav-item">
         <img src="/images/compendium-icon.png" alt="Compendium">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/antidotes" class="nav-item">
         <img src="/images/antidotes-icon.png" alt="Antidotes">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/profile" class="nav-item">
         <img src="/images/profile-icon.png" alt="Profile">
+
+        <div class="indicator"></div>
     </a>
 </nav>
 </body>

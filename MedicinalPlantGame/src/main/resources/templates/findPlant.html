@@ -9,34 +9,49 @@
 <body>
 <nav class="top-nav">
     <a href="http://localhost:7004/map" class="nav-close">X</a>
-    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-title"><span th:text="${plant.plantName}">plant</span></div>
     <div class="nav-empty"></div>
     <div class="nav-empty"></div>
 </nav>
+<div class = "page">
 <br><br>
 <h1 th:text="'Search for ' + ${plant.plantName}"></h1>
 
 <p th:text="${plant.plantDescription}"></p>
 
-<a th:href="@{/found-plant/{plantId}/{questId}(plantId=${plant.plantId},questId=${quest.questId})}">
-    Found It
-</a>
+    <div class="button-container">
+        <a class="custom-button" th:href="@{/found-plant/{plantId}/{questId}(plantId=${plant.plantId},questId=${quest.questId})}">
+            <img src="/images/button.png" alt="Found It">
+            <span>Found It</span>
+        </a>
+    </div>
 
+</div>
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">
         <img src="/images/quests-icon.png" alt="Quests">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/revision" class="nav-item">
         <img src="/images/revision-icon.png" alt="Revision">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/compendium" class="nav-item">
         <img src="/images/compendium-icon.png" alt="Compendium">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/antidotes" class="nav-item">
         <img src="/images/antidotes-icon.png" alt="Antidotes">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/profile" class="nav-item">
         <img src="/images/profile-icon.png" alt="Profile">
+
+        <div class="indicator"></div>
     </a>
 </nav>
 </body>

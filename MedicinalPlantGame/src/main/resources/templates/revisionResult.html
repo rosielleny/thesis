@@ -8,12 +8,14 @@
     <title>Score</title>
 </head>
 <body>
+<div class = "page">
 <nav class="top-nav">
     <a href="http://localhost:7004/revision" class="nav-close">X</a>
-    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-title">Revision</div>
     <div class="nav-empty"></div>
     <div class="nav-empty"></div>
 </nav>
+
 <br><br>
 <h1 th:text="${quizGame.quizName  + ' Quiz'}" ></h1>
 <h2>Score: <span th:text="*{quizGame.correctAnswers}">0</span> out of <span th:text="*{quizGame.quizQuestions.size()}">0</span></h2>
@@ -26,22 +28,32 @@
 </div>
 
 <button onclick="window.location.href='http://localhost:7004/revision';">Continue</button>
-
+</div>
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">
         <img src="/images/quests-icon.png" alt="Quests">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/revision" class="nav-item">
         <img src="/images/revision-icon.png" alt="Revision">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/compendium" class="nav-item">
         <img src="/images/compendium-icon.png" alt="Compendium">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/antidotes" class="nav-item">
         <img src="/images/antidotes-icon.png" alt="Antidotes">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/profile" class="nav-item">
         <img src="/images/profile-icon.png" alt="Profile">
+
+        <div class="indicator"></div>
     </a>
 </nav>
 </body>
