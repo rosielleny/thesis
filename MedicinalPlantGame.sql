@@ -154,7 +154,31 @@ CREATE TABLE PlayerPlant(
     requiredXP INT 
     );
  
+ CREATE TABLE Quiz(
+	quizId INT AUTO_INCREMENT PRIMARY KEY,
+	isExam BOOLEAN,
+    questionNumber TINYINT,
+    xpWorth INT
+	);
+    
+CREATE TABLE Question(
+	questionId INT AUTO_INCREMENT PRIMARY KEY,
+    questionCategory ENUM('Medicine', 'Identification') NOT NULL,
+    questionSubject ENUM('Plant', 'PlantPicture', 'Ailment') NOT NULL,
+    questionAnswer ENUM('Plant', 'PlantPicture', 'Ailment') NOT NULL,
+    question VARCHAR(255)
+    );
+    
+ -- TEST VALUES BELOW
  
+ -- Inserting quizzes and questions
+ INSERT INTO Question(questionCategory, questionSubject, questionAnswer, question)
+ VALUES('Identification', 'Plant', 'PlantPicture', 'Identify the {Plant}'),
+ ('Identification', 'PlantPicture', 'Plant','This plant is a'),
+ ('Medicine', 'Plant', 'Ailment', '{Plant} can be used to treat' ),
+ ('Medicine', 'Ailment', 'PlantPicture', 'Which plant is a treatment for {Ailment}' );
+ 
+
  CREATE TABLE Quiz(
 	quizId INT AUTO_INCREMENT PRIMARY KEY,
 	isExam BOOLEAN,
@@ -172,8 +196,10 @@ CREATE TABLE QuestionTemplate(
     );
     
 
+
     
  # TEST VALUES BELOW
+
  
  -- Inserting quizzes and questions
  INSERT INTO QuestionTemplate(questionCategory, questionSubject, questionAnswer, questionText)
@@ -189,10 +215,13 @@ CREATE TABLE QuestionTemplate(
  (true, 20, 'General', 10); 
  
  -- Inserting a test plant
+
 INSERT INTO Plant (plantName, plantLocationT, plantLocationL, defaultPicture, uniqueFeature1, uniqueFeature2, uniqueFeature3, treatmentFor, season, plantDescription)
+
 VALUES ('Broad Leaf Dock', 80, 20, 'defaultDockLeaf.jpg', 'Look at the base of the plant - the leaves emerge from a basal rosette.', 'See the leaves? In broad leaf dock these should be smooth and oblong shaped.', 'Now look at the stocks: these are normally quite long.', 'Nettle stings', 'Summer', 'The plant you are looking for has large, oblong leaves. It grows on the ground up from a basal roset and is often found near stinging nettles.'),
 	('Burdock', 10, 30, 'defaultBurdock.jpg', 'Look at the leaves - their heartshaped appearance might be the reason for one of the plant\'s other names: Love Leaves.', 'Look more closely, the leaves should be dark green on top, and paler and a little downy on the underside.', 'See the flowers? They\'re a purple colour when in bloom, and dry out into a burr. These burrs get stuck in animals\' fur, helping to carry the seeds away from the parent plant.', 'Eczema', 'Summer-Autumn', 'The plant you are looking for as distinctive purple flowers which are round and spikey. The smaller leaves are heart shaped and the larger leaves more spear shaped.'),
      ('St John\'s Wort', 70, 30, 'defaultStJohnsWort.jpg', 'Have a look at the flowers. They have five distinct yellow petals.', 'Now look more closely at the stems, they should be woody and reddish.', 'See the wee leaves? They\'re oblong, and about three times as long as they are wide.', 'Anxiety and low mood', 'Summer', 'The plant you\'re looking for has small leaves clustered around woody stems and bright yellow flowers.'),
+
         -- Below this point the additional details of the plant need to be filled in before being used in quests
     ('Black Elderflower', 20, 10, 'defaultBlackElderflower.jpg', '', '', '', 'The Common Cold', '', ''),
     ('Sweet Wormwood', 20, 10, 'defaultSweetWormwood.jpg', '', '', '', 'Malaria', '', ''),
@@ -203,6 +232,7 @@ VALUES ('Broad Leaf Dock', 80, 20, 'defaultDockLeaf.jpg', 'Look at the base of t
     ('Snowdrop', 20, 10, 'defaultSnowdrop.jpg', '', '', '', 'Memory impairment', '', ''),
     ('Willow', 20, 10, 'defaultWillow.jpg', '', '', '', 'Fever', '', ''),
     ('Foxglove', 20, 10, 'defaultFoxglove.jpg', '', '.', '', 'Abnormal heart rhythm', 'Summer', '');
+
     
 
 INSERT INTO CompendiumPage (plantId, medicinalInfo, culturalInfo, ecosystemInfo, scientificInfo, additionalInfo)
@@ -248,6 +278,7 @@ VALUES ('Balm for Nettle Stings', 'dock_elixir.jpg', 'A popular remedy for nettl
 	('Poultice for Eczema', 'burdock_elixir.jpg', 'A soothing burdock poultice made to reduce inflamation and prevent infection.'),
     ('Tonic for the Mood', 'stJohn_elixir.jpg', 'A tonic of St John\'s Wort to lift the mood.');
 
+
 -- Inserting a test action type for antidote making game
 INSERT INTO ActionType (actionType)
 VALUES ('Mashing');
@@ -270,13 +301,16 @@ VALUES ('Jane Doe', 'janedoe@example.com', '123-456-7890', 'player1profile.png',
 
 -- Inserting a quest involving the test plant, antidote, and game characters
 INSERT INTO Quest (plantId, antidoteId, questGiverId, patientId, startText, endText, requiredLevel, xpValue, stage1Text, stage2Text, stage3Text)
+
 VALUES (1, 1, 1, 1, 'There I was, head in the clouds, not realising I\'d walked into a huge patch of stinging nettles! Now I\'m just covered in stings. First things first, we\'ll need to find some dock leaves. I think I saw some of there - I\'ve marked the location on your map.', 
 'The stings are much better now, thank you!', 1, 10, 'Find the Dock Leaves.', 'Prepare the antidote.', 'Deliver the antidote.'),
 (2, 2, 1, 1, 'Your patient is suffering from uncomfortable eczema. Fortunately, I know the perfect plant - burdock! Its anti-inflamatory and antibacterial properties make it the perfect treatment. You should see its location on your map.', 'Excellent, the patient should be much more comfortable now.', 
  1, 12, 'Find the burdock plant.', 'Prepare the antidote.', 'Deliver the antidote.'),
  (3,3,1,1, 'Your patient has been feeling a low lately. Some St John\'s Wort should help them feel a wee bit better. I\'ve marked its location on your map.',
  'This should help pep them up - well done!', 1, 2, 'Find the St John\'s Wort at the location on your map.', 'Prepare the antidote.', 'Deliver the antidote.' );
- 
+
+
+
 
 -- Inserting a picture taken by the player of the plant
 INSERT INTO PlayerPlantPicture (plantId, playerId, picture)
@@ -306,6 +340,7 @@ INSERT INTO PlayerQuest (questId, playerId, questStatus, questStage)
 VALUES (1, 1, 'Inactive', 'Beginning'),
 		(2, 1, 'Inactive', 'Beginning'),
         (3, 1, 'Inactive', 'Beginning');
+
 
 INSERT INTO GameLevel (gameLevelId, requiredXP) VALUES 
 (1, 100),
