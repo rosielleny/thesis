@@ -9,18 +9,27 @@
 <body>
 <nav class="top-nav">
     <a href="http://localhost:7004/revision" class="nav-close">X</a>
-    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-title">Revision</div>
     <div class="nav-empty"></div>
     <div class="nav-empty"></div>
 </nav>
+
 <br><br>
 <h1 th:text="${quizGame.quizName  + ' Quiz'}" ></h1>
 <br>
 <p th:text="'Question ' + ${quizGame.quizProgress}" ></p>
 
+
 <div th:if="${quizGame.quizQuestions[quizGame.quizProgress - 1].questionSubjectType != 'Plant' and quizGame.quizQuestions[quizGame.quizProgress - 1].questionSubjectType != 'Ailment'}">
-    <img class = picture th:src="@{'/images/' + ${quizGame.quizQuestions[quizGame.quizProgress - 1].questionSubjectType}}" alt="Question Image">
+    <div class="profile-wrapper">
+    <div class="hexagon-container">
+        <img class="hexagon-image"
+             th:src="@{'/images/' + ${quizGame.quizQuestions[quizGame.quizProgress - 1].questionSubjectType}}"
+             alt="Question Image">
+    </div>
+    </div>
 </div>
+
 
 <p th:text="${quizGame.quizQuestions[quizGame.quizProgress - 1].questionText}"></p>
 
@@ -35,10 +44,12 @@
         </div>
         <!-- Conditional Display for Image Answers -->
         <div th:if="${quizGame.quizQuestions[quizGame.quizProgress - 1].questionAnswerType == 'PlantPicture'}" class="answer-grid">
-            <div th:each="answer, stat : ${quizGame.quizQuestions[quizGame.quizProgress - 1].allAnswers}">
+            <div th:each="answer, stat : ${quizGame.quizQuestions[quizGame.quizProgress - 1].allAnswers}" class="answer-item">
                 <input type="radio" th:id="${'answer' + stat.index}" th:name="selectedAnswer" th:value="${answer}" />
                 <label th:for="${'answer' + stat.index}">
-                    <img class = answer-grid-img th:src="@{'/images/' + ${answer}}" alt="Answer Image">
+                    <div class="hexagon-container">
+                        <img th:src="@{'/images/' + ${answer}}" alt="Answer Image">
+                    </div>
                 </label>
             </div>
         </div>
@@ -50,18 +61,28 @@
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">
         <img src="/images/quests-icon.png" alt="Quests">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/revision" class="nav-item">
         <img src="/images/revision-icon.png" alt="Revision">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/compendium" class="nav-item">
         <img src="/images/compendium-icon.png" alt="Compendium">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/antidotes" class="nav-item">
         <img src="/images/antidotes-icon.png" alt="Antidotes">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/profile" class="nav-item">
         <img src="/images/profile-icon.png" alt="Profile">
+
+        <div class="indicator"></div>
     </a>
 </nav>
 </body>

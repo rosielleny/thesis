@@ -9,18 +9,22 @@
 <body>
 <nav class="top-nav">
     <a href="http://localhost:7004/antidotes" class="nav-close">X</a>
-    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-title">Antidotes</div>
     <div class="nav-empty"></div>
     <div class="nav-empty"></div>
 </nav>
+
 <br><br>
 
+<div class = "page">
 <h1 th:text="${antidote.antidoteName}">Antidote</h1>
 
+
 <p th:if="${antidote.antidoteActions[0].actionType == 'Mashing'}" th:text="'Tap the screen to crush the ' + ${plantName} + '.'">Tap the screen to crush the plant.</p>
+</div>
 <div id="clickable-box" th:if="${antidote.antidoteActions[0].actionType == 'Mashing'}">Here would be a picture of a plant which changes state (in this case grows more crushed) as the player performs the action (in this case tapping).</div>
-
-
+<div class = "page">
+</div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var box = document.getElementById('clickable-box');
@@ -45,18 +49,28 @@
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">
         <img src="/images/quests-icon.png" alt="Quests">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/revision" class="nav-item">
         <img src="/images/revision-icon.png" alt="Revision">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/compendium" class="nav-item">
         <img src="/images/compendium-icon.png" alt="Compendium">
+
+        <div class="indicator"></div>
     </a>
-    <a href="http://localhost:7004/map" class="nav-item">
+    <a href="http://localhost:7004/antidotes" class="nav-item">
         <img src="/images/antidotes-icon.png" alt="Antidotes">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/profile" class="nav-item">
         <img src="/images/profile-icon.png" alt="Profile">
+
+        <div class="indicator"></div>
     </a>
 </nav>
 </body>

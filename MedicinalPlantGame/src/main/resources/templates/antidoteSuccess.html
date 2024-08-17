@@ -10,10 +10,11 @@
 
 <nav class="top-nav">
     <a href="http://localhost:7004/antidotes" class="nav-close">X</a>
-    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-title">Antidotes</div>
     <div class="nav-empty"></div>
     <div class="nav-empty"></div>
 </nav>
+<div class = "page">
 <br><br>
 <h1>Success!</h1>
 <div class="picture">
@@ -26,24 +27,38 @@
 <p>You've crafted <span th:text="${antidote.antidoteName}"></span>.</p>
 <p th:if="${isQuest}">This is a quest item and can be handed-in in the quest log.</p>
 
-<button onclick="window.location.href='http://localhost:7004/antidotes';">Continue</button>
-
-
+    <div class="button-container">
+        <a class="custom-button" onclick="window.location.href='http://localhost:7004/antidotes';">
+            <img src="/images/button.png" alt="Button background">
+            <span>Continue</span>
+        </a>
+    </div>
+</div>
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">
         <img src="/images/quests-icon.png" alt="Quests">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/revision" class="nav-item">
         <img src="/images/revision-icon.png" alt="Revision">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/compendium" class="nav-item">
         <img src="/images/compendium-icon.png" alt="Compendium">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/antidotes" class="nav-item">
         <img src="/images/antidotes-icon.png" alt="Antidotes">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/profile" class="nav-item">
         <img src="/images/profile-icon.png" alt="Profile">
+
+        <div class="indicator"></div>
     </a>
 </nav>
 </body>

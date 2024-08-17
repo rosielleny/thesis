@@ -8,10 +8,11 @@
 <body>
 <nav class="top-nav">
     <a href="http://localhost:7004/map" class="nav-close">X</a>
-    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-title"><span th:text="${plant.plantName}">plant</span></div>
     <div class="nav-empty"></div>
     <div class="nav-empty"></div>
 </nav>
+<div class = "page">
 <br><br>
 <p>"You've done it! You've found the <span th:text="${plant.plantName}">plant</span>!</p>
 <p>I'll harvest it while you have a closer look."</p>
@@ -23,23 +24,38 @@
          class="bottom-left-image">
 </div>
 
-<button th:onclick="'window.location.href=\'http://localhost:7004/plant-facts/' + ${quest.questId} + '/' + ${plant.plantId} + '/0\';'">Continue</button>
-
+    <div class="button-container">
+        <a class="custom-button" th:onclick="'window.location.href=\'http://localhost:7004/plant-facts/' + ${quest.questId} + '/' + ${plant.plantId} + '/0\';'">
+            <img src="/images/button.png" alt="Button background">
+            <span>Continue</span>
+        </a>
+    </div>
+</div>
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">
         <img src="/images/quests-icon.png" alt="Quests">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/revision" class="nav-item">
         <img src="/images/revision-icon.png" alt="Revision">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/compendium" class="nav-item">
         <img src="/images/compendium-icon.png" alt="Compendium">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/antidotes" class="nav-item">
         <img src="/images/antidotes-icon.png" alt="Antidotes">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/profile" class="nav-item">
         <img src="/images/profile-icon.png" alt="Profile">
+
+        <div class="indicator"></div>
     </a>
 </nav>
 </body>

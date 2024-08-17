@@ -9,23 +9,23 @@
 <body>
 <nav class="top-nav">
     <a href="http://localhost:7004/map" class="nav-close">X</a>
-    <a href="http://localhost:7004/map" class="nav-item">Open Map</a>
+    <div class="nav-title">Map</div>
     <div class="nav-empty"></div>
     <div class="nav-empty"></div>
 </nav>
+<div class = "page">
 
-<br><br><br><br><br><br><br><br><br><br><br><br>
 <div class="map-container">
-    <img th:src="@{/images/botanics-map.jpg}"
+    <img th:src="@{/images/botanics-map.png}"
          alt="Map of the botanic gardens"
          class="map-image"/>
-    <img th:src="@{/images/quests-icon.png}" alt="Marker"
+    <img th:src="@{/images/quest-marker.png}" alt="Marker"
          th:if="${quest.questName != 'no-quest'}"
          th:style="'top:' + ${plant.getPlantLocationT()} + '%; left:' + ${plant.getPlantLocationL()} + '%;'"
          class="map-marker"
          onclick="document.getElementById('quest-dialog').showModal()"/>
 </div>
-
+</div>
 <dialog id="quest-dialog">
     <p>Are you at the quest location?</p>
     <div>
@@ -38,18 +38,28 @@
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">
         <img src="/images/quests-icon.png" alt="Quests">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/revision" class="nav-item">
         <img src="/images/revision-icon.png" alt="Revision">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/compendium" class="nav-item">
         <img src="/images/compendium-icon.png" alt="Compendium">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/antidotes" class="nav-item">
         <img src="/images/antidotes-icon.png" alt="Antidotes">
+
+        <div class="indicator"></div>
     </a>
     <a href="http://localhost:7004/profile" class="nav-item">
         <img src="/images/profile-icon.png" alt="Profile">
+
+        <div class="indicator"></div>
     </a>
 </nav>
 </body>
