@@ -294,16 +294,16 @@ VALUES (1, 1, 'dockLeaf.jpg'),
         (3, 1, 'stJohnsWort3.jpg');
 
 -- Inserting plant discovery by the player
--- INSERT INTO PlayerPlant (plantId, playerId, discoveredOrder)
--- VALUES (1, 1, 1);
+ INSERT INTO PlayerPlant (plantId, playerId, discoveredOrder)
+ VALUES (1, 1, 1);
 
 -- Inserting antidote information for the player
--- INSERT INTO PlayerAntidote (antidoteId, playerId, numberMade, numberUsed)
--- VALUES (1, 1, 1, 1);
+ INSERT INTO PlayerAntidote (antidoteId, playerId, numberMade, numberUsed)
+ VALUES (1, 1, 1, 1);
 
 -- Inserting a player quest entry
 INSERT INTO PlayerQuest (questId, playerId, questStatus, questStage)
-VALUES (1, 1, 'Inactive', 'Beginning'),
+VALUES (1, 1, 'Complete', 'AntidoteMade'),
 		(2, 1, 'Inactive', 'Beginning'),
         (3, 1, 'Inactive', 'Beginning');
 
