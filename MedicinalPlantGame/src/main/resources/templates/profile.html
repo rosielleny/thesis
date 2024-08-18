@@ -15,7 +15,7 @@
     <div class="nav-empty"></div>
 </nav>
 
-<br><br>
+<br> <br>
 <h1>Profile</h1>
 <div class="profile-wrapper">
     <div class="hexagon-container">
@@ -24,18 +24,53 @@
              alt="Profile Picture"/>
     </div>
 </div>
-<div class = "page">
-<br>
-Name: <span th:text="${profile.playerName}">Player name.</span><br>
-Email: <span th:text="${profile.playerEmail}">Player email.</span><br>
-Phone: <span th:text="${profile.playerPhone}">Player phone.</span><br>
-<a th:href="@{/profile/edit/{playerId}(playerId=${profile.playerId})}" >Edit Info</a>
-<br><br>
-Level: <span th:text="${profile.playerLevel}">Player level.</span><br>
-Total XP: <span th:text="${profile.playerTotalXP}">Total XP.</span><br>
-Quests Completed: <span th:text="${profile.questsCompleted}">Quests Completed.</span><br>
-Pages Unlocked: <span th:text="${profile.pagesUnlocked}">Pages Unlocked.</span><br>
-Antidotes Made: <span th:text="${profile.antidotesMade}">Antidotes Made.</span><br>
+
+
+<div style="max-width: 300px; margin: 0 auto; text-align: center">
+    <h2 style="margin-top: 5px; margin-bottom: 0; font-size: 24px; font-weight: 600; ">
+        <span th:text="${profile.playerName}">Player name</span>
+    </h2>
+    <p  style="margin-top: 5px; margin-bottom: 0; font-size: 16px; color: #666; line-height: 1; text-align: center">
+        Level <span th:text="${profile.playerLevel}">X</span> Druid
+    </p>
+</div>
+
+<div class = "page" style="margin-top: -20px;">
+
+    <table style="width: 100%; margin-top: 10px; border-collapse: collapse;">
+        <tr>
+            <th style="text-align: left; padding: 8px; border-bottom: 1px solid #2E3D00;">Total XP</th>
+            <td style="text-align: right; padding: 8px; border-bottom: 1px solid #2E3D00;">
+                <span th:text="${profile.playerTotalXP}">Total XP</span>
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align: left; padding: 8px; border-bottom: 1px solid #2E3D00;">Quests Completed</th>
+            <td style="text-align: right; padding: 8px; border-bottom: 1px solid #2E3D00;">
+                <span th:text="${profile.questsCompleted}">Quests Completed</span>
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align: left; padding: 8px; border-bottom: 1px solid #2E3D00;">Pages Unlocked</th>
+            <td style="text-align: right; padding: 8px; border-bottom: 1px solid #2E3D00;">
+                <span th:text="${profile.pagesUnlocked}">Pages Unlocked</span>
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align: left; padding: 8px;">Antidotes Made</th>
+            <td style="text-align: right; padding: 8px;">
+                <span th:text="${profile.antidotesMade}">Antidotes Made</span>
+            </td>
+        </tr>
+    </table>
+
+    <div class="button-container" style="margin-bottom: -20px;">
+        <a class="custom-button" th:href="@{/profile/edit/{playerId}(playerId=${profile.playerId})}">
+            <img src="/images/button.png" alt="Button background">
+            <span>Edit My Info</span>
+        </a>
+    </div>
+
 </div>
 <br><br> <br><br>
 

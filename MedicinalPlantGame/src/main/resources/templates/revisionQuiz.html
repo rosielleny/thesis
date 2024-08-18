@@ -16,9 +16,9 @@
 
 <br><br>
 <h1 th:text="${quizGame.quizName  + ' Quiz'}" ></h1>
-<br>
-<p th:text="'Question ' + ${quizGame.quizProgress}" ></p>
+<h4 th:text="'Question ' + ${quizGame.quizProgress}" style = "text-align:center;  margin-bottom: 0"></h4>
 
+<div class = "page" style = "margin-top: 0">
 
 <div th:if="${quizGame.quizQuestions[quizGame.quizProgress - 1].questionSubjectType != 'Plant' and quizGame.quizQuestions[quizGame.quizProgress - 1].questionSubjectType != 'Ailment'}">
     <div class="profile-wrapper">
@@ -53,10 +53,15 @@
                 </label>
             </div>
         </div>
-    </fieldset>
-    <button type="submit">Submit Answer</button>
-</form>
 
+    </fieldset>
+    <br>
+    <button type="submit" class = custom-button >
+        <span>Submit Answer</span>
+        <img th:src="@{/images/button.png}" alt="Button background">
+    </button>
+</form>
+</div>
 <br><br><br><br>
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">
@@ -86,4 +91,5 @@
     </a>
 </nav>
 </body>
+
 </html>
