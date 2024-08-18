@@ -8,14 +8,14 @@
     <title>Score</title>
 </head>
 <body>
-<div class = "page">
+
 <nav class="top-nav">
     <a href="http://localhost:7004/revision" class="nav-close">X</a>
     <div class="nav-title">Revision</div>
     <div class="nav-empty"></div>
     <div class="nav-empty"></div>
 </nav>
-
+<div class = "page">
 <br><br>
 <h1 th:text="${quizGame.quizName  + ' Quiz'}" ></h1>
 <h2>Score: <span th:text="*{quizGame.correctAnswers}">0</span> out of <span th:text="*{quizGame.quizQuestions.size()}">0</span></h2>
@@ -27,7 +27,13 @@
     <p>You didn't pass the exam, you'll have to try again to level up.</p>
 </div>
 
-<button onclick="window.location.href='http://localhost:7004/revision';">Continue</button>
+
+    <div class="button-container">
+        <a class="custom-button" th:href="'http://localhost:7004/revision'">
+            <img src="/images/button.png" alt="Button background">
+            <span>Continue</span>
+        </a>
+    </div>
 </div>
 <nav class="bottom-nav">
     <a href="http://localhost:7004/quests" class="nav-item">

@@ -43,20 +43,35 @@
 <div th:if="${quest.getPlayerStage() == 'AntidoteMade' && quest.getPlayerQuestStatus() != 'Complete'}">
     <form th:action="@{/quests/mark-complete}" method="post">
         <input type="hidden" th:name="questId" th:value="${quest.questId}" />
-        <button type="submit" th:text="${quest.stagesText[2]}">Complete Quest</button>
+
+        <button type="submit" class="custom-button">
+            <img th:src="@{/images/long-button.png}" alt="Button background" >
+            <span th:text="${quest.stagesText[2]}" >
+        Complete Quest
+    </span>
+        </button>
     </form>
 </div>
 
 <div th:if="${quest.getPlayerQuestStatus() == 'Inactive'}">
     <form th:action="@{/quests/mark-active}" method="post">
         <input type="hidden" th:name="questId" th:value="${quest.questId}" />
-        <button type="submit">Start Quest</button>
+        <button type="submit" class = custom-button>
+            <span>Activate Quest</span>
+            <img th:src="@{/images/button.png}" alt="Button background">
+        </button>
     </form>
 </div>
 
 <!-- Determining what messages to display if player tried to complete quest -->
 <div th:if="${quest.getPlayerQuestStatus() == 'Complete' && fromCompleter.equals('fromCompleter')}">
     <p th:text=" '\'\'' + ${quest.getEndText()} + '\'\''">Quest Information.</p>
+    <div class="button-container">
+        <a class="custom-button" th:href="'http://localhost:7004/quests'">
+            <img src="/images/button.png" alt="Button background">
+            <span>Finish</span>
+        </a>
+    </div>
 </div>
 <div th:if="${quest.getPlayerQuestStatus() != 'Complete' && fromCompleter.equals('fromCompleter')}">
     <p>You do not have the antidote required for this quest.</p>

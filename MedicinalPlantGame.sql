@@ -270,11 +270,11 @@ VALUES ('Jane Doe', 'janedoe@example.com', '123-456-7890', 'player1profile.png',
 
 -- Inserting a quest involving the test plant, antidote, and game characters
 INSERT INTO Quest (plantId, antidoteId, questGiverId, patientId, startText, endText, requiredLevel, xpValue, stage1Text, stage2Text, stage3Text)
-VALUES (1, 1, 1, 1, 'There I was, head in the clouds, not realising I\'d walked into a huge patch of stinging nettles! Now I\'m just covered in stings. First things first, we\'ll need to find some dock leaves. I think I saw some of there - I\'ve marked the location on your map.', 
+VALUES (1, 1, 1, 1, 'There I was, head in the clouds, not realising I\'d walked into a huge patch of stinging nettles! Now I\'m just covered in stings, it seems like I\'m your patient this time. First things first, we\'ll need to find some dock leaves. I think I saw some of there - I\'ve marked the location on your map.', 
 'The stings are much better now, thank you!', 1, 10, 'Find the Dock Leaves.', 'Prepare the antidote.', 'Deliver the antidote.'),
 (2, 2, 1, 1, 'Your patient is suffering from uncomfortable eczema. Fortunately, I know the perfect plant - burdock! Its anti-inflamatory and antibacterial properties make it the perfect treatment. You should see its location on your map.', 'Excellent, the patient should be much more comfortable now.', 
  1, 12, 'Find the burdock plant.', 'Prepare the antidote.', 'Deliver the antidote.'),
- (3,3,1,1, 'Your patient has been feeling a low lately. Some St John\'s Wort should help them feel a wee bit better. I\'ve marked its location on your map.',
+ (3,3,1,1, 'Your patient has been feeling low lately. Some St John\'s Wort should help them feel a wee bit better. I\'ve marked its location on your map.',
  'This should help pep them up - well done!', 1, 2, 'Find the St John\'s Wort at the location on your map.', 'Prepare the antidote.', 'Deliver the antidote.' );
  
 

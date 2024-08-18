@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)http://localhost:7004/profile/edit/1 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Profile_files/styles.css">
+    <title>Profile</title>
+</head>
+<body>
+
+<nav class="top-nav">
+    <a href="http://localhost:7004/profile" class="nav-close">X</a>
+    <div class="nav-title">Profile</div>
+    <div class="nav-empty"></div>
+    <div class="nav-empty"></div>
+</nav>
+<div class="page">
+<br><br>
+<h1>Profile</h1>
+
+Edit Personal Details
+
+<form action="http://localhost:7004/profile/edit/saved" method="post">
+<br><br>
+<label class="updateInput">
+    Name:
+    <textarea value="Jane Doe" id="playerName" maxlength="255" wrap="soft" required="" name="playerName">Jane Doe</textarea>
+</label>
+<br><br>
+    <label class="updateInput">
+        Email:
+        <textarea value="janedoe@example.com" id="playerEmail" maxlength="255" wrap="soft" required="" name="playerEmail">janedoe@example.com</textarea>
+    </label>
+    <br><br>
+    <label class="updateInput">
+        Phone:
+        <textarea value="123-456-7890" id="playerPhone" maxlength="255" wrap="soft" required="" name="playerPhone">123-456-7890</textarea>
+    </label>
+    <br><br>
+
+        <button type="submit" class="custom-button">
+            <span>Save</span>
+            <img src="./Profile_files/button.png" alt="Button background">
+        </button>
+
+</form>
+</div>
+<nav class="bottom-nav">
+    <a href="http://localhost:7004/quests" class="nav-item">
+        <img src="./Profile_files/quests-icon.png" alt="Quests">
+
+        <div class="indicator"></div>
+    </a>
+    <a href="http://localhost:7004/revision" class="nav-item">
+        <img src="./Profile_files/revision-icon.png" alt="Revision">
+
+        <div class="indicator"></div>
+    </a>
+    <a href="http://localhost:7004/compendium" class="nav-item">
+        <img src="./Profile_files/compendium-icon.png" alt="Compendium">
+
+        <div class="indicator"></div>
+    </a>
+    <a href="http://localhost:7004/antidotes" class="nav-item">
+        <img src="./Profile_files/antidotes-icon.png" alt="Antidotes">
+
+        <div class="indicator"></div>
+    </a>
+    <a href="http://localhost:7004/profile" class="nav-item">
+        <img src="./Profile_files/profile-icon.png" alt="Profile">
+
+        <div class="indicator"></div>
+    </a>
+</nav>
+
+</body></html>
