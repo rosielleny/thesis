@@ -154,12 +154,6 @@ CREATE TABLE PlayerPlant(
     requiredXP INT 
     );
  
- CREATE TABLE Quiz(
-	quizId INT AUTO_INCREMENT PRIMARY KEY,
-	isExam BOOLEAN,
-    questionNumber TINYINT,
-    xpWorth INT
-	);
     
 CREATE TABLE Question(
 	questionId INT AUTO_INCREMENT PRIMARY KEY,
