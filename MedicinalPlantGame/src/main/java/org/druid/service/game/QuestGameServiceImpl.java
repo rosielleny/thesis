@@ -84,8 +84,7 @@ public class QuestGameServiceImpl implements QuestGameService {
         }
     }
 
-    /* Function called whenever a quest is completed to determine if the quest directly
-    * after it should be unlocked*/
+    /* Function called whenever a player levels up to unlock the quests for that level*/
     @Override
     public void unlockQuestsAfterLevelUp(int playerId) {
 
